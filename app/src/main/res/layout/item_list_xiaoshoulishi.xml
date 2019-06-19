@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="单号："
+            />
+        <TextView
+            android:id="@+id/xsls_PFD_DJBH"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
+            android:text="DQ-FH201701050028"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="客户："
+            />
+        <TextView
+            android:id="@+id/xsls_DWZ_DWMC"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
+            android:text="重庆民汉贸易有限公司"
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
+            android:text="业务员："
+            />
+        <TextView
+            android:id="@+id/xsls_USR_NAME"
+            style="@style/Normal_ItemList_Body"
+            android:text="阿东"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="金额："
+            />
+        <TextView
+            android:id="@+id/xsls_PFD_ZDJE"
+            style="@style/Normal_ItemList_Body"
+            android:text="$5000"
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="状态："
+            />
+        <TextView
+            android:id="@+id/xsls_PFD_DJZT"
+            style="@style/Normal_ItemList_Body"
+            android:text="已核实"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="日期："
+            />
+        <TextView
+            android:id="@+id/xsls_PFD_DJRQ"
+            style="@style/Normal_ItemList_Body"
+            android:text="2019-06-18"
+            />
+    </LinearLayout>
+
+</LinearLayout>

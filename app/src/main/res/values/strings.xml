@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">工厂APP</string>
+    <string name="welcom_name">欢迎进入工厂APP</string>
+    <string name="login_username">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="login_btn">立即登录</string>
+
+    <string name="title_home">首页</string>
+    <string name="title_mime">个人中心</string>
+    <string name="title_statistics">统计报表</string>
+    <string name="title_product">物品信息</string>
+    <string name="title_kucun_chaxun">库存查询</string>
+    <string name="title_xiaoshoulishi_chaxun">销售历史</string>
+    <string name="title_ck">仓库选择</string>
+
+    <string name="btn_search">查询搜索</string>
+    <string name="data_error">数据加载失败</string>
+    <string name="data_empty">没有查询到数据</string>
+
+    <!-- QR_Code -->
+    <string name="button_ok">OK</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the
+        device.
+    </string>
+    <string name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string name="scan_text">放入框中即可进行二维码/条码扫描</string>
+    <string name="contents_contact">Contact info</string>
+    <string name="contents_email">Email address</string>
+    <string name="contents_location">Geographic coordinates</string>
+    <string name="contents_phone">Phone number</string>
+    <string name="contents_sms">SMS address</string>
+    <string name="contents_text">Plain text</string>
+    <string name="preferences_vibrate">preferences_vibrate</string>
+    <string name="preferences_play_beep">preferences_play_beep</string>
+    <string name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string name="preferences_decode_1D_title">1D barcodes</string>
+    <string name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string name="preferences_decode_QR_title">QR Codes</string>
+    <string name="preferences_play_beep_title">Beep</string>
+    <string name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string name="preferences_supplemental_title">Retrieve more info</string>
+    <string name="preferences_vibrate_title">Vibrate</string>
+    <string name="preview_msg">&#160;preview pages available,click Download for more.</string>
+
+</resources>

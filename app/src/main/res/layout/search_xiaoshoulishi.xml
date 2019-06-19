@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/Normal_ItemList_Layout"
+        android:layout_height="35dp">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
+            android:textColor="@color/color_333333"
+            android:text="开始日期:"
+            />
+        <EditText
+            android:id="@+id/et_xsls_BDate"
+            style="@style/Normal_Edittext"
+            android:hint="开始日期>>"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
+            android:textColor="@color/color_333333"
+            android:text="结束日期:"
+            />
+        <EditText
+            android:id="@+id/et_xsls_EDate"
+            style="@style/Normal_Edittext"
+            android:hint="结束日期>>"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Normal_ItemList_Layout"
+        android:layout_height="35dp">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
+            android:textColor="@color/color_333333"
+            android:text="业务员:"
+            />
+        <EditText
+            android:id="@+id/et_xsls_USR_NAME"
+            style="@style/Normal_Edittext"
+            android:hint="请输入业务员"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:textColor="@color/color_333333"
+            android:layout_width="60dp"
+            android:text="客户名称:"
+            />
+        <EditText
+            android:id="@+id/et_xsls_DWZ_DWMC"
+            style="@style/Normal_Edittext"
+            android:hint="请输入客户名称"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_xiaoshoulishi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_blue_circle"
+        android:text="@string/btn_search"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+        />
+
+</LinearLayout>

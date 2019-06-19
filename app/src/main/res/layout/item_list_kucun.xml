@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="编码："
+            />
+        <TextView
+            android:id="@+id/kucun_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:text="DQCP0552"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="名称："
+            />
+        <TextView
+            android:id="@+id/kucun_SPK_SPMC"
+            style="@style/Normal_ItemList_Body"
+            android:text="进气门"
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="规格："
+            />
+        <TextView
+            android:id="@+id/kucun_SPK_SPSX"
+            style="@style/Normal_ItemList_Body"
+            android:text="CG150-C"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="仓库："
+            />
+        <TextView
+            android:id="@+id/kucun_JGZ_JGMC"
+            style="@style/Normal_ItemList_Body"
+            android:text="02号仓库"
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="数量："
+            />
+        <TextView
+            android:id="@+id/kucun_ZSL"
+            style="@style/Normal_ItemList_Body"
+            android:text="2000"
+            />
+    </LinearLayout>
+
+</LinearLayout>
