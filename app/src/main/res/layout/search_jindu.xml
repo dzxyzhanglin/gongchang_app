@@ -14,10 +14,38 @@
             style="@style/Normal_ItemList_Title"
             android:layout_width="60dp"
             android:textColor="@color/color_333333"
+            android:text="生产单号:"
+            />
+        <EditText
+            android:id="@+id/et_jd_SCD_DJBH"
+            style="@style/Normal_Edittext"
+            android:layout_marginRight="10dp"
+            android:hint="请输入生产单号"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:textColor="@color/color_333333"
+            android:layout_width="60dp"
+            android:text="传票号:"
+            />
+        <EditText
+            android:id="@+id/et_jd_CPNO"
+            style="@style/Normal_Edittext"
+            android:hint="请输入传票号"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Normal_ItemList_Layout"
+        android:layout_height="35dp">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
+            android:textColor="@color/color_333333"
             android:text="开始日期:"
             />
         <EditText
-            android:id="@+id/et_xsls_BDate"
+            android:id="@+id/et_jd_BDate"
             android:layout_marginRight="10dp"
             style="@style/Normal_Edittext"
             android:hint="开始日期"
@@ -33,7 +61,7 @@
             android:text="结束日期:"
             />
         <EditText
-            android:id="@+id/et_xsls_EDate"
+            android:id="@+id/et_jd_EDate"
             style="@style/Normal_Edittext"
             android:hint="结束日期"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
@@ -50,29 +78,18 @@
             style="@style/Normal_ItemList_Title"
             android:layout_width="60dp"
             android:textColor="@color/color_333333"
-            android:text="业务员:"
+            android:text="产品名称:"
             />
         <EditText
-            android:id="@+id/et_xsls_USR_NAME"
+            android:id="@+id/et_jd_CPMC"
             style="@style/Normal_Edittext"
             android:layout_marginRight="10dp"
-            android:hint="请输入业务员"
-            />
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:textColor="@color/color_333333"
-            android:layout_width="60dp"
-            android:text="客户名称:"
-            />
-        <EditText
-            android:id="@+id/et_xsls_DWZ_DWMC"
-            style="@style/Normal_Edittext"
-            android:hint="请输入客户名称"
+            android:hint="请输入产品名称"
             />
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_xiaoshoulishi"
+        android:id="@+id/btn_jd"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"

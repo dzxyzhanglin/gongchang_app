@@ -28,6 +28,42 @@ public class RequestCenter {
     }
 
     /**
+     * 货位列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETHWItems(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_HW_ITEMS, properties, webServiceCallBack);
+    }
+
+    /**
+     * 计量单位列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETJLDItem(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_JLDW_ITEM, properties, webServiceCallBack);
+    }
+
+    /**
+     * 发票类型列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETFPLXItems(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_FPLX_ITEM, properties, webServiceCallBack);
+    }
+
+    /**
+     * 结算方式列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETJSFSItems(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_JSFS_ITEM, properties, webServiceCallBack);
+    }
+
+    /**
      * 物品库存总记录数
      * @param properties
      * @param webServiceCallBack
@@ -52,6 +88,15 @@ public class RequestCenter {
      */
     public static void GETKCDetail(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
         WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_KC_DETAIL, properties, webServiceCallBack);
+    }
+
+    /**
+     * 物品信息新增、修改
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void InventSave(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.INVENT_SAVE, properties, webServiceCallBack);
     }
 
     /**
@@ -106,6 +151,24 @@ public class RequestCenter {
      */
     public static void MODIFYPWD(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
         WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.MODIFY_PWD, properties, webServiceCallBack);
+    }
+
+    /**
+     * 生产进度总量
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GetCPDInfoCount(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_CPD_INFO_COUNT, properties, webServiceCallBack);
+    }
+
+    /**
+     * 生产进度列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GetCPDInfo(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_CPD_INFO, properties, webServiceCallBack);
     }
 
 

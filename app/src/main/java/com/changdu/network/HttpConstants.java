@@ -5,7 +5,8 @@ package com.changdu.network;
  */
 public class HttpConstants {
 
-     
+    public static final String ROOT_URL = "http://183.230.28.135:8081/ERPWebService.asmx";
+
     /**
      * 登录
      */
@@ -15,6 +16,26 @@ public class HttpConstants {
      * 仓库列表
      */
     public static String GET_CK_ITEMS = "GETCKItems";
+
+    /**
+     * 货位列表
+     */
+    public static String GET_HW_ITEMS = "GETHWItems";
+
+    /**
+     * 计量单位列表
+     */
+    public static String GET_JLDW_ITEM = "GETJLDItem";
+
+    /**
+     * 发票类型
+     */
+    public static String GET_FPLX_ITEM = "GETFPLXItems";
+
+    /**
+     * 结算方式
+     */
+    public static String GET_JSFS_ITEM = "GETJSFSItems";
 
     /**
      * 物品库存总记录数
@@ -61,4 +82,19 @@ public class HttpConstants {
      * 修改密码
      */
     public static String MODIFY_PWD = "MODIFYPWD";
+
+    /**
+     * 物品信息新增、修改
+     */
+    public static String INVENT_SAVE = "InventSave";
+
+    /**
+     * 生产进度总量
+     */
+    public static String GET_CPD_INFO_COUNT = "GetCPDInfoCount";
+
+    /**
+     * 生产进度列表
+     */
+    public static String GET_CPD_INFO = "GetCPDInfo";
 }

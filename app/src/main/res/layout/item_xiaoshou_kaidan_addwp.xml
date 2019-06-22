@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_f2f2f2"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="编号" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="批次" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="货位" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="数量" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="价格" />
+
+        <ImageView
+            android:id="@+id/btn_kaidan_addwp"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_add_circle_black_24dp"/>
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_kaidan_wp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:dividerHeight="8dp"
+        android:divider="@color/color_e3e3e3"
+        >
+    </ListView>
+
+</LinearLayout>

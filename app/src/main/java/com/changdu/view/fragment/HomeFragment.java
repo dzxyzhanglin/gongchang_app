@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.changdu.R;
 import com.changdu.activiti.ChanliangtongjiActivity;
+import com.changdu.activiti.JinduActivity;
 import com.changdu.activiti.KucunActivity;
 import com.changdu.activiti.LoginActivity;
+import com.changdu.activiti.XiaoshouKaidanActivity;
 import com.changdu.activiti.XiaoshoulishiActivity;
 import com.changdu.adapter.HomeAdapter;
 import com.changdu.model.HomeModel;
@@ -70,7 +72,7 @@ public class HomeFragment extends BaseFragment {
         model = new HomeModel(R.drawable.icon_shoujipandian, "手机盘点");
         dataList.add(model);
 
-        model = new HomeModel(R.drawable.icon_xiaoshoukaidan, "销售开单");
+        model = new HomeModel(R.drawable.icon_xiaoshoukaidan, getString(R.string.title_xiaoshou_kaidan));
         dataList.add(model);
 
         model = new HomeModel(R.drawable.icon_xisoshoulishi, getString(R.string.title_xiaoshoulishi_chaxun));
@@ -82,7 +84,7 @@ public class HomeFragment extends BaseFragment {
         model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, "产量统计");
         dataList.add(model);
 
-        model = new HomeModel(R.drawable.icon_jinduchaxun, "生产进度查询");
+        model = new HomeModel(R.drawable.icon_jinduchaxun, getString(R.string.title_jindu_chaxun));
         dataList.add(model);
 
         // 显示数据
@@ -106,6 +108,12 @@ public class HomeFragment extends BaseFragment {
                         break;
                     case R.drawable.icon_gongrenchanliangtongji: // 工人产量统计
                         startActivity(new Intent(mContext, ChanliangtongjiActivity.class));
+                        break;
+                    case R.drawable.icon_jinduchaxun:
+                        startActivity(new Intent(mContext, JinduActivity.class));
+                        break;
+                    case R.drawable.icon_xiaoshoukaidan:
+                        startActivity(new Intent(mContext, XiaoshouKaidanActivity.class));
                         break;
                     /*case R.drawable.icon_shoujichuantu:
                         startActivity(new Intent(mContext, LoginActivity.class));

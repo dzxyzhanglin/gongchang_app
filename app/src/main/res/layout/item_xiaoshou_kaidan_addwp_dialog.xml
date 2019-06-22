@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="批次："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_dialog_PC"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:gravity="left|center"
+            android:hint="请输入批次"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="货位："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_dialog_HWID"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:gravity="left|center"
+            android:hint="请选择货位"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:inputType="none"
+            android:focusableInTouchMode="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="单位："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_dialog_DW"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:gravity="left|center"
+            android:hint="请输选择计量单位"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:inputType="none"
+            android:focusableInTouchMode="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="数量："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_dialog_SL"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:gravity="left|center"
+            android:hint="请输入数量"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="价格："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_dialog_PRICE"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:gravity="left|center"
+            android:hint="请输入价格"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_kaidan_dialog_save"
+        style="@style/Normal_Blue_Button"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:text="保存"/>
+</LinearLayout>

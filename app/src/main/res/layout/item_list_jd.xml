@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="生产单号："
+            />
+        <TextView
+            android:id="@+id/jd_SCD_DJBH"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="10sp"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="70dp"
+            android:text="传票号："
+            />
+        <TextView
+            android:id="@+id/jd_CPNO"
+            android:textSize="10sp"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="编码："
+            />
+        <TextView
+            android:id="@+id/jd_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="70dp"
+            android:text="名称："
+            />
+        <TextView
+            android:id="@+id/jd_SPK_SPMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="规格："
+            />
+        <TextView
+            android:id="@+id/jd_SPK_SPSX"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="70dp"
+            android:text="状态："
+            />
+        <TextView
+            android:id="@+id/jd_CPZT"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="BOM："
+            />
+        <TextView
+            android:id="@+id/jd_MBMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="70dp"
+            android:text="任务量："
+            />
+        <TextView
+            android:id="@+id/jd_CPSL"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="当前工序："
+            />
+        <TextView
+            android:id="@+id/jd_GYB_GYMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="70dp"
+            android:text="当前数："
+            />
+        <TextView
+            android:id="@+id/jd_DQSL"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="审批日期："
+            />
+        <TextView
+            android:id="@+id/jd_SPRQ"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="120dp"
+            android:text="上工序完成时间："
+            />
+        <TextView
+            android:id="@+id/jd_WGRQ"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+</LinearLayout>

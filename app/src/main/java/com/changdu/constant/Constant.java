@@ -30,6 +30,16 @@ public class Constant {
      */
     public static final int ACTIVITI_FOR_RESULT_CK = 1000;
 
+    public static final int ACTIVITI_FOR_RESULT_HW = 1001;
+
+    public static final int ACTIVITI_FOR_RESULT_JLDW = 1002;
+
+    public static final int ACTIVITI_FOR_RESULT_FPLX = 1002;
+
+    public static final int ACTIVITI_FOR_RESULT_JSFS = 1003;
+
+    public static final int ACTIVITI_FOR_RESULT_ADD_WP = 1100;
+
     /**
      * 操作类型
      */

@@ -1,5 +1,7 @@
 package com.changdu.util;
 
+import android.util.Log;
+
 public class StringUtil {
 
     /**

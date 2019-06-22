@@ -43,8 +43,16 @@
 
         <activity android:name=".activiti.XiaoshoulishiActivity" />
         <activity android:name=".activiti.XiaoshoulishiDetailActivity" />
+        <activity android:name=".activiti.XiaoshouKaidanActivity" />
+        <activity android:name=".activiti.XiaoshouKaidanAddWpActivity" />
 
-        <activity android:name=".activiti.CkActivity" />
+        <activity android:name=".activiti.JinduActivity" />
+
+        <activity android:name=".activiti.basicdata.CkActivity" />
+        <activity android:name=".activiti.basicdata.HwActivity" />
+        <activity android:name=".activiti.basicdata.JldwActivity" />
+        <activity android:name=".activiti.basicdata.JsfsActivity" />
+        <activity android:name=".activiti.basicdata.FplxActivity" />
 
         <activity android:name=".activiti.ChanliangtongjiActivity" />
 

@@ -1,17 +1,16 @@
-package com.changdu.activiti;
+package com.changdu.activiti.basicdata;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
-import com.changdu.adapter.CkAdapter;
+import com.changdu.adapter.FplxAdapter;
+import com.changdu.adapter.JsfsAdapter;
 import com.changdu.constant.Constant;
-import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
@@ -21,10 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CkActivity extends BaseActivity {
+/**
+ * 结算方式列表
+ */
+public class JsfsActivity extends BaseActivity {
 
     private ListView mListView;
-    private CkAdapter adapter;
+    private JsfsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class CkActivity extends BaseActivity {
         setContentView(R.layout.activity_ck_layout);
         mContext = this;
         // 设置标题
-        setTitle(getString(R.string.title_ck), true);
+        setTitle(getString(R.string.title_jsfs), true);
 
         mListView = findViewById(R.id.lv_ck);
 
@@ -41,30 +43,29 @@ public class CkActivity extends BaseActivity {
 
     private void initData() {
         HashMap<String, String> properties = new HashMap<>();
-        properties.put("UID", UserManager.getInstance().getUID());
-        RequestCenter.GETCKItems(properties, new WebServiceUtils.WebServiceCallBack() {
+
+        RequestCenter.GETJSFSItems(properties, new WebServiceUtils.WebServiceCallBack() {
 
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
+                if (!StringUtil.checkDataEmpty(resultStr)) {
                     Map<String, Object> map = JsonToMap.toMap(resultStr);
                     String Sucecss = StringUtil.convertStr(map.get("Sucecss"));
-                    Log.e("Sucecss", Sucecss);
                     if ("True".equals(Sucecss)) {
                         final List<Map<String, Object>> dataList = (List<Map<String, Object>>) map.get("DATA");
-                        adapter = new CkAdapter(mContext, dataList);
+                        adapter = new JsfsAdapter(mContext, dataList);
                         mListView.setAdapter(adapter);
                         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                                 Map<String, Object> data = dataList.get(position);
-                                String CKID = StringUtil.convertStr(data.get("ID"));
-                                String CKNAME = StringUtil.convertStr(data.get("JGZ_JGMC"));
+                                String ID = StringUtil.convertStr(data.get("ID"));
+                                String NAME = StringUtil.convertStr(data.get("GXF_MC"));
 
                                 Intent intent = new Intent();
-                                intent.putExtra("CKID", CKID);
-                                intent.putExtra("CKNAME", CKNAME);
-                                setResult(Constant.ACTIVITI_FOR_RESULT_CK, intent);
+                                intent.putExtra("ID", ID);
+                                intent.putExtra("NAME", NAME);
+                                setResult(Constant.ACTIVITI_FOR_RESULT_JSFS, intent);
                                 finish();
                             }
                         });

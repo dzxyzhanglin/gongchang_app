@@ -4,21 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <!-- 搜索框 -->
-    <include layout="@layout/search_kucun" />
+    <!-- 搜索 -->
+    <include layout="@layout/search_jindu" />
 
     <!-- 查询结果 -->
     <include layout="@layout/total" />
 
     <!-- 数据列表 -->
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/kucun_refreshLayout"
+        android:id="@+id/rl_jindu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:background="@android:color/white"
         app:srlEnableFooterTranslationContent="true"
         app:srlPrimaryColor="@color/color_f2f2f2"
@@ -31,13 +29,12 @@
             app:srlDrawableProgress="@drawable/animation_loading_frame"/>
 
         <ListView
-            android:id="@+id/kucun_listview"
+            android:id="@+id/lv_jindu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:dividerHeight="8dp"
             android:divider="@color/color_e3e3e3"
-            android:choiceMode="singleChoice"
             >
         </ListView>
 
@@ -45,13 +42,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    <Button
-        android:id="@+id/btn_kaidan_confirm"
-        android:visibility="gone"
-        style="@style/Normal_Blue_Button"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:text="确认选择"/>
 
 </LinearLayout>

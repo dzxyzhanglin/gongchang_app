@@ -13,7 +13,14 @@
     <string name="title_kucun_detail">详细信息查询及盘点</string>
     <string name="title_xiaoshoulishi_chaxun">销售历史</string>
     <string name="title_xiaoshoulishi_detail">销售发货详细信息</string>
+    <string name="title_xiaoshou_kaidan">销售开单</string>
+    <string name="title_xiaoshou_kaidan_addwp">开单物品选择</string>
+    <string name="title_jindu_chaxun">生产进度查询</string>
     <string name="title_ck">仓库选择</string>
+    <string name="title_hw">货位选择</string>
+    <string name="title_jldw">计量单位选择</string>
+    <string name="title_fplx">发票类型选择</string>
+    <string name="title_jsfs">结算方式选择</string>
     <string name="title_chanliangtongji">产量统计</string>
     <string name="title_company">企业信息</string>
     <string name="title_updatepass">修改密码</string>

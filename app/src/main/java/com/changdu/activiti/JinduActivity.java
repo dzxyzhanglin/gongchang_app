@@ -1,11 +1,10 @@
 package com.changdu.activiti;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,15 +12,16 @@ import android.widget.TextView;
 
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
-import com.changdu.activiti.basicdata.CkActivity;
-import com.changdu.adapter.KucunAdapter;
-import com.changdu.constant.Constant;
+import com.changdu.adapter.JinduAdapter;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.CollUtil;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
+import com.dou361.dialogui.DialogUIUtils;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
+import com.dou361.dialogui.widget.DateSelectorWheelView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -32,39 +32,38 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 库存查询
+ * 生产进度查询
  */
-public class KucunActivity extends BaseActivity implements View.OnClickListener {
+public class JinduActivity extends BaseActivity implements View.OnClickListener {
 
     private ListView mListView;
     private List<Map<String, Object>> dataList;
-    private KucunAdapter adapter;
+    private JinduAdapter adapter;
     private RefreshLayout refreshLayout;
 
-    private EditText mSPBH;
-    private EditText mSPMC;
-    private EditText mSPSX;
-    private EditText mZJM;
-    private EditText mCKID;
+    private EditText mSCD_DJBH;
+    private EditText mCPNO;
+    private EditText mBDate;
+    private EditText mEDate;
+    private EditText mCPMC;
     private TextView mTotal;
     private Button mSearch;
 
     private Integer SumRecord = 0; // 总记录数
     private Integer PNum = 1; // 页码
-    private String CKID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kucun_layout);
+        setContentView(R.layout.activity_jindu_layout);
         mContext = this;
         // 设置标题
-        setTitle(getString(R.string.title_kucun_chaxun), true);
+        setTitle(getString(R.string.title_jindu_chaxun), true);
 
         initView();
         getDataCount();
 
-        refreshLayout = findViewById(R.id.kucun_refreshLayout);
+        refreshLayout = findViewById(R.id.rl_jindu);
         refreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -92,42 +91,25 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
-        mListView = findViewById(R.id.kucun_listview);
-        mSPBH = findViewById(R.id.et_kucun_SPBH);
-        mSPMC = findViewById(R.id.et_kucun_SPMC);
-        mSPSX = findViewById(R.id.et_kucun_SPSX);
-        mZJM = findViewById(R.id.et_kucun_ZJM);
-
-        mCKID = findViewById(R.id.et_kucun_CKID);
-        mCKID.setOnClickListener(this);
-
+        mListView = findViewById(R.id.lv_jindu);
+        mSCD_DJBH = findViewById(R.id.et_jd_SCD_DJBH);
+        mCPNO = findViewById(R.id.et_jd_CPNO);
+        mBDate = findViewById(R.id.et_jd_BDate);
+        mBDate.setOnClickListener(this);
+        mEDate = findViewById(R.id.et_jd_EDate);
+        mCPMC = findViewById(R.id.et_jd_CPMC);
+        mEDate.setOnClickListener(this);
         mTotal = findViewById(R.id.tv_total);
-
-        mSearch = findViewById(R.id.btn_kucun);
+        mSearch = findViewById(R.id.btn_jd);
         mSearch.setOnClickListener(this);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Map<String, Object> data = dataList.get(i);
-                Intent intent = new Intent(mContext, KucunDetailActivity.class);
-                intent.putExtra("SPID", StringUtil.convertStr(data.get("ID")));
-                intent.putExtra("SPK_SPBH", StringUtil.convertStr(data.get("SPK_SPBH")));
-                intent.putExtra("SPK_SPMC", StringUtil.convertStr(data.get("SPK_SPMC")));
-                intent.putExtra("SPK_SPSX", StringUtil.convertStr(data.get("SPK_SPSX")));
-                startActivity(intent);
-            }
-        });
     }
 
     private void getDataCount() {
-
         HashMap<String, String> properties = getProperties();
 
         showLoading();
 
-        // 获取记录总数
-        RequestCenter.GETSpzlCount(properties, new WebServiceUtils.WebServiceCallBack() {
+        RequestCenter.GetCPDInfoCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
                 if (!StringUtil.checkDataEmpty(resultStr)) {
@@ -155,7 +137,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         properties.put("PNum", String.valueOf(PNum));
         properties.put("SumRecord", String.valueOf(SumRecord));
 
-        RequestCenter.GETSpzlInfo(properties, new WebServiceUtils.WebServiceCallBack() {
+        RequestCenter.GetCPDInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
                 if (resultStr != null) {
@@ -165,8 +147,9 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                         pageDataList = JsonToMap.toListMap(resultStr);
                         dataList.addAll(pageDataList);
                     }
+                    Log.e("pageDataList", pageDataList.toString());
                     if (type == INIT_DATA) { // 初始数据
-                        adapter = new KucunAdapter(mContext, pageDataList);
+                        adapter = new JinduAdapter(mContext, pageDataList);
                         mListView.setAdapter(adapter);
                         if (CollUtil.isEmpty(pageDataList)) {
                             showToast(getString(R.string.data_empty));
@@ -189,52 +172,47 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 cancleLoading();
             }
         });
+
     }
 
-    /**
-     * 获取查询条件
-     * @return
-     */
     private HashMap<String, String> getProperties() {
         HashMap<String, String> properties = new HashMap<>();
         String UID = UserManager.getInstance().getUID();
-        String SPBH = mSPBH.getText().toString();
-        String SPMC = mSPMC.getText().toString();
-        String SPSX = mSPSX.getText().toString();
-        String ZJM = mZJM.getText().toString();
-
         properties.put("UID", UID);
-        properties.put("SPBH", SPBH);
-        properties.put("SPMC", SPMC);
-        properties.put("SPSX", SPSX);
-        properties.put("ZJM", ZJM);
-        properties.put("CKID", CKID);
+        properties.put("SCDH", mSCD_DJBH.getText().toString());
+        properties.put("CPNO", mCPNO.getText().toString());
+        properties.put("BDate", mBDate.getText().toString());
+        properties.put("EDate", mEDate.getText().toString());
+        properties.put("CPMC", mCPMC.getText().toString());
+
         return properties;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.et_kucun_CKID:
-                Intent intent = new Intent(mContext, CkActivity.class);
-                startActivityForResult(intent, Constant.ACTIVITI_FOR_RESULT_CK);
+            case R.id.et_jd_BDate: // 开始日期
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                    @Override
+                    public void onSaveSelectedDate(int tag, String selectedDate) {
+                        Log.e("selectedDate", selectedDate);
+                        mBDate.setText(selectedDate);
+                    }
+                }).show();
                 break;
-            case R.id.btn_kucun:
+            case R.id.et_jd_EDate: // 结束日期
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                    @Override
+                    public void onSaveSelectedDate(int tag, String selectedDate) {
+                        Log.e("selectedDate", selectedDate);
+                        mEDate.setText(selectedDate);
+                    }
+                }).show();
+                break;
+            case R.id.btn_jd: // 搜索
                 PNum = 1;
                 getDataCount();
                 break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constant.ACTIVITI_FOR_RESULT_CK) {
-            if (data != null) {
-                String ckName = data.getStringExtra("CKNAME");
-                CKID = data.getStringExtra("CKID");
-                mCKID.setText(ckName);
-            }
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.CkActivity;
-import com.changdu.adapter.KucunAdapter;
+import com.changdu.adapter.XiaoshouKaidanAddWpAdapter;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
@@ -22,6 +23,7 @@ import com.changdu.util.CollUtil;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
+import com.dou361.dialogui.DialogUIUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -32,13 +34,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 库存查询
+ * 销售开单时选择物品
  */
-public class KucunActivity extends BaseActivity implements View.OnClickListener {
-
+public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.OnClickListener {
     private ListView mListView;
     private List<Map<String, Object>> dataList;
-    private KucunAdapter adapter;
+    private XiaoshouKaidanAddWpAdapter adapter;
     private RefreshLayout refreshLayout;
 
     private EditText mSPBH;
@@ -48,6 +49,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
     private EditText mCKID;
     private TextView mTotal;
     private Button mSearch;
+    private Button mAddConfirm;
 
     private Integer SumRecord = 0; // 总记录数
     private Integer PNum = 1; // 页码
@@ -59,7 +61,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_kucun_layout);
         mContext = this;
         // 设置标题
-        setTitle(getString(R.string.title_kucun_chaxun), true);
+        setTitle(getString(R.string.title_xiaoshou_kaidan_addwp), true);
 
         initView();
         getDataCount();
@@ -93,6 +95,15 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         mListView = findViewById(R.id.kucun_listview);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("CC", "点击了item " + position);
+                adapter.setSelectPosition(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         mSPBH = findViewById(R.id.et_kucun_SPBH);
         mSPMC = findViewById(R.id.et_kucun_SPMC);
         mSPSX = findViewById(R.id.et_kucun_SPSX);
@@ -106,18 +117,9 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         mSearch = findViewById(R.id.btn_kucun);
         mSearch.setOnClickListener(this);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Map<String, Object> data = dataList.get(i);
-                Intent intent = new Intent(mContext, KucunDetailActivity.class);
-                intent.putExtra("SPID", StringUtil.convertStr(data.get("ID")));
-                intent.putExtra("SPK_SPBH", StringUtil.convertStr(data.get("SPK_SPBH")));
-                intent.putExtra("SPK_SPMC", StringUtil.convertStr(data.get("SPK_SPMC")));
-                intent.putExtra("SPK_SPSX", StringUtil.convertStr(data.get("SPK_SPSX")));
-                startActivity(intent);
-            }
-        });
+        mAddConfirm = findViewById(R.id.btn_kaidan_confirm);
+        mAddConfirm.setVisibility(View.VISIBLE);
+        mAddConfirm.setOnClickListener(this);
     }
 
     private void getDataCount() {
@@ -166,7 +168,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                         dataList.addAll(pageDataList);
                     }
                     if (type == INIT_DATA) { // 初始数据
-                        adapter = new KucunAdapter(mContext, pageDataList);
+                        adapter = new XiaoshouKaidanAddWpAdapter(mContext, pageDataList);
                         mListView.setAdapter(adapter);
                         if (CollUtil.isEmpty(pageDataList)) {
                             showToast(getString(R.string.data_empty));
@@ -222,6 +224,10 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
             case R.id.btn_kucun:
                 PNum = 1;
                 getDataCount();
+                break;
+            case R.id.btn_kaidan_confirm: // 确认选择物品
+                View rootViewB = View.inflate(mContext, R.layout.item_xiaoshou_kaidan_addwp_dialog, null);
+                DialogUIUtils.showCustomBottomAlert(this, rootViewB).show();
                 break;
         }
     }

@@ -3,7 +3,6 @@ package com.changdu.activiti;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,6 +35,7 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView mSPK_SPSX; // 规格
     private ListView mListView;
     private List<Map<String, Object>> dataList = new ArrayList<>();
+    private String mData; // 原始数据
     private KucunDetailAdapter adapter;
     private RefreshLayout refreshLayout;
     private Button mAdd;
@@ -79,11 +79,8 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initView() {
         mSPK_SPBH = findViewById(R.id.kucun_detail_SPK_SPBH);
-        mSPK_SPBH.setText(StringUtil.convertStr(SPK_SPBH));
         mSPK_SPMC = findViewById(R.id.kucun_detail_SPK_SPMC);
-        mSPK_SPMC.setText(StringUtil.convertStr(SPK_SPMC));
         mSPK_SPSX = findViewById(R.id.kucun_detail_SPK_SPSX);
-        mSPK_SPSX.setText(StringUtil.convertStr(SPK_SPSX));
 
         mListView = findViewById(R.id.lv_kucun_detail);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -99,6 +96,8 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra("HWB_HWMC", StringUtil.convertStr(data.get("HWB_HWMC")));
                 intent.putExtra("ZPD_SL", StringUtil.convertStr(data.get("ZPD_SL")));
                 intent.putExtra("OPERATE", Constant.OPERATE_UPDATE);
+                intent.putExtra("DATA_LIST", mData);
+                intent.putExtra("DATA_INDEX", i);
                 startActivity(intent);
             }
         });
@@ -117,11 +116,20 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
             public void callBack(String resultStr) {
                 if (resultStr != null) {
                     if (!StringUtil.checkDataEmpty(resultStr)) {
-                        dataList = JsonToMap.toListMap(resultStr);
+                        Map<String, Object> map = JsonToMap.toMap(resultStr);
+
+                        // 标题赋值
+                        mSPK_SPBH.setText(StringUtil.convertStr(map.get("SPK_SPBH")));
+                        mSPK_SPMC.setText(StringUtil.convertStr(map.get("SPK_SPMC")));
+                        mSPK_SPSX.setText(StringUtil.convertStr(map.get("SPK_SPSX")));
+
+                        // 列表
+                        dataList = (List<Map<String, Object>>) map.get("DList");
                         adapter = new KucunDetailAdapter(mContext, dataList);
                         mListView.setAdapter(adapter);
                         refreshLayout.finishRefresh();
                         refreshLayout.resetNoMoreData();
+                        mData = resultStr;
                     } else {
                         showToast(getString(R.string.data_empty));
                     }
@@ -145,6 +153,8 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra("HWB_HWMC", "");
                 intent.putExtra("ZPD_SL", "");
                 intent.putExtra("OPERATE", Constant.OPERATE_ADD);
+                intent.putExtra("DATA_LIST", mData);
+                intent.putExtra("DATA_INDEX", -1);
                 startActivity(intent);
                 break;
         }

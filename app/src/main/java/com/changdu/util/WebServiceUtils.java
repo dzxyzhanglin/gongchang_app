@@ -35,7 +35,9 @@ public class WebServiceUtils {
             HttpConstants.GET_SPZL_INTO,
             HttpConstants.GET_BILL_INFO,
             HttpConstants.GET_MADE_DETAIL,
-            HttpConstants.GET_KC_DETAIL
+            //HttpConstants.GET_KC_DETAIL,
+            HttpConstants.GET_CPD_INFO,
+            HttpConstants.GET_JLDW_ITEM
     );
 
     /**
