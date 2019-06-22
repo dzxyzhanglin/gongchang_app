@@ -1,12 +1,11 @@
 package com.changdu.activiti;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
-import com.changdu.adapter.XisoshoulishiAdapter;
+import com.changdu.adapter.ChanliangtongjiAdapter;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.CollUtil;
@@ -34,38 +33,35 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 销售历史
+ * 工人产量统计
  */
-public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickListener {
+public class ChanliangtongjiActivity extends BaseActivity implements View.OnClickListener {
 
     private ListView mListView;
     private List<Map<String, Object>> dataList;
-    private XisoshoulishiAdapter adapter;
+    private ChanliangtongjiAdapter adapter;
     private RefreshLayout refreshLayout;
 
     private EditText mBDate;
     private EditText mEDate;
-    private EditText mUSR_NAME;
-    private EditText mDWZ_DWMC;
-    private Button mSearch;
     private TextView mTotal;
+    private Button mSearch;
 
     private Integer SumRecord = 0; // 总记录数
     private Integer PNum = 1; // 页码
-    private String DJE = ""; // 总金额
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xiaoshoulishi_layout);
+        setContentView(R.layout.activity_chanliangtongji_layout);
         mContext = this;
         // 设置标题
-        setTitle(getString(R.string.title_xiaoshoulishi_chaxun), true);
+        setTitle(getString(R.string.title_chanliangtongji), true);
 
         initView();
         getDataCount();
 
-        refreshLayout = findViewById(R.id.rl_xiaoshoulishi);
+        refreshLayout = findViewById(R.id.rl_chanliangtongji);
         refreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -93,25 +89,12 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
-        mListView = findViewById(R.id.lv_xiaoshoulishi);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Map<String, Object> data = dataList.get(i);
-                Log.e("d", data.toString());
-                Intent intent = new Intent(mContext, XiaoshoulishiDetailActivity.class);
-                intent.putExtra("BillID", StringUtil.convertStr(data.get("ID")));
-                startActivity(intent);
-            }
-        });
-
-        mBDate = findViewById(R.id.et_xsls_BDate);
+        mListView = findViewById(R.id.lv_chanliangtongji);
+        mBDate = findViewById(R.id.et_cltj_BDate);
         mBDate.setOnClickListener(this);
-        mEDate = findViewById(R.id.et_xsls_EDate);
+        mEDate = findViewById(R.id.et_cltj_EDate);
         mEDate.setOnClickListener(this);
-        mUSR_NAME = findViewById(R.id.et_xsls_USR_NAME);
-        mDWZ_DWMC = findViewById(R.id.et_xsls_DWZ_DWMC);
-        mSearch = findViewById(R.id.btn_xiaoshoulishi);
+        mSearch = findViewById(R.id.btn_chanliangtongji);
         mSearch.setOnClickListener(this);
         mTotal = findViewById(R.id.tv_total);
     }
@@ -124,12 +107,12 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
 
         showLoading();
 
-        RequestCenter.GETBillCount(properties, new WebServiceUtils.WebServiceCallBack() {
+        RequestCenter.GETMadeCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
                 if (!StringUtil.checkDataEmpty(resultStr)) {
                     Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    String total = StringUtil.convertStr(map.get("DCount"));
+                    String total = StringUtil.convertStr(map.get("DCOUNT"));
                     SumRecord = Integer.valueOf(total);
                     mTotal.setText(total);
                     if (SumRecord > 0) {
@@ -152,7 +135,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
         properties.put("PNum", String.valueOf(PNum));
         properties.put("SumRecord", String.valueOf(SumRecord));
 
-        RequestCenter.GETBillInfo(properties, new WebServiceUtils.WebServiceCallBack() {
+        RequestCenter.GETMadeDetail(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
                 if (resultStr != null) {
@@ -163,7 +146,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                         dataList.addAll(pageDataList);
                     }
                     if (type == INIT_DATA) { // 初始数据
-                        adapter = new XisoshoulishiAdapter(mContext, pageDataList);
+                        adapter = new ChanliangtongjiAdapter(mContext, pageDataList);
                         mListView.setAdapter(adapter);
                         if (CollUtil.isEmpty(pageDataList)) {
                             showToast(getString(R.string.data_empty));
@@ -183,10 +166,10 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                 } else {
                     showToast(getString(R.string.data_error));
                 }
+
                 cancleLoading();
             }
         });
-
     }
 
     /**
@@ -196,11 +179,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
     private HashMap<String, String> getProperties() {
         HashMap<String, String> properties = new HashMap<>();
         String UID = UserManager.getInstance().getUID();
-        properties.put("UID", UID);
-        properties.put("DJZT", ""); // 单据状态
-        properties.put("DJBH", ""); // 单据单号
-        properties.put("USR_NAME", mUSR_NAME.getText().toString()); // 业务员
-        properties.put("KHMC", mDWZ_DWMC.getText().toString()); // 客户名称
+        properties.put("RYID", UID);
         properties.put("BDate", mBDate.getText().toString()); // 开始日期
         properties.put("EDate", mEDate.getText().toString()); // 截至日期
         return properties;
@@ -209,7 +188,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.et_xsls_BDate: // 开始日期
+            case R.id.et_cltj_BDate:
                 DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
@@ -218,7 +197,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                     }
                 }).show();
                 break;
-            case R.id.et_xsls_EDate: // 结束日期
+            case R.id.et_cltj_EDate:
                 DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
@@ -227,7 +206,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                     }
                 }).show();
                 break;
-            case R.id.btn_xiaoshoulishi: // 搜索
+            case R.id.btn_chanliangtongji:
                 PNum = 1;
                 getDataCount();
                 break;

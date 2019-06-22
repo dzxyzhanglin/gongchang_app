@@ -11,7 +11,7 @@ public class UserModel extends BaseModel {
 
     private String Msg;
 
-    private String UTYPE;
+    private String UTYPE; // QC-巡检
 
     private String UID;
 

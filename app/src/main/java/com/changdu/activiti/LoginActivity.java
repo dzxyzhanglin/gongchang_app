@@ -69,10 +69,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 HashMap<String, String> properties = new HashMap<String, String>();
                 properties.put("Code", Code);
                 properties.put("PWD", PWD);
+
+                showLoading();
+
                 RequestCenter.CheckUserByCode(properties, new WebServiceUtils.WebServiceCallBack() {
 
                     @Override
                     public void callBack(String resultStr) {
+                        cancleLoading();
                         if (resultStr != null) {
                             // 去掉首尾的 [  ];
                             resultStr = StringUtil.formart(resultStr);

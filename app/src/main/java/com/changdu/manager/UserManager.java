@@ -10,6 +10,7 @@ public class UserManager {
     private static final String APP_PREFERENCES_UID_KEY = "gongchang_profile_uid";
     private static final String APP_PREFERENCES_UNAME_KEY = "gongchang_profile_uname";
     private static final String APP_PREFERENCES_CODE_KEY = "gongchang_profile_code";
+    private static final String APP_PREFERENCES_UTYPE_KEY = "gongchang_profile_utype";
 
     public static UserManager getInstance() {
         if (userManager == null) {
@@ -30,6 +31,7 @@ public class UserManager {
             spManager.putString(APP_PREFERENCES_UID_KEY, user.getUID());
             spManager.putString(APP_PREFERENCES_UNAME_KEY, user.getUName());
             spManager.putString(APP_PREFERENCES_CODE_KEY, user.getCode());
+            spManager.putString(APP_PREFERENCES_UTYPE_KEY, user.getUTYPE());
         }
     }
 
@@ -38,6 +40,7 @@ public class UserManager {
         spManager.remove(APP_PREFERENCES_UID_KEY);
         spManager.remove(APP_PREFERENCES_UNAME_KEY);
         spManager.remove(APP_PREFERENCES_CODE_KEY);
+        spManager.remove(APP_PREFERENCES_UTYPE_KEY);
     }
 
     public String getUID() {

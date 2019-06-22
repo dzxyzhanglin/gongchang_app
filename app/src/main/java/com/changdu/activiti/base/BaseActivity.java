@@ -1,6 +1,7 @@
 package com.changdu.activiti.base;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,13 +14,15 @@ import android.widget.Toast;
 
 import com.changdu.constant.Constant;
 import com.changdu.util.StringUtil;
+import com.dou361.dialogui.DialogUIUtils;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public String TAG;
+    protected String TAG;
     protected Activity mContext;
+    protected Dialog dialog;
 
     protected int INIT_DATA = 1; // 初始化数据
     protected int REFRESH_DATA = 2; // 刷新数据
@@ -159,17 +162,28 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 判断结果是否为空
-     * @param result
-     * @return
+     * 显示加载中界面
      */
-    public boolean checkDataEmpty(String result) {
-        if (StringUtil.isBlank(result)) {
-            return true;
+    public void showLoading() {
+        if (dialog != null) {
+            dialog.show();
+        } else {
+            dialog = DialogUIUtils.showLoading(mContext, "加载中...", false, true, true, true).show();
         }
-        if ("anyType{}".equals(result)) {
-            return true;
+    }
+
+    /**
+     * 隐藏加载中界面
+     */
+    public void hidLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.hide();
         }
-        return false;
+    }
+
+    public void cancleLoading() {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 }

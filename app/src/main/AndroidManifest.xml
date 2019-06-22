@@ -38,10 +38,25 @@
         <activity android:name=".activiti.MainActivity" />
 
         <activity android:name=".activiti.KucunActivity" />
+        <activity android:name=".activiti.KucunDetailActivity" />
+        <activity android:name=".activiti.KucunAddUpdateActivity" />
 
         <activity android:name=".activiti.XiaoshoulishiActivity" />
+        <activity android:name=".activiti.XiaoshoulishiDetailActivity" />
 
         <activity android:name=".activiti.CkActivity" />
+
+        <activity android:name=".activiti.ChanliangtongjiActivity" />
+
+        <activity android:name=".activiti.CompanyActivity" />
+
+        <activity android:name=".activiti.UpdatePassActivity" />
+
+        <!-- 集成蒲公英自动更新 -->
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="4dd41ee0a9ad84255b82102c7fcb21e8" >
+        </meta-data>
 
     </application>
 

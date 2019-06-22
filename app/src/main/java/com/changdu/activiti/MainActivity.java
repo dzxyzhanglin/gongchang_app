@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import com.changdu.view.fragment.HomeFragment;
 import com.changdu.view.fragment.MimeFragment;
 import com.changdu.view.fragment.ProductFragment;
 import com.changdu.view.fragment.StatisticsFragment;
+import com.pgyersdk.update.PgyUpdateManager;
 
 public class MainActivity extends BaseActivity {
 
@@ -59,6 +61,9 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.content_layout, mHomeFragment);
         fragmentTransaction.commit();
+
+        // 检查更新
+        checkVersion();
     }
 
     /**
@@ -149,5 +154,18 @@ public class MainActivity extends BaseActivity {
         if (fragment != null) {
             ft.hide(fragment);
         }
+    }
+
+    /**
+     * 检查更新
+     */
+    private void checkVersion() {
+        Log.e("TAG", "检查是否有新版本更新...");
+        new PgyUpdateManager.Builder()
+                .setForced(false)                //设置是否强制提示更新
+                // v3.0.4+ 以上同时可以在官网设置强制更新最高低版本；网站设置和代码设置一种情况成立则提示强制更新
+                .setUserCanRetry(false)         //失败后是否提示重新下载
+                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
+                .register();
     }
 }

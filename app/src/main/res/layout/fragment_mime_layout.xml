@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="200dp"
-        android:text="个人中心" />
+    <ListView
+        android:id="@+id/lv_mime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        > 
+    </ListView>
 </LinearLayout>

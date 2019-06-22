@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -103,17 +104,32 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
 
         mSearch = findViewById(R.id.btn_kucun);
         mSearch.setOnClickListener(this);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Map<String, Object> data = dataList.get(i);
+                Intent intent = new Intent(mContext, KucunDetailActivity.class);
+                intent.putExtra("SPID", StringUtil.convertStr(data.get("ID")));
+                intent.putExtra("SPK_SPBH", StringUtil.convertStr(data.get("SPK_SPBH")));
+                intent.putExtra("SPK_SPMC", StringUtil.convertStr(data.get("SPK_SPMC")));
+                intent.putExtra("SPK_SPSX", StringUtil.convertStr(data.get("SPK_SPSX")));
+                startActivity(intent);
+            }
+        });
     }
 
     private void getDataCount() {
 
         HashMap<String, String> properties = getProperties();
 
+        showLoading();
+
         // 获取记录总数
         RequestCenter.GETSpzlCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
+                if (!StringUtil.checkDataEmpty(resultStr)) {
                     Map<String, Object> map = JsonToMap.toMap(resultStr);
                     String total = StringUtil.convertStr(map.get("DCOUNT"));
                     SumRecord = Integer.valueOf(total);
@@ -123,9 +139,11 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                         getDataList(INIT_DATA);
                     } else {
                         showToast(getString(R.string.data_empty));
+                        cancleLoading();
                     }
                 } else {
                     showToast(getString(R.string.data_error));
+                    cancleLoading();
                 }
             }
         });
@@ -142,7 +160,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 if (resultStr != null) {
                     PNum++;
                     List<Map<String, Object>> pageDataList = new ArrayList<>();
-                    if (!checkDataEmpty(resultStr)) {
+                    if (!StringUtil.checkDataEmpty(resultStr)) {
                         pageDataList = JsonToMap.toListMap(resultStr);
                         dataList.addAll(pageDataList);
                     }
@@ -167,6 +185,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 } else {
                     showToast(getString(R.string.data_error));
                 }
+                cancleLoading();
             }
         });
     }

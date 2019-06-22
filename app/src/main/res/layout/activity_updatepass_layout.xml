@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left|center"
+        android:layout_marginLeft="20dp"
+        android:text="旧密码："
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/et_updatepass_OLDPWD"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:hint="旧密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/color_333333"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center"
+        android:layout_marginLeft="20dp"
+        android:text="新密码："
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/et_updatepass_NEWPWD"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/color_333333"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center"
+        android:layout_marginLeft="20dp"
+        android:text="确认新密码："
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/et_updatepass_CONFIRM_NEWPWD"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:hint="请再次输入新密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/color_333333"/>
+
+    <Button
+        android:id="@+id/btn_updatepass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_blue_circle"
+        android:text="确认修改"
+        android:textColor="@color/color_white"
+        android:textSize="18sp" />
+</LinearLayout>

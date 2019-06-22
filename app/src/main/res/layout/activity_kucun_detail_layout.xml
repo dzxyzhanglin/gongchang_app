@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_marginLeft="15dp"
+            android:text="编码：" />
+
+        <TextView
+            android:id="@+id/kucun_detail_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="10sp"
+            android:text="" />
+
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="名称：" />
+
+        <TextView
+            android:id="@+id/kucun_detail_SPK_SPMC"
+            style="@style/Normal_ItemList_Body"
+            android:layout_weight="0.8"
+            android:textSize="12sp"
+            android:text="" />
+
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:text="规格：" />
+
+        <TextView
+            android:id="@+id/kucun_detail_SPK_SPSX"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
+            android:text="" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_f2f2f2"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="序号" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="仓库" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="批次" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="货位" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="数量" />
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/rl_kucun_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        app:srlEnableAutoLoadMore="false"
+        app:srlEnableFooterTranslationContent="true"
+        app:srlPrimaryColor="@color/color_f2f2f2">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@android:color/white"
+            app:srlDrawableProgress="@drawable/animation_loading_frame"
+            app:srlPrimaryColor="@color/colorPrimary" />
+
+        <ListView
+            android:id="@+id/lv_kucun_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/color_e3e3e3"
+            android:dividerHeight="1dp"
+            android:overScrollMode="never"></ListView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <Button
+        android:id="@+id/btn_kucun_detal_wtadd"
+        style="@style/Normal_Blue_Button"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="想要新增"  />
+</LinearLayout>

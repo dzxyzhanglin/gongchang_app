@@ -29,4 +29,13 @@ public class Constant {
      * ACTIVITI_FOR_RESULT CODE
      */
     public static final int ACTIVITI_FOR_RESULT_CK = 1000;
+
+    /**
+     * 操作类型
+     */
+    public static final String OPERATE_UPDATE = "UPDATE";
+
+    public static final String OPERATE_ADD = "ADD";
+
+
 }

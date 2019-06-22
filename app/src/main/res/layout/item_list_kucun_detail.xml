@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        style="@style/Normal_ItemList_Layout"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/kucun_detail_NO"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/kucun_detail_JGZ_JGMC"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="A仓" />
+
+        <TextView
+            android:id="@+id/kucun_detail_ZPD_PC"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="20180623" />
+
+        <TextView
+            android:id="@+id/kucun_detail_HWB_HWMC"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="A-1" />
+
+        <TextView
+            android:id="@+id/kucun_detail_ZPD_SL"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="28" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.changdu.R;
+import com.changdu.activiti.ChanliangtongjiActivity;
 import com.changdu.activiti.KucunActivity;
 import com.changdu.activiti.LoginActivity;
 import com.changdu.activiti.XiaoshoulishiActivity;
@@ -102,6 +103,9 @@ public class HomeFragment extends BaseFragment {
                         break;
                     case R.drawable.icon_xisoshoulishi: // 销售历史
                         startActivity(new Intent(mContext, XiaoshoulishiActivity.class));
+                        break;
+                    case R.drawable.icon_gongrenchanliangtongji: // 工人产量统计
+                        startActivity(new Intent(mContext, ChanliangtongjiActivity.class));
                         break;
                     /*case R.drawable.icon_shoujichuantu:
                         startActivity(new Intent(mContext, LoginActivity.class));

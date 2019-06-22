@@ -12,6 +12,21 @@ public class StringUtil {
     }
 
     /**
+     * 判断数据是否为空
+     * @param result
+     * @return
+     */
+    public static boolean checkDataEmpty(String result) {
+        if (StringUtil.isBlank(result)) {
+            return true;
+        }
+        if ("anyType{}".equals(result) || "2".equals(result)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 格式化json，去除首尾[ ]
      * @param json
      * @return

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="生产人员："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="传票号："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:id="@+id/cltj_CPNO"
+            android:text=""
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="工序："
+            />
+        <TextView
+            android:id="@+id/cltj_GYB_GYMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="产品编码："
+            />
+        <TextView
+            android:id="@+id/cltj_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="产品名称："
+            />
+        <TextView
+            android:id="@+id/cltj_SPK_SPMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="规格型号："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="接收数："
+            />
+        <TextView
+            android:id="@+id/cltj_JSSL"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="合格数："
+            />
+        <TextView
+            android:id="@+id/cltj_RKSL"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="不合格数："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="报废数："
+            />
+        <TextView
+            android:id="@+id/cltj_BFSL"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:textSize="12sp"
+            android:layout_width="80dp"
+            android:text="抽样报废数："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="缺件数："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="开工日期："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="完工日期："
+            />
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+</LinearLayout>

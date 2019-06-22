@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Normal_Detail_Title"
+                android:text="基本信息" />
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="中文名称：" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_CNAME"
+                    style="@style/Normal_ItemList_Body"
+                    android:paddingLeft="20dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="英文名称：" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_NAME"
+                    style="@style/Normal_ItemList_Body"
+                    android:paddingLeft="20dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="70dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="简称：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_ABBR"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Normal_Detail_Title"
+                android:layout_marginTop="20dp"
+                android:text="联系信息" />
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="电话号码：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_TEL"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="传真号码：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_FAX"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="电子邮箱：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_EMAIL"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="公司地址：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_ADDR"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="邮政编码：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_ZIP"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Normal_Detail_Title"
+                android:layout_marginTop="20dp"
+                android:text="其他信息" />
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="公司网站：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_WEB"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="开户银行：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_BANK"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="银行账号：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_BANKNO"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="公司税号：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_TAXNO"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="100dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="负责人：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_LEGAL"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Normal_ItemList_Layout">
+
+                <TextView
+                    style="@style/Normal_ItemList_Title"
+                    android:layout_width="110dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="20dp"
+                    android:text="负责人电话：" />
+
+                <TextView
+                    android:id="@+id/tv_company_EPI_CONTACT"
+                    style="@style/Normal_ItemList_Body"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

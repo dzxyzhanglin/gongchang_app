@@ -70,7 +70,8 @@
         <EditText
             android:id="@+id/et_kucun_CKID"
             style="@style/Normal_Edittext"
-            android:hint="请选择所在仓库>>"
+            android:hint="请选择所在仓库"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
             android:editable="false"
             android:inputType="none"
             android:focusableInTouchMode="false"

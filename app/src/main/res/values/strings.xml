@@ -10,8 +10,13 @@
     <string name="title_statistics">统计报表</string>
     <string name="title_product">物品信息</string>
     <string name="title_kucun_chaxun">库存查询</string>
+    <string name="title_kucun_detail">详细信息查询及盘点</string>
     <string name="title_xiaoshoulishi_chaxun">销售历史</string>
+    <string name="title_xiaoshoulishi_detail">销售发货详细信息</string>
     <string name="title_ck">仓库选择</string>
+    <string name="title_chanliangtongji">产量统计</string>
+    <string name="title_company">企业信息</string>
+    <string name="title_updatepass">修改密码</string>
 
     <string name="btn_search">查询搜索</string>
     <string name="data_error">数据加载失败</string>

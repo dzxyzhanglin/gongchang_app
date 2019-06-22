@@ -10,6 +10,7 @@
     <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
             android:text="单号："
             />
         <TextView
@@ -55,6 +56,7 @@
     <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
+            android:layout_width="60dp"
             android:text="状态："
             />
         <TextView

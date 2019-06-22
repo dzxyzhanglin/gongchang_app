@@ -46,6 +46,15 @@ public class RequestCenter {
     }
 
     /**
+     * 获取单个物品库存详情
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETKCDetail(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_KC_DETAIL, properties, webServiceCallBack);
+    }
+
+    /**
      * 销售历史总数
      * @param properties
      * @param webServiceCallBack
@@ -61,6 +70,42 @@ public class RequestCenter {
      */
     public static void GETBillInfo(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
         WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_BILL_INFO, properties, webServiceCallBack);
+    }
+
+    /**
+     * 获取生产统计记录数
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETMadeCount(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_MADE_COUNT, properties, webServiceCallBack);
+    }
+
+    /**
+     * 获取生产统计明细
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETMadeDetail(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_MADE_DETAIL, properties, webServiceCallBack);
+    }
+
+    /**
+     * 获取企业详情
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETQYInfo(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_QY_INFO, properties, webServiceCallBack);
+    }
+
+    /**
+     * 修改密码
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void MODIFYPWD(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.MODIFY_PWD, properties, webServiceCallBack);
     }
 
 

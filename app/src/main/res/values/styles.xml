@@ -64,4 +64,25 @@
         <item name="android:textColorHint">@color/color_999999</item>
     </style>
 
+    <!-- 详细信息标题 -->
+    <style name="Normal_Detail_Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
+    <style name="Normal_Blue_Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@drawable/button_blue_circle</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

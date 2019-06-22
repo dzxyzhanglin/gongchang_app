@@ -33,7 +33,9 @@ public class WebServiceUtils {
 
     private static final List<String> notFormatMethod = Arrays.asList(
             HttpConstants.GET_SPZL_INTO,
-            HttpConstants.GET_BILL_INFO
+            HttpConstants.GET_BILL_INFO,
+            HttpConstants.GET_MADE_DETAIL,
+            HttpConstants.GET_KC_DETAIL
     );
 
     /**
