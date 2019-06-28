@@ -48,30 +48,30 @@ public class FplxActivity extends BaseActivity {
 
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    String Sucecss = StringUtil.convertStr(map.get("Sucecss"));
-                    if ("True".equals(Sucecss)) {
-                        final List<Map<String, Object>> dataList = (List<Map<String, Object>>) map.get("DATA");
-                        adapter = new FplxAdapter(mContext, dataList);
-                        mListView.setAdapter(adapter);
-                        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                                Map<String, Object> data = dataList.get(position);
-                                String ID = StringUtil.convertStr(data.get("ID"));
-                                String NAME = StringUtil.convertStr(data.get("IV_MC"));
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    return;
+                }
 
-                                Intent intent = new Intent();
-                                intent.putExtra("ID", ID);
-                                intent.putExtra("NAME", NAME);
-                                setResult(Constant.ACTIVITI_FOR_RESULT_FPLX, intent);
-                                finish();
-                            }
-                        });
-                    } else {
-                        showToast(getString(R.string.data_error));
-                    }
+                String Sucecss = StringUtil.convertStr(map.get("Sucecss"));
+                if ("True".equals(Sucecss)) {
+                    final List<Map<String, Object>> dataList = (List<Map<String, Object>>) map.get("DATA");
+                    adapter = new FplxAdapter(mContext, dataList);
+                    mListView.setAdapter(adapter);
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            Map<String, Object> data = dataList.get(position);
+                            String ID = StringUtil.convertStr(data.get("ID"));
+                            String NAME = StringUtil.convertStr(data.get("IV_MC"));
+
+                            Intent intent = new Intent();
+                            intent.putExtra("ID", ID);
+                            intent.putExtra("NAME", NAME);
+                            setResult(Constant.ACTIVITI_FOR_RESULT_FPLX, intent);
+                            finish();
+                        }
+                    });
                 } else {
                     showToast(getString(R.string.data_error));
                 }

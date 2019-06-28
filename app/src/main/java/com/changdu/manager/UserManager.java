@@ -55,6 +55,10 @@ public class UserManager {
         return SPManager.getInstance().getString(APP_PREFERENCES_CODE_KEY, "");
     }
 
+    public String getUType() {
+        return SPManager.getInstance().getString(APP_PREFERENCES_UTYPE_KEY, "");
+    }
+
     /**
      * 判断用户是否登录
      * @return

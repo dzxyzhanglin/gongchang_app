@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="加工人员："
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/JGRY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="传票编号："
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/CPNO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产品名称："
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/CPMC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前工序："
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/GXMC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/jg_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="加工信息"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/xj_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_gray"
+                    android:gravity="center"
+                    android:text="巡检信息"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bar2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ListView
+                    android:id="@+id/checkList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:divider="@color/color_gray"
+                    android:dividerHeight="1px"></ListView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bar1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="传票计划数量：" />
+
+                    <TextView
+                        android:id="@+id/CPSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="传票接收数量：" />
+
+                    <TextView
+                        android:id="@+id/JSSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="传票合格数量：" />
+
+                    <TextView
+                        android:id="@+id/RKSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="本工序报废数：" />
+
+                    <TextView
+                        android:id="@+id/BBFSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="上工序报废数：" />
+
+                    <TextView
+                        android:id="@+id/PBFSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="本工序缺件数：" />
+
+                    <TextView
+                        android:id="@+id/BQSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="上工序缺件数：" />
+
+                    <TextView
+                        android:id="@+id/PQSL"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="设备名称：" />
+
+                    <TextView
+                        android:id="@+id/SBMC"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Normal_ItemList_Layout"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="开工时间：" />
+
+                    <TextView
+                        android:id="@+id/KGRQ"
+                        style="@style/Normal_ItemList_Body"
+                        android:layout_weight="2"
+                        android:text="" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/confirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="审核"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_gray"
+                android:gravity="center"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

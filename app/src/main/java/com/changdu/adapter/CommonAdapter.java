@@ -12,6 +12,10 @@ public abstract class CommonAdapter extends BaseAdapter {
 
     protected List<Map<String, Object>> mDataList;
 
+    public List<Map<String, Object>> getmDataList() {
+        return mDataList;
+    }
+
     /**
      * 刷新
      * @param dataList

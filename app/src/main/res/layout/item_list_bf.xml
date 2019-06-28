@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10.0dip">
+
+    <TextView
+        android:id="@+id/tv_qtbf_name"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:textColor="@color/text_black"
+        android:textSize="14.0sp"
+        android:text="自动校正"/>
+
+    <TextView
+        android:id="@+id/tv_qtbf_bf"
+        android:layout_width="0.0dip"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/blue"
+        android:textSize="14.0sp"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/tv_qtbf_qj"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:textColor="@color/blue"
+        android:textSize="14.0sp"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/tv_qtbf_delete"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:padding="5.0dip"
+        android:text="删除"
+        android:textColor="@color/color_red_f9"
+        android:textSize="14.0sp" />
+</LinearLayout>

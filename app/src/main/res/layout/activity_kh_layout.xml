@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/Normal_ItemList_Layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="60dp">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:textColor="@color/color_333333"
+            android:layout_width="60dp"
+            android:text="客户名称:"
+            />
+        <EditText
+            android:id="@+id/et_kh_KHMC"
+            style="@style/Normal_Edittext"
+            android:layout_height="40dp"
+            android:hint="请输入客户名称搜索"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_kh"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_blue_circle"
+        android:text="@string/btn_search"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+        />
+
+    <include layout="@layout/activity_ck_layout" />
+
+
+</LinearLayout>

@@ -38,7 +38,26 @@ public class Constant {
 
     public static final int ACTIVITI_FOR_RESULT_JSFS = 1003;
 
+    public static final int ACTIVITI_FOR_RESULT_KH = 1004;
+
+    public static final int ACTIVITI_FOR_RESULT_DEVICE = 1005;
+
     public static final int ACTIVITI_FOR_RESULT_ADD_WP = 1100;
+
+    public static final int ACTIVITI_FOR_RESULT_ADD_QTBF = 1101;
+
+    public static final int ACTIVITI_FOR_RESULT_PLUG_IMG = 1150;
+
+    /**
+     * 扫码类型
+     */
+    public static final String CAPTURE_CHUANTU = "CHUANTU"; // 手机传图
+
+    public static final String CAPTURE_PANDIAN = "PANDIAN"; // 手机盘点
+
+    public static final String CAPTURE_CHEJIAN_SAOMIAO = "CHEJIAN_SAOMIAO"; // 车间扫码
+
+    public static final String CAPTURE_RESULT_CODE = "CAPTURE_RESULT_CODE"; // 车间扫码
 
     /**
      * 操作类型
@@ -47,5 +66,10 @@ public class Constant {
 
     public static final String OPERATE_ADD = "ADD";
 
+    /**
+     * 查看图片
+     */
+    public static final String PLUS_IMG_LIST = "PLUS_IMG_LIST";
+    public static final String PLUS_IMG_POSITION = "PLUS_IMG_POSITION";
 
 }

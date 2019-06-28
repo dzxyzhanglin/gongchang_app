@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_kaidan_wp_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:layout_height="40dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/tv_kaidan_wp_PC"
+            style="@style/Normal_ItemList_Body"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/tv_kaidan_wp_HW_NAME"
+            style="@style/Normal_ItemList_Body"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/tv_kaidan_wp_SL"
+            style="@style/Normal_ItemList_Body"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/tv_kaidan_wp_PRICE"
+            style="@style/Normal_ItemList_Body"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="1" />
+
+        <ImageView
+            android:id="@+id/iv_kaidan_wp_DELETE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:src="@drawable/ic_remove_circle_black_24dp" />
+
+
+
+</LinearLayout>

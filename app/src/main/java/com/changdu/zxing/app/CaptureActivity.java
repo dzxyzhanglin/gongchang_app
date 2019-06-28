@@ -16,8 +16,8 @@
 
 package com.changdu.zxing.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -37,12 +37,20 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.changdu.R;
+import com.changdu.activiti.WorkInfoActivity;
+import com.changdu.activiti.ChuanTuActivity;
+import com.changdu.activiti.KucunDetailActivity;
+import com.changdu.activiti.XunjianActivity;
+import com.changdu.activiti.base.BaseActivity;
+import com.changdu.constant.Constant;
+import com.changdu.manager.UserManager;
+import com.changdu.util.StatusBarUtil;
+import com.changdu.util.StringUtil;
 import com.changdu.zxing.camera.CameraManager;
 import com.changdu.zxing.decode.BeepManager;
 import com.changdu.zxing.decode.CaptureActivityHandler;
@@ -53,23 +61,20 @@ import com.changdu.zxing.decode.Intents;
 import com.changdu.zxing.decode.RGBLuminanceSource;
 import com.changdu.zxing.util.Util;
 import com.changdu.zxing.view.ViewfinderView;
+import com.dou361.dialogui.DialogUIUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
-import com.google.zxing.EncodeHintType;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.oned.MultiFormatOneDReader;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Vector;
 
@@ -80,7 +85,7 @@ import java.util.Vector;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
+public final class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -108,10 +113,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
-    private Button mButtonBack;
     private Button createBtn;
     private Button photoBtn;
+    private Button shougongBtn;
     private Button flashBtn;
+
+    private Dialog mButtonDialog;
+    private EditText mCode;
+    private Button mQuery;
 
     private Result lastResult;
     private boolean hasSurface;
@@ -123,6 +132,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     private InactivityTimer inactivityTimer;
     private BeepManager beepManager;
     private boolean isFlash = false;
+    private String captureType; // 模块
+    private String barcodeFormatType = "QR_CODE"; // 扫描的条码或二维码类型，默认为二维码
 
     private int REQUEST_CODE = 3;
 
@@ -136,26 +147,25 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     @Override
     public void onCreate(Bundle icicle) {
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(icicle);
-
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_qrcode_capture_layout);
+
+        mContext = this;
+        // 初始化标题
+        initTitle();
 
         Util.currentActivity = this;
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 
-        mButtonBack = (Button) findViewById(R.id.button_back);
-        mButtonBack.setOnClickListener(click);
         createBtn = (Button) findViewById(R.id.qrcode_btn);
         createBtn.setOnClickListener(click);
         photoBtn = (Button) findViewById(R.id.photo_btn);
         photoBtn.setOnClickListener(click);
         flashBtn = (Button) findViewById(R.id.flash_btn);
         flashBtn.setOnClickListener(click);
+        shougongBtn = (Button) findViewById(R.id.shougong_btn);
+        shougongBtn.setOnClickListener(click);
 
         surfaceView = (SurfaceView) findViewById(R.id.preview_view);
         surfaceHolder = surfaceView.getHolder();
@@ -169,12 +179,29 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
-
-        // showHelpOnFirstLaunch();
     }
 
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
+
+    private void initTitle() {
+        Intent intent = getIntent();
+        captureType = intent.getStringExtra("CAPTURE_TYPE");
+        Log.e("starttype", captureType);
+        // 设置标题
+        String title = "";
+        if (Objects.equals(captureType, Constant.CAPTURE_CHUANTU)) {
+            title = getString(R.string.title_kucun_shoujichuantu);
+        } else if (Objects.equals(captureType, Constant.CAPTURE_PANDIAN)) {
+            title = getString(R.string.title_kucun_shoujipandian);
+        } else if (Objects.equals(captureType, Constant.CAPTURE_CHEJIAN_SAOMIAO)) {
+            title = getString(R.string.title_kucun_chejiansaoma);
+        }
+        title += "扫一扫";
+        setTitle(title, true);
+
+        StatusBarUtil.immersive(mContext, R.color.color_transparent);
+    }
 
     /**
      * 闪光灯点击事件
@@ -184,9 +211,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         @Override
         public void onClick(View v) {
             int id = v.getId();
-            if (id == R.id.button_back) {
-                finish();
-            } else if (id == R.id.flash_btn) {
+            if (id == R.id.flash_btn) {
                 if (!isFlash) {
                     CameraManager.get().turnLightOn();
                 } else {
@@ -195,22 +220,66 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 }
                 isFlash = !isFlash;
             } else if (id == R.id.photo_btn) {
-                // 打开手机中的相册
-                Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
-                innerIntent.setType("image/*");
-                Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
-                startActivityForResult(wrapperIntent, REQUEST_CODE);
+                // 切换为扫码条形码
+                // TODO
+                Log.e("TAG", "切换为扫码条形码");
             } else if (id == R.id.qrcode_btn) {
-                // 跳转到生成二维码页面
-                Bitmap b = createQRCode();
-                Intent intent = getIntent();
-                intent.putExtra("QR_CODE", b);
-                setResult(200, intent);
-                finish();
-            }
+                // 切换为扫码二维码
+                // TODO
+                Log.e("TAG", "切换为扫码二维码");
+            } else if (id == R.id.shougong_btn) {
+                // 手工输入
+                View rootViewB = View.inflate(mContext, R.layout.item_saomao_sg_dialog, null);
+                if (mButtonDialog == null) {
+                    mButtonDialog = DialogUIUtils.showCustomBottomAlert(mContext, rootViewB).show();
+                } else {
+                    mButtonDialog.show();
+                }
 
+                mCode = mButtonDialog.findViewById(R.id.et_saomiao_code);
+                mQuery = mButtonDialog.findViewById(R.id.btn_saomiao_query);
+                mQuery.setOnClickListener(click);
+            } else if (id == R.id.btn_saomiao_query) { // 手工输入查询
+                String code = mCode.getText().toString();
+                if (StringUtil.isBlank(code)) {
+                    showToast("请输入扫描结果");
+                    return;
+                }
+
+                handleDecodeResult(code);
+            }
         }
     };
+
+    public void handleDecodeResult(String code) {
+        if (Objects.equals(captureType, Constant.CAPTURE_CHUANTU)) {
+            Intent ctIntent = new Intent(mContext, ChuanTuActivity.class);
+            ctIntent.putExtra(Constant.CAPTURE_RESULT_CODE, code);
+            mContext.startActivity(ctIntent);
+        } else if (Objects.equals(captureType, Constant.CAPTURE_PANDIAN)) {
+            Intent ctIntent = new Intent(mContext, KucunDetailActivity.class);
+            ctIntent.putExtra("SPID", code);
+            mContext.startActivity(ctIntent);
+        } else if (Objects.equals(captureType, Constant.CAPTURE_CHEJIAN_SAOMIAO)) {
+            // 判断工人和巡检身份
+            String UType = UserManager.getInstance().getUType();
+            Intent ctIntent = null;
+            if (Objects.equals(UType, "QC")) {
+                ctIntent = new Intent(mContext, XunjianActivity.class);
+            } else {
+                ctIntent = new Intent(mContext, WorkInfoActivity.class);
+            }
+            ctIntent.putExtra(Constant.CAPTURE_RESULT_CODE, code);
+            mContext.startActivity(ctIntent);
+        } else {
+            Toast.makeText(mContext, "没有对应模块。" + captureType, Toast.LENGTH_LONG).show();
+        }
+
+        if (mButtonDialog != null) {
+            mButtonDialog.dismiss();
+        }
+        mContext.finish();
+    }
 
     @SuppressWarnings("deprecation")
     @Override
@@ -334,6 +403,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     public void handleDecode(Result rawResult, Bitmap barcode) {
         inactivityTimer.onActivity();
         lastResult = rawResult;
+        barcodeFormatType = rawResult.getBarcodeFormat().toString(); // 条码二维码类型
         if (barcode == null) {
             // This is from history -- no saved barcode
             handleDecodeInternally(rawResult, null);
@@ -475,6 +545,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
+        Intent intent = getIntent();
+        captureType = intent.getStringExtra("CAPTURE_TYPE");
+        Log.e("initCameratype", captureType);
+
         try {
             /**
              * use a CameraManager to manager the camera's life cycles
@@ -492,7 +566,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             return;
         }
         if (handler == null) {
-            handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
+            handler = new CaptureActivityHandler(this, decodeFormats, characterSet, captureType);
         }
     }
 
@@ -574,46 +648,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             MultiFormatOneDReader reader = new MultiFormatOneDReader(null);
             return reader.decode(bitmap1);
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Bitmap createQRCode() {
-        int QR_WIDTH = 100;
-        int QR_HEIGHT = 100;
-
-        try {
-            // 需要引入core包
-            QRCodeWriter writer = new QRCodeWriter();
-            String text = Util.getIMEI(this);
-            if (text == null || "".equals(text) || text.length() < 1) {
-                return null;
-            }
-            // 把输入的文本转为二维码
-            BitMatrix martix = writer.encode(text, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT);
-
-            System.out.println("w:" + martix.getWidth() + "h:" + martix.getHeight());
-
-            Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
-            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-            BitMatrix bitMatrix = new QRCodeWriter().encode(text, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
-            int[] pixels = new int[QR_WIDTH * QR_HEIGHT];
-            for (int y = 0; y < QR_HEIGHT; y++) {
-                for (int x = 0; x < QR_WIDTH; x++) {
-                    if (bitMatrix.get(x, y)) {
-                        pixels[y * QR_WIDTH + x] = 0xff000000;
-                    } else {
-                        pixels[y * QR_WIDTH + x] = 0xffffffff;
-                    }
-                }
-            }
-            // cheng chen de er wei ma
-            Bitmap bitmap = Bitmap.createBitmap(QR_WIDTH, QR_HEIGHT, Bitmap.Config.ARGB_8888);
-            bitmap.setPixels(pixels, 0, QR_WIDTH, 0, 0, QR_WIDTH, QR_HEIGHT);
-
-            return bitmap;
-        } catch (WriterException e) {
             e.printStackTrace();
         }
         return null;

@@ -83,7 +83,7 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         if (StringUtil.isBlank(mData)) {
             dataList = new ArrayList<>();
         } else {
-            Map<String, Object> map = JsonToMap.toMap(mData);
+            Map<String, Object> map = toMap(mData);
             dataList = (List<Map<String, Object>>) map.get("DList");
         }
         Log.e("d", dataList.toString());
@@ -136,21 +136,22 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         String WU_LIST = buildDataList();
         properties.put("List", WU_LIST);
 
+        showLoading();
         RequestCenter.InventSave(properties, new WebServiceUtils.WebServiceCallBack() {
 
             @Override
             public void callBack(String resultStr) {
-                Log.e("resultStr", resultStr);
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
-                        showToast(StringUtil.convertStr(map.get("Mesg")));
-                        finish();
-                    } else {
-                        showToast(StringUtil.convertStr(map.get("Mesg")));
-                    }
+                cancleLoading();
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    return;
+                }
+
+                if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
+                    showToast(StringUtil.convertStr(map.get("Mesg")));
+                    finish();
                 } else {
-                    showToast("操作失败");
+                    showToast(StringUtil.convertStr(map.get("Mesg")));
                 }
             }
         });
@@ -215,8 +216,8 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.ACTIVITI_FOR_RESULT_CK) {
             if (data != null) {
-                JGZ_JGMC = data.getStringExtra("CKNAME");
-                ZPD_JGID = data.getStringExtra("CKID");
+                JGZ_JGMC = data.getStringExtra("NAME");
+                ZPD_JGID = data.getStringExtra("ID");
                 mZPD_JGID.setText(JGZ_JGMC);
 
                 // 清空货位选择

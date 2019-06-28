@@ -71,29 +71,28 @@ public class CompanyActivity extends BaseActivity {
 
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
-                        List<Map<String, Object>> list = (List<Map<String, Object>>) map.get("DATA");
-                        if (!CollUtil.isEmpty(list)) {
-                            Map<String, Object> data = list.get(0);
-                            mEPI_CNAME.setText(StringUtil.convertStr(data.get("EPI_CNAME")));
-                            mEPI_NAME.setText(StringUtil.convertStr(data.get("EPI_NAME")));
-                            mEPI_ABBR.setText(StringUtil.convertStr(data.get("EPI_ABBR")));
-                            mEPI_TEL.setText(StringUtil.convertStr(data.get("EPI_TEL")));
-                            mEPI_ADDR.setText(StringUtil.convertStr(data.get("EPI_ADDR")));
-                            mEPI_FAX.setText(StringUtil.convertStr(data.get("EPI_FAX")));
-                            mEPI_ZIP.setText(StringUtil.convertStr(data.get("EPI_ZIP")));
-                            mEPI_WEB.setText(StringUtil.convertStr(data.get("EPI_WEB")));
-                            mEPI_EMAIL.setText(StringUtil.convertStr(data.get("EPI_EMAIL")));
-                            mEPI_BANK.setText(StringUtil.convertStr(data.get("EPI_BANK")));
-                            mEPI_BANKNO.setText(StringUtil.convertStr(data.get("EPI_BANKNO")));
-                            mEPI_TAXNO.setText(StringUtil.convertStr(data.get("EPI_TAXNO")));
-                            mEPI_LEGAL.setText(StringUtil.convertStr(data.get("EPI_LEGAL")));
-                            mEPI_CONTACT.setText(StringUtil.convertStr(data.get("EPI_CONTACT")));
-                        }
-                    } else {
-                        showToast(getString(R.string.data_error));
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    return;
+                }
+                if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
+                    List<Map<String, Object>> list = (List<Map<String, Object>>) map.get("DATA");
+                    if (!CollUtil.isEmpty(list)) {
+                        Map<String, Object> data = list.get(0);
+                        mEPI_CNAME.setText(StringUtil.convertStr(data.get("EPI_CNAME")));
+                        mEPI_NAME.setText(StringUtil.convertStr(data.get("EPI_NAME")));
+                        mEPI_ABBR.setText(StringUtil.convertStr(data.get("EPI_ABBR")));
+                        mEPI_TEL.setText(StringUtil.convertStr(data.get("EPI_TEL")));
+                        mEPI_ADDR.setText(StringUtil.convertStr(data.get("EPI_ADDR")));
+                        mEPI_FAX.setText(StringUtil.convertStr(data.get("EPI_FAX")));
+                        mEPI_ZIP.setText(StringUtil.convertStr(data.get("EPI_ZIP")));
+                        mEPI_WEB.setText(StringUtil.convertStr(data.get("EPI_WEB")));
+                        mEPI_EMAIL.setText(StringUtil.convertStr(data.get("EPI_EMAIL")));
+                        mEPI_BANK.setText(StringUtil.convertStr(data.get("EPI_BANK")));
+                        mEPI_BANKNO.setText(StringUtil.convertStr(data.get("EPI_BANKNO")));
+                        mEPI_TAXNO.setText(StringUtil.convertStr(data.get("EPI_TAXNO")));
+                        mEPI_LEGAL.setText(StringUtil.convertStr(data.get("EPI_LEGAL")));
+                        mEPI_CONTACT.setText(StringUtil.convertStr(data.get("EPI_CONTACT")));
                     }
                 } else {
                     showToast(getString(R.string.data_error));

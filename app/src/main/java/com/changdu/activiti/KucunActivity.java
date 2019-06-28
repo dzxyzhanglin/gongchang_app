@@ -130,20 +130,19 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         RequestCenter.GETSpzlCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    String total = StringUtil.convertStr(map.get("DCOUNT"));
-                    SumRecord = Integer.valueOf(total);
-                    mTotal.setText(total);
-                    if (SumRecord > 0) {
-                        dataList = new ArrayList<>();
-                        getDataList(INIT_DATA);
-                    } else {
-                        showToast(getString(R.string.data_empty));
-                        cancleLoading();
-                    }
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    cancleLoading();
+                    return;
+                }
+                String total = StringUtil.convertStr(map.get("DCOUNT"));
+                SumRecord = Integer.valueOf(total);
+                mTotal.setText(total);
+                if (SumRecord > 0) {
+                    dataList = new ArrayList<>();
+                    getDataList(INIT_DATA);
                 } else {
-                    showToast(getString(R.string.data_error));
+                    showToast(getString(R.string.data_empty));
                     cancleLoading();
                 }
             }
@@ -158,34 +157,33 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         RequestCenter.GETSpzlInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
-                    PNum++;
-                    List<Map<String, Object>> pageDataList = new ArrayList<>();
-                    if (!StringUtil.checkDataEmpty(resultStr)) {
-                        pageDataList = JsonToMap.toListMap(resultStr);
-                        dataList.addAll(pageDataList);
-                    }
-                    if (type == INIT_DATA) { // 初始数据
-                        adapter = new KucunAdapter(mContext, pageDataList);
-                        mListView.setAdapter(adapter);
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            showToast(getString(R.string.data_empty));
-                        }
-                    } else if (type == REFRESH_DATA) { // 刷新数据
-                        adapter.refresh(pageDataList);
-                        refreshLayout.finishRefresh();
-                        refreshLayout.resetNoMoreData();
-                    } else if (type == LOAD_MORE_DATA) { // 加载更多数据
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        } else {
-                            adapter.loadMore(pageDataList);
-                            refreshLayout.finishLoadMore();
-                        }
-                    }
-                } else {
-                    showToast(getString(R.string.data_error));
+                List<Map<String, Object>> pageDataList = toListMap(resultStr);
+                if (pageDataList == null) {
+                    cancleLoading();
+                    return;
                 }
+                dataList.addAll(pageDataList);
+                PNum++;
+
+                if (type == INIT_DATA) { // 初始数据
+                    adapter = new KucunAdapter(mContext, pageDataList);
+                    mListView.setAdapter(adapter);
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        showToast(getString(R.string.data_empty));
+                    }
+                } else if (type == REFRESH_DATA) { // 刷新数据
+                    adapter.refresh(pageDataList);
+                    refreshLayout.finishRefresh();
+                    refreshLayout.resetNoMoreData();
+                } else if (type == LOAD_MORE_DATA) { // 加载更多数据
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
+                    } else {
+                        adapter.loadMore(pageDataList);
+                        refreshLayout.finishLoadMore();
+                    }
+                }
+
                 cancleLoading();
             }
         });
@@ -231,8 +229,8 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.ACTIVITI_FOR_RESULT_CK) {
             if (data != null) {
-                String ckName = data.getStringExtra("CKNAME");
-                CKID = data.getStringExtra("CKID");
+                String ckName = data.getStringExtra("NAME");
+                CKID = data.getStringExtra("ID");
                 mCKID.setText(ckName);
             }
         }

@@ -114,28 +114,23 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
-                    if (!StringUtil.checkDataEmpty(resultStr)) {
-                        Map<String, Object> map = JsonToMap.toMap(resultStr);
-
-                        // 标题赋值
-                        mSPK_SPBH.setText(StringUtil.convertStr(map.get("SPK_SPBH")));
-                        mSPK_SPMC.setText(StringUtil.convertStr(map.get("SPK_SPMC")));
-                        mSPK_SPSX.setText(StringUtil.convertStr(map.get("SPK_SPSX")));
-
-                        // 列表
-                        dataList = (List<Map<String, Object>>) map.get("DList");
-                        adapter = new KucunDetailAdapter(mContext, dataList);
-                        mListView.setAdapter(adapter);
-                        refreshLayout.finishRefresh();
-                        refreshLayout.resetNoMoreData();
-                        mData = resultStr;
-                    } else {
-                        showToast(getString(R.string.data_empty));
-                    }
-                } else {
-                    showToast(getString(R.string.data_error));
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    return;
                 }
+
+                // 标题赋值
+                mSPK_SPBH.setText(StringUtil.convertStr(map.get("SPK_SPBH")));
+                mSPK_SPMC.setText(StringUtil.convertStr(map.get("SPK_SPMC")));
+                mSPK_SPSX.setText(StringUtil.convertStr(map.get("SPK_SPSX")));
+
+                // 列表
+                dataList = (List<Map<String, Object>>) map.get("DList");
+                adapter = new KucunDetailAdapter(mContext, dataList);
+                mListView.setAdapter(adapter);
+                refreshLayout.finishRefresh();
+                refreshLayout.resetNoMoreData();
+                mData = resultStr;
             }
         });
     }

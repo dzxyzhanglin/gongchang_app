@@ -13,7 +13,9 @@
             android:text="编码：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_SPK_SPBH"
             style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
             android:text="DQCP005" />
 
         <TextView
@@ -22,6 +24,7 @@
             android:text="名称：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_SPK_SPMC"
             style="@style/Normal_ItemList_Body"
             android:text="进气门" />
     </LinearLayout>
@@ -34,6 +37,7 @@
             android:text="规格：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_SPK_SPSX"
             style="@style/Normal_ItemList_Body"
             android:text="CG150-C" />
 
@@ -43,6 +47,7 @@
             android:text="数量：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_PFM_PFSL"
             style="@style/Normal_ItemList_Body"
             android:text="20000" />
     </LinearLayout>
@@ -55,6 +60,7 @@
             android:text="价格：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_PFM_ZKJG"
             style="@style/Normal_ItemList_Body"
             android:text="20000" />
 
@@ -64,6 +70,7 @@
             android:text="金额：" />
 
         <TextView
+            android:id="@+id/tv_list_xsls_detail_PFM_ZKJE"
             style="@style/Normal_ItemList_Body"
             android:text="299" />
     </LinearLayout>

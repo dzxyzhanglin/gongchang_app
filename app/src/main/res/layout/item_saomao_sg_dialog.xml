@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_saomiao_code"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:gravity="left|center"
+        android:hint="请手工输入扫描结果"
+        android:paddingLeft="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_saomiao_query"
+        style="@style/Normal_Blue_Button"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:text="查询"/>
+
+</LinearLayout>

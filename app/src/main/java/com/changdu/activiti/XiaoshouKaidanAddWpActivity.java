@@ -1,5 +1,6 @@
 package com.changdu.activiti;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,12 +16,13 @@ import android.widget.TextView;
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.CkActivity;
+import com.changdu.activiti.basicdata.HwActivity;
+import com.changdu.activiti.basicdata.JldwActivity;
 import com.changdu.adapter.XiaoshouKaidanAddWpAdapter;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.CollUtil;
-import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
 import com.dou361.dialogui.DialogUIUtils;
@@ -28,6 +30,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +57,22 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
     private Integer SumRecord = 0; // 总记录数
     private Integer PNum = 1; // 页码
     private String CKID = "";
+    private String CK_NAME;
+
+    // 底部弹窗
+    private EditText mDialogPC; // 批次
+    private EditText mDialogHWID; // 货位
+    private EditText mDialogDW; // 单位
+    private EditText mDialogSL; // 数量
+    private EditText mDialogPRICE; // 价格
+    private Dialog mButtonDialog;
+    private Button mButtonDialogSave;
+
+    private String DialogHWID = "";
+    private String DialogHW_NAME = "";
+    private String DialogDWID = "";
+    private String DialogDW_NAME = "";
+    private Map<String, Object> selectedData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +82,38 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         // 设置标题
         setTitle(getString(R.string.title_xiaoshou_kaidan_addwp), true);
 
+        Intent intent = getIntent();
+        CKID = intent.getStringExtra("CKID");
+        CK_NAME = intent.getStringExtra("CK_NAME");
+
         initView();
         getDataCount();
+    }
+
+    private void initView() {
+        mListView = findViewById(R.id.kucun_listview);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedData = dataList.get(position);
+                adapter.setSelectPosition(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        mSPBH = findViewById(R.id.et_kucun_SPBH);
+        mSPMC = findViewById(R.id.et_kucun_SPMC);
+        mSPSX = findViewById(R.id.et_kucun_SPSX);
+        mZJM = findViewById(R.id.et_kucun_ZJM);
+        mCKID = findViewById(R.id.et_kucun_CKID);
+        mCKID.setText(CK_NAME);
+        mTotal = findViewById(R.id.tv_total);
+        mSearch = findViewById(R.id.btn_kucun);
+        mSearch.setOnClickListener(this);
+
+        mAddConfirm = findViewById(R.id.btn_kaidan_confirm);
+        mAddConfirm.setVisibility(View.VISIBLE);
+        mAddConfirm.setOnClickListener(this);
 
         refreshLayout = findViewById(R.id.kucun_refreshLayout);
         refreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能（非必须）
@@ -93,35 +142,6 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         });
     }
 
-    private void initView() {
-        mListView = findViewById(R.id.kucun_listview);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("CC", "点击了item " + position);
-                adapter.setSelectPosition(position);
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        mSPBH = findViewById(R.id.et_kucun_SPBH);
-        mSPMC = findViewById(R.id.et_kucun_SPMC);
-        mSPSX = findViewById(R.id.et_kucun_SPSX);
-        mZJM = findViewById(R.id.et_kucun_ZJM);
-
-        mCKID = findViewById(R.id.et_kucun_CKID);
-        mCKID.setOnClickListener(this);
-
-        mTotal = findViewById(R.id.tv_total);
-
-        mSearch = findViewById(R.id.btn_kucun);
-        mSearch.setOnClickListener(this);
-
-        mAddConfirm = findViewById(R.id.btn_kaidan_confirm);
-        mAddConfirm.setVisibility(View.VISIBLE);
-        mAddConfirm.setOnClickListener(this);
-    }
-
     private void getDataCount() {
 
         HashMap<String, String> properties = getProperties();
@@ -132,20 +152,20 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         RequestCenter.GETSpzlCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    String total = StringUtil.convertStr(map.get("DCOUNT"));
-                    SumRecord = Integer.valueOf(total);
-                    mTotal.setText(total);
-                    if (SumRecord > 0) {
-                        dataList = new ArrayList<>();
-                        getDataList(INIT_DATA);
-                    } else {
-                        showToast(getString(R.string.data_empty));
-                        cancleLoading();
-                    }
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    cancleLoading();
+                    return;
+                }
+
+                String total = StringUtil.convertStr(map.get("DCOUNT"));
+                SumRecord = Integer.valueOf(total);
+                mTotal.setText(total);
+                if (SumRecord > 0) {
+                    dataList = new ArrayList<>();
+                    getDataList(INIT_DATA);
                 } else {
-                    showToast(getString(R.string.data_error));
+                    showToast(getString(R.string.data_empty));
                     cancleLoading();
                 }
             }
@@ -160,34 +180,33 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         RequestCenter.GETSpzlInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
-                    PNum++;
-                    List<Map<String, Object>> pageDataList = new ArrayList<>();
-                    if (!StringUtil.checkDataEmpty(resultStr)) {
-                        pageDataList = JsonToMap.toListMap(resultStr);
-                        dataList.addAll(pageDataList);
-                    }
-                    if (type == INIT_DATA) { // 初始数据
-                        adapter = new XiaoshouKaidanAddWpAdapter(mContext, pageDataList);
-                        mListView.setAdapter(adapter);
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            showToast(getString(R.string.data_empty));
-                        }
-                    } else if (type == REFRESH_DATA) { // 刷新数据
-                        adapter.refresh(pageDataList);
-                        refreshLayout.finishRefresh();
-                        refreshLayout.resetNoMoreData();
-                    } else if (type == LOAD_MORE_DATA) { // 加载更多数据
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        } else {
-                            adapter.loadMore(pageDataList);
-                            refreshLayout.finishLoadMore();
-                        }
-                    }
-                } else {
-                    showToast(getString(R.string.data_error));
+                List<Map<String, Object>> pageDataList = toListMap(resultStr);
+                if (pageDataList == null) {
+                    cancleLoading();
+                    return;
                 }
+                dataList.addAll(pageDataList);
+                PNum++;
+
+                if (type == INIT_DATA) { // 初始数据
+                    adapter = new XiaoshouKaidanAddWpAdapter(mContext, pageDataList);
+                    mListView.setAdapter(adapter);
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        showToast(getString(R.string.data_empty));
+                    }
+                } else if (type == REFRESH_DATA) { // 刷新数据
+                    adapter.refresh(pageDataList);
+                    refreshLayout.finishRefresh();
+                    refreshLayout.resetNoMoreData();
+                } else if (type == LOAD_MORE_DATA) { // 加载更多数据
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
+                    } else {
+                        adapter.loadMore(pageDataList);
+                        refreshLayout.finishLoadMore();
+                    }
+                }
+
                 cancleLoading();
             }
         });
@@ -225,9 +244,77 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
                 PNum = 1;
                 getDataCount();
                 break;
+
+            // 底部弹窗
             case R.id.btn_kaidan_confirm: // 确认选择物品
+                if (selectedData == null) {
+                    showToast("请选择开单物品");
+                    return;
+                }
                 View rootViewB = View.inflate(mContext, R.layout.item_xiaoshou_kaidan_addwp_dialog, null);
-                DialogUIUtils.showCustomBottomAlert(this, rootViewB).show();
+                if (mButtonDialog == null) {
+                    mButtonDialog = DialogUIUtils.showCustomBottomAlert(this, rootViewB).show();
+                    Log.e("mButtonDialog", "创建底部弹窗");
+                } else {
+                    // 清空之前已经填写的内容
+                    mDialogPC.setText("");
+                    mDialogHWID.setText("");
+                    mDialogDW.setText("");
+                    mDialogSL.setText("");
+                    mDialogPRICE.setText("");
+                    mButtonDialog.setTitle("");
+
+                    DialogHWID = "";
+                    DialogDWID = "";
+                    DialogHW_NAME = "";
+                    DialogDW_NAME = "";
+
+                    mButtonDialog.show();
+                }
+                // 底部弹窗
+                mDialogPC = mButtonDialog.findViewById(R.id.et_kaidan_dialog_PC); // 批次
+                mDialogHWID = mButtonDialog.findViewById(R.id.et_kaidan_dialog_HWID); // 货位
+                mDialogHWID.setOnClickListener(this);
+                mDialogDW = mButtonDialog.findViewById(R.id.et_kaidan_dialog_DW); // 单位
+                mDialogDW.setOnClickListener(this);
+                mDialogSL = mButtonDialog.findViewById(R.id.et_kaidan_dialog_SL); // 数量
+                mDialogPRICE = mButtonDialog.findViewById(R.id.et_kaidan_dialog_PRICE); // 价格
+                mButtonDialogSave = mButtonDialog.findViewById(R.id.btn_kaidan_dialog_save);
+                mButtonDialogSave.setOnClickListener(this);
+                break;
+            case R.id.et_kaidan_dialog_HWID: // 货位
+                Intent hwIntent = new Intent(mContext, HwActivity.class);
+                hwIntent.putExtra("CKID", CKID);
+                startActivityForResult(hwIntent, Constant.ACTIVITI_FOR_RESULT_HW);
+                break;
+            case R.id.et_kaidan_dialog_DW: // 单位
+                Intent dwIntent = new Intent(mContext, JldwActivity.class);
+                String SPID = StringUtil.convertStr(selectedData.get("ID"));
+                dwIntent.putExtra("SPID", SPID);
+                startActivityForResult(dwIntent, Constant.ACTIVITI_FOR_RESULT_JLDW);
+                break;
+            case R.id.btn_kaidan_dialog_save: // 保存
+                Map<String, Object> m = new HashMap<>();
+                m.put("SPID", StringUtil.convertStr(selectedData.get("ID")));
+                m.put("SPK_SPBH", StringUtil.convertStr(selectedData.get("SPK_SPBH")));
+                m.put("DWID", DialogDWID);
+                m.put("DW_NAME", DialogDW_NAME);
+                m.put("PC", mDialogPC.getText().toString());
+                m.put("HWID", DialogHWID);
+                m.put("HW_NAME", DialogHW_NAME);
+                m.put("SL", mDialogSL.getText().toString());
+                m.put("PRICE", mDialogPRICE.getText().toString());
+
+                Intent i = new Intent();
+                Bundle localBundle = new Bundle();
+                localBundle.putSerializable("SELECTED_WP", (Serializable) m);
+                i.putExtras(localBundle);
+                setResult(Constant.ACTIVITI_FOR_RESULT_ADD_WP, i);
+
+                if (mButtonDialog != null) {
+                    mButtonDialog.dismiss();
+                }
+                finish();
                 break;
         }
     }
@@ -237,10 +324,23 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.ACTIVITI_FOR_RESULT_CK) {
             if (data != null) {
-                String ckName = data.getStringExtra("CKNAME");
-                CKID = data.getStringExtra("CKID");
+                String ckName = data.getStringExtra("NAME");
+                CKID = data.getStringExtra("ID");
                 mCKID.setText(ckName);
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_HW) { // 货位
+            if (data != null) {
+                DialogHW_NAME = data.getStringExtra("NAME");
+                DialogHWID = data.getStringExtra("ID");
+                mDialogHWID.setText(DialogHW_NAME);
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_JLDW) {
+            if (data != null) {
+                DialogDW_NAME = data.getStringExtra("NAME");
+                DialogDWID = data.getStringExtra("ID");
+                mDialogDW.setText(DialogDW_NAME);
             }
         }
     }
+
 }

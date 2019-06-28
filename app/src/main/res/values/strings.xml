@@ -10,6 +10,12 @@
     <string name="title_statistics">统计报表</string>
     <string name="title_product">物品信息</string>
     <string name="title_kucun_chaxun">库存查询</string>
+    <string name="title_kucun_shoujichuantu">手机传图</string>
+    <string name="title_kucun_shoujipandian">手机盘点</string>
+    <string name="title_kucun_chejiansaoma">车间扫描</string>
+    <string name="title_workinfo">加工信息</string>
+    <string name="title_xunjian">巡检信息</string>
+    <string name="title_qtbf">其他工序录入</string>
     <string name="title_kucun_detail">详细信息查询及盘点</string>
     <string name="title_xiaoshoulishi_chaxun">销售历史</string>
     <string name="title_xiaoshoulishi_detail">销售发货详细信息</string>
@@ -21,6 +27,8 @@
     <string name="title_jldw">计量单位选择</string>
     <string name="title_fplx">发票类型选择</string>
     <string name="title_jsfs">结算方式选择</string>
+    <string name="title_kh">客户选择</string>
+    <string name="title_device">选择设备</string>
     <string name="title_chanliangtongji">产量统计</string>
     <string name="title_company">企业信息</string>
     <string name="title_updatepass">修改密码</string>
@@ -28,6 +36,7 @@
     <string name="btn_search">查询搜索</string>
     <string name="data_error">数据加载失败</string>
     <string name="data_empty">没有查询到数据</string>
+    <string name="data_parse_error">数据格式错误</string>
 
     <!-- QR_Code -->
     <string name="button_ok">OK</string>

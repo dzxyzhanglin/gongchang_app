@@ -53,27 +53,23 @@ public class JldwActivity extends BaseActivity {
 
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    final List<Map<String, Object>> dataList = JsonToMap.toListMap(resultStr);
-                    adapter = new JldwAdapter(mContext, dataList);
-                    mListView.setAdapter(adapter);
-                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                            Map<String, Object> data = dataList.get(position);
-                            String ID = StringUtil.convertStr(data.get("ID"));
-                            String NAME = StringUtil.convertStr(data.get("JLB_JLDW"));
+                final List<Map<String, Object>> dataList = (List<Map<String, Object>>) toListMap(resultStr);
+                adapter = new JldwAdapter(mContext, dataList);
+                mListView.setAdapter(adapter);
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        Map<String, Object> data = dataList.get(position);
+                        String ID = StringUtil.convertStr(data.get("ID"));
+                        String NAME = StringUtil.convertStr(data.get("JLB_JLDW"));
 
-                            Intent intent = new Intent();
-                            intent.putExtra("ID", ID);
-                            intent.putExtra("NAME", NAME);
-                            setResult(Constant.ACTIVITI_FOR_RESULT_JLDW, intent);
-                            finish();
-                        }
-                    });
-                } else {
-                    showToast(getString(R.string.data_error));
-                }
+                        Intent intent = new Intent();
+                        intent.putExtra("ID", ID);
+                        intent.putExtra("NAME", NAME);
+                        setResult(Constant.ACTIVITI_FOR_RESULT_JLDW, intent);
+                        finish();
+                    }
+                });
             }
         });
     }

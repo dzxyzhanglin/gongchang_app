@@ -48,17 +48,19 @@ public final class CaptureActivityHandler extends Handler {
     private final CaptureActivity activity;
     private final DecodeThread decodeThread;
     private State state;
+    private String captureType;
 
     private enum State {
         PREVIEW, SUCCESS, DONE
     }
 
-    public CaptureActivityHandler(CaptureActivity activity, Vector<BarcodeFormat> decodeFormats, String characterSet) {
+    public CaptureActivityHandler(CaptureActivity activity, Vector<BarcodeFormat> decodeFormats, String characterSet, String captureType) {
         this.activity = activity;
         decodeThread = new DecodeThread(activity, decodeFormats, characterSet, new ViewfinderResultPointCallback(
                 activity.getViewfinderView()));
         decodeThread.start();
         state = State.SUCCESS;
+        this.captureType = captureType;
 
         // Start ourselves capturing previews and decoding.
         CameraManager.get().startPreview();
@@ -86,10 +88,14 @@ public final class CaptureActivityHandler extends Handler {
             Bitmap barcode = bundle == null ? null : (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
             activity.handleDecode((Result) message.obj, barcode);
             Result result = (Result) message.obj;
-            Intent mIntent = new Intent();
+
+            // 处理扫描的结果
+            activity.handleDecodeResult(result.getText());
+
+           /* Intent mIntent = new Intent();
             mIntent.putExtra("SCAN_RESULT", result.getText());
             activity.setResult(Activity.RESULT_OK, mIntent);
-            activity.finish();
+            activity.finish();*/
         } else if (message.what == R.id.decode_failed) {
             // We're decoding as fast as possible, so when one decode fails,
             // start another.

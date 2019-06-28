@@ -49,10 +49,14 @@ public final class CameraManager {
 	/**
 	 * 定义扫描框宽高
 	 */
-	private static final int MIN_FRAME_WIDTH = 240;
+	private static final int MIN_FRAME_WIDTH = 500;
+	private static final int MIN_FRAME_HEIGHT = 500;
+	private static final int MAX_FRAME_WIDTH = 700;
+	private static final int MAX_FRAME_HEIGHT = 700;
+/*	private static final int MIN_FRAME_WIDTH = 240;
 	private static final int MIN_FRAME_HEIGHT = 240;
 	private static final int MAX_FRAME_WIDTH = 480;
-	private static final int MAX_FRAME_HEIGHT = 360;
+	private static final int MAX_FRAME_HEIGHT = 360;*/
 
 	private static CameraManager cameraManager;
 

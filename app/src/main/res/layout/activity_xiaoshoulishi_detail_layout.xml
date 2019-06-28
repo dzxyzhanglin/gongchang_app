@@ -2,121 +2,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="@style/Normal_Detail_Title"
+            android:text="主信息" />
+
+        <LinearLayout style="@style/Normal_ItemList_Layout">
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="单号：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_PFD_DJBH"
+                style="@style/Normal_ItemList_Body"
+                android:text="DQCP0552"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="客户：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_DWZ_DWMC"
+                style="@style/Normal_ItemList_Body"
+                android:text="刘晓东"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Normal_ItemList_Layout">
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="业务员：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_USR_NAME"
+                style="@style/Normal_ItemList_Body"
+                android:text="阿东" />
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="金额：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_PFD_ZDJE"
+                style="@style/Normal_ItemList_Body"
+                android:text="5000" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Normal_ItemList_Layout">
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="状态：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_PFD_DJZT"
+                style="@style/Normal_ItemList_Body"
+                android:text="已核实" />
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="结算方式：" />
+
+            <TextView
+                style="@style/Normal_ItemList_Body"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Normal_ItemList_Layout">
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="发票类型：" />
+
+            <TextView
+                style="@style/Normal_ItemList_Body"
+                android:text="" />
+
+            <TextView
+                style="@style/Normal_ItemList_Title"
+                android:layout_width="80dp"
+                android:text="日期：" />
+
+            <TextView
+                android:id="@+id/tv_xsls_detail_PFD_DJRQ"
+                style="@style/Normal_ItemList_Body"
+                android:text="2019-02-02" />
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/Normal_Detail_Title"
+            android:text="物品信息" />
+
+        <ListView
+            android:id="@+id/lv_xsls_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/Normal_Detail_Title"
-                android:text="主信息" />
-
-            <LinearLayout style="@style/Normal_ItemList_Layout">
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="单号：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="DQCP0552" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="客户：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="刘晓东" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/Normal_ItemList_Layout">
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="业务员：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="阿东" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="金额：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="5000" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/Normal_ItemList_Layout">
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="状态：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="已核实" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="结算方式：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="已核实" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/Normal_ItemList_Layout">
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="发票类型：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="已核实" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Title"
-                    android:layout_width="80dp"
-                    android:text="日期：" />
-
-                <TextView
-                    style="@style/Normal_ItemList_Body"
-                    android:text="2019-02-02" />
-            </LinearLayout>
+            android:divider="@color/color_e3e3e3"
+            android:dividerHeight="1dp"
+            android:overScrollMode="never"></ListView>
 
 
-            <TextView
-                style="@style/Normal_Detail_Title"
-                android:text="物品信息" />
-
-            <ListView
-                android:id="@+id/lv_xsls_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never"
-                android:dividerHeight="8dp"
-                android:divider="@color/color_e3e3e3"
-                >
-            </ListView>
-
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </LinearLayout>

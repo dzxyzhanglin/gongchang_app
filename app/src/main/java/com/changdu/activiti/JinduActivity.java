@@ -62,6 +62,20 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
 
         initView();
         getDataCount();
+    }
+
+    private void initView() {
+        mListView = findViewById(R.id.lv_jindu);
+        mSCD_DJBH = findViewById(R.id.et_jd_SCD_DJBH);
+        mCPNO = findViewById(R.id.et_jd_CPNO);
+        mBDate = findViewById(R.id.et_jd_BDate);
+        mBDate.setOnClickListener(this);
+        mEDate = findViewById(R.id.et_jd_EDate);
+        mCPMC = findViewById(R.id.et_jd_CPMC);
+        mEDate.setOnClickListener(this);
+        mTotal = findViewById(R.id.tv_total);
+        mSearch = findViewById(R.id.btn_jd);
+        mSearch.setOnClickListener(this);
 
         refreshLayout = findViewById(R.id.rl_jindu);
         refreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能（非必须）
@@ -90,20 +104,6 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         });
     }
 
-    private void initView() {
-        mListView = findViewById(R.id.lv_jindu);
-        mSCD_DJBH = findViewById(R.id.et_jd_SCD_DJBH);
-        mCPNO = findViewById(R.id.et_jd_CPNO);
-        mBDate = findViewById(R.id.et_jd_BDate);
-        mBDate.setOnClickListener(this);
-        mEDate = findViewById(R.id.et_jd_EDate);
-        mCPMC = findViewById(R.id.et_jd_CPMC);
-        mEDate.setOnClickListener(this);
-        mTotal = findViewById(R.id.tv_total);
-        mSearch = findViewById(R.id.btn_jd);
-        mSearch.setOnClickListener(this);
-    }
-
     private void getDataCount() {
         HashMap<String, String> properties = getProperties();
 
@@ -112,20 +112,20 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         RequestCenter.GetCPDInfoCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (!StringUtil.checkDataEmpty(resultStr)) {
-                    Map<String, Object> map = JsonToMap.toMap(resultStr);
-                    String total = StringUtil.convertStr(map.get("DCOUNT"));
-                    SumRecord = Integer.valueOf(total);
-                    mTotal.setText(total);
-                    if (SumRecord > 0) {
-                        dataList = new ArrayList<>();
-                        getDataList(INIT_DATA);
-                    } else {
-                        showToast(getString(R.string.data_empty));
-                        cancleLoading();
-                    }
+                Map<String, Object> map = toMap(resultStr);
+                if (map == null) {
+                    cancleLoading();
+                    return;
+                }
+
+                String total = StringUtil.convertStr(map.get("DCOUNT"));
+                SumRecord = Integer.valueOf(total);
+                mTotal.setText(total);
+                if (SumRecord > 0) {
+                    dataList = new ArrayList<>();
+                    getDataList(INIT_DATA);
                 } else {
-                    showToast(getString(R.string.data_error));
+                    showToast(getString(R.string.data_empty));
                     cancleLoading();
                 }
             }
@@ -140,35 +140,34 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         RequestCenter.GetCPDInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
-                if (resultStr != null) {
-                    PNum++;
-                    List<Map<String, Object>> pageDataList = new ArrayList<>();
-                    if (!StringUtil.checkDataEmpty(resultStr)) {
-                        pageDataList = JsonToMap.toListMap(resultStr);
-                        dataList.addAll(pageDataList);
-                    }
-                    Log.e("pageDataList", pageDataList.toString());
-                    if (type == INIT_DATA) { // 初始数据
-                        adapter = new JinduAdapter(mContext, pageDataList);
-                        mListView.setAdapter(adapter);
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            showToast(getString(R.string.data_empty));
-                        }
-                    } else if (type == REFRESH_DATA) { // 刷新数据
-                        adapter.refresh(pageDataList);
-                        refreshLayout.finishRefresh();
-                        refreshLayout.resetNoMoreData();
-                    } else if (type == LOAD_MORE_DATA) { // 加载更多数据
-                        if (CollUtil.isEmpty(pageDataList)) {
-                            refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        } else {
-                            adapter.loadMore(pageDataList);
-                            refreshLayout.finishLoadMore();
-                        }
-                    }
-                } else {
-                    showToast(getString(R.string.data_error));
+                List<Map<String, Object>> pageDataList = toListMap(resultStr);
+                if (pageDataList == null) {
+                    cancleLoading();
+                    return;
                 }
+                dataList.addAll(pageDataList);
+                PNum++;
+
+                Log.e("pageDataList", pageDataList.toString());
+                if (type == INIT_DATA) { // 初始数据
+                    adapter = new JinduAdapter(mContext, pageDataList);
+                    mListView.setAdapter(adapter);
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        showToast(getString(R.string.data_empty));
+                    }
+                } else if (type == REFRESH_DATA) { // 刷新数据
+                    adapter.refresh(pageDataList);
+                    refreshLayout.finishRefresh();
+                    refreshLayout.resetNoMoreData();
+                } else if (type == LOAD_MORE_DATA) { // 加载更多数据
+                    if (CollUtil.isEmpty(pageDataList)) {
+                        refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
+                    } else {
+                        adapter.loadMore(pageDataList);
+                        refreshLayout.finishLoadMore();
+                    }
+                }
+
                 cancleLoading();
             }
         });

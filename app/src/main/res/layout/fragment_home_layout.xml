@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
-        android:horizontalSpacing="40dp"
+        android:horizontalSpacing="30dp"
         android:scrollbars="none"
         android:layout_gravity="center">
     </GridView>

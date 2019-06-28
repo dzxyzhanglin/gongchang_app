@@ -19,7 +19,9 @@ import com.changdu.activiti.LoginActivity;
 import com.changdu.activiti.XiaoshouKaidanActivity;
 import com.changdu.activiti.XiaoshoulishiActivity;
 import com.changdu.adapter.HomeAdapter;
+import com.changdu.constant.Constant;
 import com.changdu.model.HomeModel;
+import com.changdu.zxing.app.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,10 +68,10 @@ public class HomeFragment extends BaseFragment {
         HomeModel model = new HomeModel(R.drawable.icon_kucun_chaxun, getString(R.string.title_kucun_chaxun));
         dataList.add(model);
 
-        model = new HomeModel(R.drawable.icon_shoujichuantu, "手机传图");
+        model = new HomeModel(R.drawable.icon_shoujichuantu, getString(R.string.title_kucun_shoujichuantu));
         dataList.add(model);
 
-        model = new HomeModel(R.drawable.icon_shoujipandian, "手机盘点");
+        model = new HomeModel(R.drawable.icon_shoujipandian, getString(R.string.title_kucun_shoujipandian));
         dataList.add(model);
 
         model = new HomeModel(R.drawable.icon_xiaoshoukaidan, getString(R.string.title_xiaoshou_kaidan));
@@ -78,7 +80,7 @@ public class HomeFragment extends BaseFragment {
         model = new HomeModel(R.drawable.icon_xisoshoulishi, getString(R.string.title_xiaoshoulishi_chaxun));
         dataList.add(model);
 
-        model = new HomeModel(R.drawable.icon_chejiansaoma, "车间扫描");
+        model = new HomeModel(R.drawable.icon_chejiansaoma, getString(R.string.title_kucun_chejiansaoma));
         dataList.add(model);
 
         model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, "产量统计");
@@ -115,13 +117,41 @@ public class HomeFragment extends BaseFragment {
                     case R.drawable.icon_xiaoshoukaidan:
                         startActivity(new Intent(mContext, XiaoshouKaidanActivity.class));
                         break;
-                    /*case R.drawable.icon_shoujichuantu:
-                        startActivity(new Intent(mContext, LoginActivity.class));
-                        break;*/
+                    case R.drawable.icon_shoujichuantu: // 手机传图
+                        CAPTURE_TYPE = Constant.CAPTURE_CHUANTU;
+                        if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
+                            doOpenCamera(CAPTURE_TYPE);
+                        } else {
+                            requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
+                        }
+                        break;
+                    case R.drawable.icon_shoujipandian: // 手机盘点
+                        CAPTURE_TYPE = Constant.CAPTURE_PANDIAN;
+                        if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
+                            doOpenCamera(CAPTURE_TYPE);
+                        } else {
+                            requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
+                        }
+                        break;
+                    case R.drawable.icon_chejiansaoma: // 车间扫码
+                        CAPTURE_TYPE = Constant.CAPTURE_CHEJIAN_SAOMIAO;
+                        if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
+                            doOpenCamera(CAPTURE_TYPE);
+                        } else {
+                            requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
+                        }
+                        break;
                     default:
                         Toast.makeText(mContext, "暂无该功能", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @Override
+    public void doOpenCamera(String captureType) {
+        Intent intent = new Intent(mContext, CaptureActivity.class);
+        intent.putExtra("CAPTURE_TYPE", captureType);
+        startActivity(intent);
     }
 }

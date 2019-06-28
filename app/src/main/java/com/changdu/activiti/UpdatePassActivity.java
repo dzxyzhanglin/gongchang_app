@@ -67,12 +67,11 @@ public class UpdatePassActivity extends BaseActivity implements View.OnClickList
 
                     @Override
                     public void callBack(String resultStr) {
-                        if (!StringUtil.checkDataEmpty(resultStr)) {
-                            Map<String, Object> map = JsonToMap.toMap(resultStr);
-                            showToast(StringUtil.convertStr(map.get("Mesg")));
-                        } else {
-                            showToast("修改密码失败");
+                        Map<String, Object> map = toMap(resultStr);
+                        if (map == null) {
+                            return;
                         }
+                        showToast(StringUtil.convertStr(map.get("Mesg")));
                     }
                 });
                 break;

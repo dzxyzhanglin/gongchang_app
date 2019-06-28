@@ -6,8 +6,8 @@ android {
         applicationId "com.changdu"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.4"
+        versionCode 8
+        versionName "V1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,6 +31,8 @@ dependencies {
     implementation 'org.dom4j:dom4j:2.0.0'
     implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
     implementation 'com.pgyersdk:sdk:3.0.5'
+    // 选择多张图片
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation files('libs/zxing.jar')
     implementation files('libs/ksoap2-android.jar')
     implementation files('libs/json-lib-2.4-jdk15.jar')

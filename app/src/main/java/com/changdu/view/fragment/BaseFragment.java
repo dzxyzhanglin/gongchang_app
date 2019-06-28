@@ -15,6 +15,8 @@ public class BaseFragment extends Fragment {
 
     protected Activity mContext;
 
+    protected String CAPTURE_TYPE;
+
     /**
      * 申请指定的权限.
      */
@@ -44,7 +46,7 @@ public class BaseFragment extends Fragment {
             case Constant.HARDWEAR_CAMERA_CODE:
                 if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    doOpenCamera();
+                    doOpenCamera(CAPTURE_TYPE);
                 }
                 break;
             case Constant.WRITE_READ_EXTERNAL_CODE:
@@ -56,7 +58,7 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void doOpenCamera() {
+    public void doOpenCamera(String captureType) {
 
     }
 

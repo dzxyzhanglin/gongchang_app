@@ -38,6 +38,16 @@ public class HttpConstants {
     public static String GET_JSFS_ITEM = "GETJSFSItems";
 
     /**
+     * 客户列表
+     */
+    public static String GET_KH_LIST = "GETKHList";
+
+    /**
+     * 设备列表
+     */
+    public static String GET_DEVICE_MX = "GETDeviceMX";
+
+    /**
      * 物品库存总记录数
      */
     public static String GET_SPZL_COUNT = "GETSpzlCount";
@@ -46,6 +56,11 @@ public class HttpConstants {
      * 物品库存列表
      */
     public static String GET_SPZL_INTO = "GETSpzlInfo";
+
+    /**
+     * 物品明细
+     */
+    public static String GET_SPZL_DETAIL = "GETSpzlDetail";
 
     /**
      * 十八、获取单个物品库存详情
@@ -61,6 +76,11 @@ public class HttpConstants {
      * 销售历史列表（二十二、获取销售发货单明细）
      */
     public static String GET_BILL_INFO = "GETBillInfo";
+
+    /**
+     * 销售历史详情
+     */
+    public static String GET_BILL_DETAIL = "GETBillDetail";
 
 
     /**
@@ -96,5 +116,61 @@ public class HttpConstants {
     /**
      * 生产进度列表
      */
-    public static String GET_CPD_INFO = "GetCPDInfo";
+    public static String GET_CPD_INFO = "GETCPInfo";
+
+    /**
+     * 销售开单保存
+     */
+    public static String SELL_SAVE = "SellSave";
+
+    /**
+     * 获取物品图片列表
+     */
+    public static String GET_IMAGE_LIST = "GETImageList";
+
+    /**
+     * 获取单个图片
+     */
+    public static String GET_IMG = "GetImg";
+
+    /**
+     * 保存图片
+     */
+    public static String SAVE_IMG = "SaveImg";
+
+    /**
+     * 获取传票信息
+     */
+    public static String GET_CP_INFO = "GETCPInfo";
+
+    /**
+     * 加工保存
+     */
+    public static String MADE_OVER_PROC = "MadeOverProc";
+
+    /**
+     * 获取生产工序列表
+     */
+    public static String GET_GXMX = "GETGXMX";
+
+    /**
+     * 获取传票完工登记(检验接口)
+     */
+    public static String GET_CHECK_INFO = "GETCheckInfo";
+
+    /**
+     * 获取检验项目列表
+     */
+    public static String GET_CHECK_ITEMS = "GETCheckItems";
+
+    /**
+     * 获取问题原因列表
+     */
+    public static String GET_CHECK_YY_ITEMS = "GETCheckYYItems";
+
+    /**
+     * 检验登记
+     */
+    public static String MADE_CHECK_PROC = "MadeCheckProc";
+
 }

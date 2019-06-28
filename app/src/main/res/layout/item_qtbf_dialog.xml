@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_qtbf_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:gravity="left|center"
+        android:text=""
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:textColor="@color/color_333333"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/et_qtbf_bf"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:gravity="left|center"
+        android:hint="请输入报废数量"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/et_qtbf_qj"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_f7f8fa_circle"
+        android:gravity="left|center"
+        android:inputType="number"
+        android:hint="请输入缺件数量"
+        android:paddingLeft="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_qtbf_dialog_save"
+        style="@style/Normal_Blue_Button"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:text="确定"/>
+
+</LinearLayout>

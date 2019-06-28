@@ -6,156 +6,192 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:text="客户："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_KHID"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none"
+            android:gravity="left|center"
+            android:hint="请选择客户名称"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:text="仓库："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_kaidan_CKID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="客户："
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/et_kaidan_KHID"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_f7f8fa_circle"
-                    android:gravity="left|center"
-                    android:hint="请输入客户名称"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="仓库："
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/et_kaidan_CKID"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_f7f8fa_circle"
-                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-                    android:editable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="请选择仓库"
-                    android:inputType="none"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="18sp" />
-            </LinearLayout>
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:hint="请选择仓库"
+            android:inputType="none"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="发票类型："
-                    android:textSize="18sp" />
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:gravity="left|center"
+            android:text="发票类型："
+            android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/et_kaidan_FPLX"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_f7f8fa_circle"
-                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-                    android:editable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="请选择发票类型"
-                    android:inputType="none"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="结算方式："
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/et_kaidan_JSFS"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_f7f8fa_circle"
-                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-                    android:editable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="请选择结算方式"
-                    android:inputType="none"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="18sp" />
-            </LinearLayout>
+        <EditText
+            android:id="@+id/et_kaidan_FPLX"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:hint="请选择发票类型"
+            android:inputType="none"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
-            <!-- 添加物品 -->
-            <include layout="@layout/item_xiaoshou_kaidan_addwp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_kaidan_save"
-                style="@style/Normal_Blue_Button"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="0dp"
-                android:text="保存"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:gravity="left|center"
+            android:text="结算方式："
+            android:textSize="16sp" />
 
-        </LinearLayout>
+        <EditText
+            android:id="@+id/et_kaidan_JSFS"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_f7f8fa_circle"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:hint="请选择结算方式"
+            android:inputType="none"
+            android:paddingLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    </ScrollView>
+    <!-- 添加物品 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/color_f2f2f2"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="编号" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="批次" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="货位" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="数量" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="价格" />
+
+        <ImageView
+            android:id="@+id/btn_kaidan_addwp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:src="@drawable/ic_add_circle_black_24dp" />
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_kaidan_wp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:dividerHeight="1dp"
+        android:divider="@color/color_e3e3e3"
+        >
+    </ListView>
+    <Button
+        android:id="@+id/btn_kaidan_save"
+        style="@style/Normal_Blue_Button"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:text="保存" />
 
 </LinearLayout>

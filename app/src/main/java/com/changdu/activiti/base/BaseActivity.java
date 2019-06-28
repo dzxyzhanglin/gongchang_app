@@ -12,11 +12,18 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.changdu.R;
 import com.changdu.constant.Constant;
+import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.dou361.dialogui.DialogUIUtils;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -185,5 +192,54 @@ public class BaseActivity extends AppCompatActivity {
         if (dialog != null) {
             dialog.dismiss();
         }
+    }
+
+    /**
+     * 结果解析为map对象，
+     * 解析失败返回null
+     * @param resultStr
+     * @return
+     */
+    public Map<String, Object> toMap(String resultStr) {
+        if (resultStr != null) {
+            if (!StringUtil.checkDataEmpty(resultStr)) {
+                try {
+                    resultStr = StringUtil.formart(resultStr);
+                    Map<String, Object> map = JsonToMap.toMap(resultStr);
+                    return map;
+                } catch (Exception ex) {
+                    showToast(getString(R.string.data_parse_error));
+                }
+            } else {
+                showToast(getString(R.string.data_empty));
+            }
+        } else {
+            showToast(getString(R.string.data_error));
+        }
+        return null;
+    }
+
+    /**
+     * 解析为list map对象，
+     * 解析失败返回null
+     * @param resultStr
+     * @return
+     */
+    public List<Map<String, Object>> toListMap(String resultStr) {
+        if (resultStr != null) {
+            if (!StringUtil.checkDataEmpty(resultStr)) {
+                try {
+                    List<Map<String, Object>> lists = JsonToMap.toListMap(resultStr);
+                    return lists;
+                } catch (Exception ex) {
+                    showToast(getString(R.string.data_parse_error));
+                }
+            } else {
+                return new ArrayList<Map<String, Object>>();
+            }
+        } else {
+            showToast(getString(R.string.data_error));
+        }
+        return null;
     }
 }
