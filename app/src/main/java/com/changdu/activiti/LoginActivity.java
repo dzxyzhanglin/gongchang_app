@@ -1,6 +1,7 @@
 package com.changdu.activiti;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +40,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         initView();
 
-        StatusBarUtil.immersive(mContext, R.color.color_transparent);
+        // 沉浸式状态栏
+        StatusBarUtil.immersive(mContext, R.color.color_transparent, 0);
     }
 
     private void initView() {

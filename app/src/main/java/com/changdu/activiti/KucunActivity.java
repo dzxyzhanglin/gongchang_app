@@ -1,13 +1,20 @@
 package com.changdu.activiti;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -118,14 +125,35 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intent);
             }
         });
+
+        // 搜索抽屉
+        drawerLayout = findViewById(R.id.drawer_kucun_layout);
+        mSearchLayout = findViewById(R.id.kucun_search_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_search_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_add_search) {
+            openOrCloseDrawer();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void getDataCount() {
-
         HashMap<String, String> properties = getProperties();
-
         showLoading();
-
         // 获取记录总数
         RequestCenter.GETSpzlCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
@@ -143,6 +171,11 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                     getDataList(INIT_DATA);
                 } else {
                     showToast(getString(R.string.data_empty));
+                    if (dataList != null && dataList.size() > 0) {
+                        dataList = new ArrayList<>();
+                        adapter.setmDataList(dataList);
+                        adapter.notifyDataSetChanged();
+                    }
                     cancleLoading();
                 }
             }
@@ -219,6 +252,7 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.btn_kucun:
                 PNum = 1;
+                openOrCloseDrawer();
                 getDataCount();
                 break;
         }

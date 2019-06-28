@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">工厂APP</string>
     <string name="welcom_name">欢迎进入工厂APP</string>
-    <string name="login_username">用户名</string>
-    <string name="login_password">密码</string>
+    <string name="login_username">请输入用户名</string>
+    <string name="login_password">请输入密码</string>
     <string name="login_btn">立即登录</string>
 
     <string name="title_home">首页</string>
@@ -37,6 +37,9 @@
     <string name="data_error">数据加载失败</string>
     <string name="data_empty">没有查询到数据</string>
     <string name="data_parse_error">数据格式错误</string>
+
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
 
     <!-- QR_Code -->
     <string name="button_ok">OK</string>

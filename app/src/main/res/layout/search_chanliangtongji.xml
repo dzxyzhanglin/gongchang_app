@@ -1,60 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:id="@+id/chanliangtongji_search_layout"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="@color/color_white"
+    android:clickable="true"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/Normal_ItemList_Layout"
-        android:layout_height="35dp">
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:layout_width="60dp"
-            android:textColor="@color/color_333333"
-            android:text="生产日期:"
-            />
-        <EditText
-            android:id="@+id/et_cltj_BDate"
-            android:layout_marginRight="10dp"
-            style="@style/Normal_Edittext"
-            android:hint="日期（起）"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:editable="false"
-            android:inputType="none"
-            android:focusableInTouchMode="false"
-            />
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:layout_width="60dp"
-            android:textColor="@color/color_333333"
-            android:gravity="center"
-            android:text="-"
-            />
-        <EditText
-            android:id="@+id/et_cltj_EDate"
-            style="@style/Normal_Edittext"
-            android:hint="日期（止）"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:editable="false"
-            android:inputType="none"
-            android:focusableInTouchMode="false"
-            />
-    </LinearLayout>
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:layout_marginTop="10dp"
+        android:text="传票号:" />
+
+    <EditText
+        android:id="@+id/et_cltj_CPNO"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入传票号" />
+
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="生产开始日期:" />
+
+    <EditText
+        android:id="@+id/et_cltj_BDate"
+        style="@style/Normal_Search_Edittext"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        android:hint="生产开始日期"
+        android:inputType="none" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="生产结束日期" />
+
+    <EditText
+        android:id="@+id/et_cltj_EDate"
+        style="@style/Normal_Search_Edittext"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        android:hint="生产结束日期"
+        android:inputType="none" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:layout_marginTop="10dp"
+        android:text="物品名称:" />
+
+    <EditText
+        android:id="@+id/et_cltj_SPMC"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入传票号" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_chanliangtongji"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/button_blue_circle"
         android:text="@string/btn_search"
         android:textColor="@color/color_white"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 
 </LinearLayout>

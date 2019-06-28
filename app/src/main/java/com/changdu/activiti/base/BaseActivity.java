@@ -6,14 +6,19 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.changdu.R;
 import com.changdu.constant.Constant;
+import com.changdu.util.DateUtil;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.dou361.dialogui.DialogUIUtils;
@@ -21,6 +26,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +36,9 @@ public class BaseActivity extends AppCompatActivity {
     protected String TAG;
     protected Activity mContext;
     protected Dialog dialog;
+
+    protected DrawerLayout drawerLayout;
+    protected LinearLayout mSearchLayout;
 
     protected int INIT_DATA = 1; // 初始化数据
     protected int REFRESH_DATA = 2; // 刷新数据
@@ -192,6 +201,35 @@ public class BaseActivity extends AppCompatActivity {
         if (dialog != null) {
             dialog.dismiss();
         }
+    }
+
+    /**
+     * 打开/关闭搜索抽屉
+     */
+    public void openOrCloseDrawer() {
+        if (drawerLayout.isDrawerOpen(mSearchLayout)) {
+            Log.e("TAG", "关闭");
+            drawerLayout.closeDrawer(mSearchLayout);
+        } else {
+            Log.e("TAG", "打开");
+            drawerLayout.openDrawer(mSearchLayout);
+        }
+    }
+
+    /**
+     * 打开日期控件时，获取日期控件的默认值
+     * @param mDate
+     * @return
+     */
+    public long getDatePickDefaultDate(EditText mDate) {
+        Date selectedDate = DateUtil.parseDate(mDate.getText().toString());
+        Log.e("DATE1", mDate.getText().toString());
+        long date = System.currentTimeMillis() + 60000;
+        if (selectedDate != null) {
+            date = selectedDate.getTime();
+        }
+        Log.e("DATE", String.valueOf(date));
+        return date;
     }
 
     /**

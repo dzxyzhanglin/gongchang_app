@@ -186,11 +186,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                         new Intent(mContext, DeviceActivity.class), Constant.ACTIVITI_FOR_RESULT_DEVICE);
                 break;
             case R.id.KGRQ_TIME: // 完工时间
-                Date selectedDate = DateUtil.parseDate(mKGRQ_TIME.getText().toString());
-                long date = System.currentTimeMillis() + 60000;
-                if (selectedDate != null) {
-                    date = selectedDate.getTime();
-                }
+                long date = getDatePickDefaultDate(mKGRQ_TIME);
                 DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "选择开工时间", date, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {

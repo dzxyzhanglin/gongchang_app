@@ -3,8 +3,11 @@ package com.changdu.activiti;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.changdu.adapter.XisoshoulishiAdapter;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.CollUtil;
+import com.changdu.util.DateUtil;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
@@ -29,6 +33,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +118,30 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                 }, 500);
             }
         });
+
+        // 搜索抽屉
+        drawerLayout = findViewById(R.id.drawer_xiaoshoulishi_layout);
+        mSearchLayout = findViewById(R.id.xiaoshoulishi_search_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_search_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_add_search) {
+            openOrCloseDrawer();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -120,9 +149,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
      */
     private void getDataCount() {
         HashMap<String, String> properties = getProperties();
-
         showLoading();
-
         RequestCenter.GETBillCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
@@ -140,6 +167,11 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                     getDataList(INIT_DATA);
                 } else {
                     showToast(getString(R.string.data_empty));
+                    if (dataList != null && dataList.size() > 0) {
+                        dataList = new ArrayList<>();
+                        adapter.setmDataList(dataList);
+                        adapter.notifyDataSetChanged();
+                    }
                     cancleLoading();
                 }
             }
@@ -208,7 +240,8 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.et_xsls_BDate: // 开始日期
-                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                long startDate = getDatePickDefaultDate(mBDate);
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", startDate, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
                         Log.e("selectedDate", selectedDate);
@@ -217,7 +250,8 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                 }).show();
                 break;
             case R.id.et_xsls_EDate: // 结束日期
-                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                long endDate = getDatePickDefaultDate(mEDate);
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", endDate, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
                         Log.e("selectedDate", selectedDate);
@@ -227,6 +261,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.btn_xiaoshoulishi: // 搜索
                 PNum = 1;
+                openOrCloseDrawer();
                 getDataCount();
                 break;
         }

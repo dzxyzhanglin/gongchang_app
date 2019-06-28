@@ -2,8 +2,11 @@ package com.changdu.activiti;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +64,7 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         setTitle(getString(R.string.title_jindu_chaxun), true);
 
         initView();
-        getDataCount();
+        //getDataCount();
     }
 
     private void initView() {
@@ -102,13 +105,40 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
                 }, 500);
             }
         });
+
+
+        // 搜索抽屉
+        drawerLayout = findViewById(R.id.drawer_jindu_layout);
+        mSearchLayout = findViewById(R.id.jindu_search_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_search_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_add_search) {
+            openOrCloseDrawer();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void getDataCount() {
+        if (!checkSearchCondition()) {
+            showToast("请选择搜索条件");
+            return;
+        }
         HashMap<String, String> properties = getProperties();
-
         showLoading();
-
         RequestCenter.GetCPDInfoCount(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
@@ -126,6 +156,11 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
                     getDataList(INIT_DATA);
                 } else {
                     showToast(getString(R.string.data_empty));
+                    if (dataList != null && dataList.size() > 0) {
+                        dataList = new ArrayList<>();
+                        adapter.setmDataList(dataList);
+                        adapter.notifyDataSetChanged();
+                    }
                     cancleLoading();
                 }
             }
@@ -174,6 +209,27 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    private boolean checkSearchCondition() {
+        boolean res = false;
+        if (!StringUtil.isBlank(mSCD_DJBH.getText().toString())) {
+            res = true;
+        }
+        if (!StringUtil.isBlank(mCPNO.getText().toString())) {
+            res = true;
+        }
+        if (!StringUtil.isBlank(mBDate.getText().toString())) {
+            res = true;
+        }
+        if (!StringUtil.isBlank(mEDate.getText().toString())) {
+            res = true;
+        }
+        if (!StringUtil.isBlank(mCPMC.getText().toString())) {
+            res = true;
+        }
+
+        return res;
+    }
+
     private HashMap<String, String> getProperties() {
         HashMap<String, String> properties = new HashMap<>();
         String UID = UserManager.getInstance().getUID();
@@ -191,7 +247,8 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.et_jd_BDate: // 开始日期
-                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                long startDate = getDatePickDefaultDate(mBDate);
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "开始日期", startDate, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
                         Log.e("selectedDate", selectedDate);
@@ -200,7 +257,8 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
                 }).show();
                 break;
             case R.id.et_jd_EDate: // 结束日期
-                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                long endDate = getDatePickDefaultDate(mEDate);
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", endDate, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
                         Log.e("selectedDate", selectedDate);
@@ -210,6 +268,7 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.btn_jd: // 搜索
                 PNum = 1;
+                openOrCloseDrawer();
                 getDataCount();
                 break;
         }

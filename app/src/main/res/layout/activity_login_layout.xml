@@ -47,8 +47,9 @@
                 android:background="@drawable/bg_f7f8fa_circle"
                 android:drawableLeft="@drawable/icon_user"
                 android:hint="@string/login_username"
+                android:textColorHint="@color/color_cdcdcd"
                 android:paddingLeft="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/color_333333"/>
 
             <EditText
@@ -61,8 +62,10 @@
                 android:background="@drawable/bg_f7f8fa_circle"
                 android:drawableLeft="@drawable/icon_pass"
                 android:hint="@string/login_password"
+                android:textColorHint="@color/color_cdcdcd"
+                android:inputType="textPassword"
                 android:paddingLeft="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/color_333333"/>
 
             <Button

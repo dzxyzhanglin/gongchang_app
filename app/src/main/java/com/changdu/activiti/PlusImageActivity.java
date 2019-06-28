@@ -2,12 +2,15 @@ package com.changdu.activiti;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.adapter.ViewImagePagerAdapter;
 import com.changdu.constant.Constant;
+import com.changdu.util.StatusBarUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -26,12 +29,33 @@ public class PlusImageActivity extends BaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plus_image_layout);
+        mContext = this;
 
         Bundle extras = getIntent().getExtras();
         imgList = (List<Map<String, Object>>) extras.getSerializable(Constant.PLUS_IMG_LIST);
         mPosition = extras.getInt(Constant.PLUS_IMG_POSITION);
 
         initView();
+
+        // 沉浸式状态栏
+        //StatusBarUtil.immersive(mContext, R.color.color_transparent, 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_delete_image) {
+            showToast("删除图片");
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initView() {

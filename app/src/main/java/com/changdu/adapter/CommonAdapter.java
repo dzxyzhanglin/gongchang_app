@@ -16,6 +16,10 @@ public abstract class CommonAdapter extends BaseAdapter {
         return mDataList;
     }
 
+    public void setmDataList(List<Map<String, Object>> mDataList) {
+        this.mDataList = mDataList;
+    }
+
     /**
      * 刷新
      * @param dataList

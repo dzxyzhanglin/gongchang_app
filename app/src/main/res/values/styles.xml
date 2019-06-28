@@ -71,6 +71,29 @@
         <item name="android:textColorHint">@color/color_999999</item>
     </style>
 
+
+    <!-- 搜索 -->
+    <style name="Normal_Search_Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+    <style name="Normal_Search_Edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/edittext_bg</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:textColorHint">@color/color_999999</item>
+    </style>
+
     <!-- 详细信息标题 -->
     <style name="Normal_Detail_Title">
         <item name="android:layout_width">match_parent</item>

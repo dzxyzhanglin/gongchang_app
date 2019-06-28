@@ -1,94 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:id="@+id/kucun_search_layout"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="@color/color_white"
+    android:clickable="true"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/Normal_ItemList_Layout"
-        android:layout_height="35dp">
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:textColor="@color/color_333333"
-            android:text="编码:"
-            />
-        <EditText
-            android:id="@+id/et_kucun_SPBH"
-            style="@style/Normal_Edittext"
-            android:hint="请输入编码"
-            />
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:layout_width="60dp"
-            android:textColor="@color/color_333333"
-            android:text="名称:"
-            />
-        <EditText
-            android:id="@+id/et_kucun_SPMC"
-            style="@style/Normal_Edittext"
-            android:hint="请输入名称"
-            />
-    </LinearLayout>
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:layout_marginTop="10dp"
+        android:text="编码:" />
 
-    <LinearLayout
-        style="@style/Normal_ItemList_Layout"
-        android:layout_height="35dp">
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:textColor="@color/color_333333"
-            android:text="规格:"
-            />
-        <EditText
-            android:id="@+id/et_kucun_SPSX"
-            style="@style/Normal_Edittext"
-            android:hint="请输入规格"
-            />
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:textColor="@color/color_333333"
-            android:layout_width="60dp"
-            android:text="助记码:"
-            />
-        <EditText
-            android:id="@+id/et_kucun_ZJM"
-            style="@style/Normal_Edittext"
-            android:hint="请输入助记码"
-            />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/et_kucun_SPBH"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入编码" />
 
-    <LinearLayout
-        style="@style/Normal_ItemList_Layout"
-        android:layout_height="35dp">
-        <TextView
-            style="@style/Normal_ItemList_Title"
-            android:textColor="@color/color_333333"
-            android:text="仓库:"
-            />
-        <EditText
-            android:id="@+id/et_kucun_CKID"
-            style="@style/Normal_Edittext"
-            android:hint="请选择所在仓库"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:editable="false"
-            android:inputType="none"
-            android:focusableInTouchMode="false"
-            />
-    </LinearLayout>
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="名称:" />
+
+    <EditText
+        android:id="@+id/et_kucun_SPMC"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入名称" />
+
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="规格:" />
+
+    <EditText
+        android:id="@+id/et_kucun_SPSX"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入规格" />
+
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="助记码:" />
+
+    <EditText
+        android:id="@+id/et_kucun_ZJM"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入助记码" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="仓库:"
+        android:textColor="@color/color_333333" />
+
+    <EditText
+        android:id="@+id/et_kucun_CKID"
+        style="@style/Normal_Search_Edittext"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        android:hint="请选择所在仓库"
+        android:inputType="none" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_kucun"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/button_blue_circle"
         android:text="@string/btn_search"
         android:textColor="@color/color_white"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 
 </LinearLayout>
