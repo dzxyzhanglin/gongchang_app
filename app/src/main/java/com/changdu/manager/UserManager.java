@@ -2,6 +2,10 @@ package com.changdu.manager;
 
 import com.changdu.db.SPManager;
 import com.changdu.model.UserModel;
+import com.changdu.model.UserPermissionModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserManager {
 
@@ -11,6 +15,7 @@ public class UserManager {
     private static final String APP_PREFERENCES_UNAME_KEY = "gongchang_profile_uname";
     private static final String APP_PREFERENCES_CODE_KEY = "gongchang_profile_code";
     private static final String APP_PREFERENCES_UTYPE_KEY = "gongchang_profile_utype";
+    private static final String APP_PREFERENCES_PERMISSION_KEY = "gongchang_profile_permission";
 
     public static UserManager getInstance() {
         if (userManager == null) {
@@ -32,6 +37,18 @@ public class UserManager {
             spManager.putString(APP_PREFERENCES_UNAME_KEY, user.getUName());
             spManager.putString(APP_PREFERENCES_CODE_KEY, user.getCode());
             spManager.putString(APP_PREFERENCES_UTYPE_KEY, user.getUTYPE());
+
+            // 权限
+            List<UserPermissionModel> data = user.getDATA();
+            if (data != null && data.size() > 0) {
+                StringBuilder sb = new StringBuilder();
+                for (UserPermissionModel p : data) {
+                    sb.append(p.getRGH_NAME()).append(",");
+                }
+                spManager.putString(APP_PREFERENCES_PERMISSION_KEY, sb.toString().substring(0, sb.toString().length() - 1));
+            } else {
+                spManager.putString(APP_PREFERENCES_PERMISSION_KEY, "");
+            }
         }
     }
 
@@ -41,6 +58,7 @@ public class UserManager {
         spManager.remove(APP_PREFERENCES_UNAME_KEY);
         spManager.remove(APP_PREFERENCES_CODE_KEY);
         spManager.remove(APP_PREFERENCES_UTYPE_KEY);
+        spManager.remove(APP_PREFERENCES_PERMISSION_KEY);
     }
 
     public String getUID() {
@@ -57,6 +75,10 @@ public class UserManager {
 
     public String getUType() {
         return SPManager.getInstance().getString(APP_PREFERENCES_UTYPE_KEY, "");
+    }
+
+    public String getPermissionData() {
+        return SPManager.getInstance().getString(APP_PREFERENCES_PERMISSION_KEY, "");
     }
 
     /**

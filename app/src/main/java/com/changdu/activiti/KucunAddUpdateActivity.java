@@ -89,7 +89,7 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         Log.e("d", dataList.toString());
 
         // 设置标题
-        String title = (Constant.OPERATE_ADD.equals(OPERATE) ? "新增" : "修改") + "物品信息";
+        String title = (Constant.OPERATE_ADD.equals(OPERATE) ? "新增" : "修改") + "物品库存信息";
         setTitle(title, true);
         mAddUpdate.setText(title);
 
@@ -205,8 +205,6 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
             }
             jdx++;
         }
-
-        Log.e("data", sb.toString());
 
         return sb.toString();
     }

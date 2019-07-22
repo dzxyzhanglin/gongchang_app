@@ -64,7 +64,7 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         setTitle(getString(R.string.title_jindu_chaxun), true);
 
         initView();
-        //getDataCount();
+        getDataCount();
     }
 
     private void initView() {

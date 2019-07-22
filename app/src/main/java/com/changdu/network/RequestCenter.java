@@ -237,8 +237,17 @@ public class RequestCenter {
      * @param properties
      * @param webServiceCallBack
      */
-    public static void SaveImg(HashMap<String, Object> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
-        WebServiceUtils.callWebService2(HttpConstants.ROOT_URL, HttpConstants.SAVE_IMG, properties, webServiceCallBack);
+    public static void SaveImg(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.SAVE_IMG, properties, webServiceCallBack);
+    }
+
+    /**
+     * 删除图片
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void DeleteImg(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.DELETE_IMG, properties, webServiceCallBack);
     }
 
     /**

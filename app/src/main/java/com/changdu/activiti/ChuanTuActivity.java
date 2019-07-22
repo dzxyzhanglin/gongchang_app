@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -26,8 +25,10 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 手机传图
@@ -41,6 +42,8 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
 
     private String SPBH;
     private String SPID;
+
+    private static int saveNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,11 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
 
                 if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
                     dataList = (List<Map<String, Object>>) map.get("DATA");
+                    if (dataList != null && dataList.size() > 0) {
+                        for (Map<String, Object> d : dataList) {
+                            d.put("TYPE", "REMOTE");
+                        }
+                    }
                     adapter = new ChuanTuAdapter(mContext, dataList);
                     mGridView.setAdapter(adapter);
 
@@ -149,8 +157,11 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
                             Map<String, Object> d = new HashMap<>();
                             String path = localMedia.getPath();
                             d.put("ID", "");
-                            d.put("IMAGE_BYTE", ImageUtil.getByteFromLocalImagePath(path));
-                            d.put("TYPE", "PATH");
+                            d.put("IMAGE_BYTE", path);
+                            d.put("TPMC", ImageUtil.getImageNameFromLocalPath(path));
+                            // 选择的时候不能转为二进制，太耗费资源，容易NR
+                            //d.put("IMAGE_BYTE", ImageUtil.getByteFromLocalImagePath(path));
+                            d.put("TYPE", "LOCAL");
                             lists.add(d);
                         }
                         adapter.loadMore(lists);
@@ -168,33 +179,86 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
      */
     private void saveImgs() {
         List<Map<String, Object>> lists = adapter.getmDataList();
-        for (Map<String, Object> data : lists) {
-            HashMap<String, Object> properties = new HashMap<>();
-            properties.put("SPID", SPID);
-            properties.put("fid", StringUtil.convertStr(data.get("ID")));
-            properties.put("TPMC", StringUtil.convertStr(data.get("TITLE")));
-            byte[] bt = (byte[]) data.get("IMAGE_BYTE");
-            properties.put("imageBytes", bt);
-
+        final int saveSize = lists.size();
+        if (saveSize > 0) {
             showLoading();
-            RequestCenter.SaveImg(properties, new WebServiceUtils.WebServiceCallBack() {
-                @Override
-                public void callBack(String resultStr) {
-                    cancleLoading();
-                    Map<String, Object> map = toMap(resultStr);
-                    if (map == null) {
-                        return;
-                    }
-                    if ("True".equals(StringUtil.convertStr(map.get("Sucecss")))) {
-                        showToast("保存成功");
-                    } else {
-                        showToast(StringUtil.convertStr(map.get("Mesg")));
-                    }
+            saveNum = 0;
+            for (Map<String, Object> data : lists) {
+                String type = StringUtil.convertStr(data.get("TYPE"));
+                if (Objects.equals("LOCAL", type)) {
+                    HashMap<String, String> properties = new LinkedHashMap<>();
+                    properties.put("SPID", SPID);
+                    properties.put("FID", "新增");
+                    properties.put("TPMC", StringUtil.convertStr(data.get("TPMC")));
+
+                    String path = StringUtil.convertStr(data.get("IMAGE_BYTE"));
+                    properties.put("TPType", ImageUtil.getImageSuffixFromLocalPath(path));
+                    String imageBytes = ImageUtil.getByteFromLocalImagePath(path);
+                    properties.put("imageBytes", imageBytes);
+
+                    RequestCenter.SaveImg(properties, new WebServiceUtils.WebServiceCallBack() {
+                        @Override
+                        public void callBack(String resultStr) {
+                            saveNum++;
+                            if (saveSize == saveNum) {
+                                cancleLoading();
+                            }
+                            if (Objects.equals(resultStr, "保存成功")) {
+                                showToast("保存成功");
+                            } else {
+                                showToast("保存失败");
+                            }
+                        }
+                    });
+                } else if (Objects.equals("REMOTE", type)) {
+                    HashMap<String, String> properties = new HashMap<>();
+                    properties.put("SPID", SPID);
+                    properties.put("FID", StringUtil.convertStr(data.get("ID")));
+                    properties.put("TPMC", StringUtil.convertStr(data.get("TPMC")));
+
+                    String path = StringUtil.convertStr(data.get("IMAGE_BYTE"));
+                    properties.put("imageBytes", path);
+                    properties.put("TPType", StringUtil.convertStr(data.get("KIND")));
+
+                    showLoading();
+                    RequestCenter.SaveImg(properties, new WebServiceUtils.WebServiceCallBack() {
+                        @Override
+                        public void callBack(String resultStr) {
+                            saveNum++;
+                            if (saveSize == saveNum) {
+                                cancleLoading();
+                            }
+                            if (Objects.equals(resultStr, "保存成功")) {
+                                showToast("保存成功");
+                            } else {
+                                showToast("保存失败");
+                            }
+                        }
+                    });
                 }
-            });
+            }
         }
 
-        // TODO 判断是否有图片删除
+        // 判断是否有图片删除
+        List<Map<String, Object>> deletedList = adapter.getDeletedList();
+        if (deletedList!= null && deletedList.size() > 0) {
+            for (Map<String, Object> map : deletedList) {
+                String ImageID = StringUtil.convertStr(map.get("ID"));
+                if (!StringUtil.isBlank(ImageID)) {
+                    HashMap<String, String> properties = new HashMap<>();
+                    properties.put("ImageID", ImageID);
+                    showLoading();
+                    RequestCenter.DeleteImg(properties, new WebServiceUtils.WebServiceCallBack() {
+                        @Override
+                        public void callBack(String resultStr) {
+                            cancleLoading();
+                            // TODO判断返回值
+                            showToast("删除成功");
+                        }
+                    });
+                }
+            }
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,18 @@ import com.changdu.R;
 import com.changdu.activiti.ChanliangtongjiActivity;
 import com.changdu.activiti.JinduActivity;
 import com.changdu.activiti.KucunActivity;
-import com.changdu.activiti.LoginActivity;
 import com.changdu.activiti.XiaoshouKaidanActivity;
 import com.changdu.activiti.XiaoshoulishiActivity;
 import com.changdu.adapter.HomeAdapter;
 import com.changdu.constant.Constant;
+import com.changdu.manager.UserManager;
 import com.changdu.model.HomeModel;
+import com.changdu.util.StringUtil;
 import com.changdu.zxing.app.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 首页
@@ -64,30 +67,87 @@ public class HomeFragment extends BaseFragment {
 
     private void initData() {
 
+        String permissionData = UserManager.getInstance().getPermissionData();
         dataList = new ArrayList<>();
-        HomeModel model = new HomeModel(R.drawable.icon_kucun_chaxun, getString(R.string.title_kucun_chaxun));
-        dataList.add(model);
+        if (!StringUtil.isBlank(permissionData)) {
+            HomeModel model = null;
+            String[] lists = permissionData.split(",");
+            for (String title : lists) {
+                if (Objects.equals(title, getString(R.string.title_kucun_chaxun))) {
+                    model = new HomeModel(R.drawable.icon_kucun_chaxun, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_kucun_shoujichuantu))) {
+                    model = new HomeModel(R.drawable.icon_shoujichuantu, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_kucun_shoujipandian))) {
+                    model = new HomeModel(R.drawable.icon_shoujipandian, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_xiaoshou_kaidan))) {
+                    model = new HomeModel(R.drawable.icon_xiaoshoukaidan, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_xiaoshoulishi_chaxun))) {
+                    model = new HomeModel(R.drawable.icon_xisoshoulishi, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_kucun_chejiansaoma))) {
+                    model = new HomeModel(R.drawable.icon_chejiansaoma, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_chanliangtongji))) {
+                    model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, title);
+                    dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_jindu_chaxun))) {
+                    model = new HomeModel(R.drawable.icon_jinduchaxun, title);
+                    dataList.add(model);
+                }
+            }
 
-        model = new HomeModel(R.drawable.icon_shoujichuantu, getString(R.string.title_kucun_shoujichuantu));
-        dataList.add(model);
+            /*String kucunTitle = getString(R.string.title_kucun_chaxun);
+            if (permissionData.indexOf(kucunTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_kucun_chaxun, kucunTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_shoujipandian, getString(R.string.title_kucun_shoujipandian));
-        dataList.add(model);
+            /*String shoujichuantuTitle = getString(R.string.title_kucun_shoujichuantu);
+            if (permissionData.indexOf(shoujichuantuTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_shoujichuantu, shoujichuantuTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_xiaoshoukaidan, getString(R.string.title_xiaoshou_kaidan));
-        dataList.add(model);
+            /*String shoujipandianTitle = getString(R.string.title_kucun_shoujipandian);
+            if (permissionData.indexOf(shoujipandianTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_shoujipandian, shoujipandianTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_xisoshoulishi, getString(R.string.title_xiaoshoulishi_chaxun));
-        dataList.add(model);
+            /*String xiaoshoukaidanTitle = getString(R.string.title_xiaoshou_kaidan);
+            if (permissionData.indexOf(xiaoshoukaidanTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_xiaoshoukaidan, xiaoshoukaidanTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_chejiansaoma, getString(R.string.title_kucun_chejiansaoma));
-        dataList.add(model);
+           /* String xisoshoulishiTitle = getString(R.string.title_xiaoshoulishi_chaxun);
+            if (permissionData.indexOf(xisoshoulishiTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_xisoshoulishi, xisoshoulishiTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, "产量统计");
-        dataList.add(model);
+            /*String chejiansaomaTitle = getString(R.string.title_kucun_chejiansaoma);
+            if (permissionData.indexOf(chejiansaomaTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_chejiansaoma, chejiansaomaTitle);
+                dataList.add(model);
+            }*/
 
-        model = new HomeModel(R.drawable.icon_jinduchaxun, getString(R.string.title_jindu_chaxun));
-        dataList.add(model);
+            /*String gongrenchanliangtongjiTitle = getString(R.string.title_chanliangtongji);
+            if (permissionData.indexOf(gongrenchanliangtongjiTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, gongrenchanliangtongjiTitle);
+                dataList.add(model);
+            }*/
+
+            /*String jinduchaxunTitle = getString(R.string.title_jindu_chaxun);
+            if (permissionData.indexOf(jinduchaxunTitle) != -1) {
+                model = new HomeModel(R.drawable.icon_jinduchaxun, jinduchaxunTitle);
+                dataList.add(model);
+            }*/
+        }
 
         // 显示数据
         showData();
@@ -150,6 +210,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void doOpenCamera(String captureType) {
+        Log.e("doOpenCamera", "子 doOpenCamera");
+
         Intent intent = new Intent(mContext, CaptureActivity.class);
         intent.putExtra("CAPTURE_TYPE", captureType);
         startActivity(intent);

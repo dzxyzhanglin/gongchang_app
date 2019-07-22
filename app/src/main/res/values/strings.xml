@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">工厂APP</string>
-    <string name="welcom_name">欢迎进入工厂APP</string>
+    <string name="app_name">掌佳科技</string>
+    <string name="welcom_name">欢迎进入掌佳科技</string>
     <string name="login_username">请输入用户名</string>
     <string name="login_password">请输入密码</string>
     <string name="login_btn">立即登录</string>
@@ -13,6 +13,7 @@
     <string name="title_kucun_shoujichuantu">手机传图</string>
     <string name="title_kucun_shoujipandian">手机盘点</string>
     <string name="title_kucun_chejiansaoma">车间扫描</string>
+    <string name="title_chanliangtongji">产量统计</string>
     <string name="title_workinfo">加工信息</string>
     <string name="title_xunjian">巡检信息</string>
     <string name="title_qtbf">其他工序录入</string>
@@ -29,7 +30,6 @@
     <string name="title_jsfs">结算方式选择</string>
     <string name="title_kh">客户选择</string>
     <string name="title_device">选择设备</string>
-    <string name="title_chanliangtongji">产量统计</string>
     <string name="title_company">企业信息</string>
     <string name="title_updatepass">修改密码</string>
 

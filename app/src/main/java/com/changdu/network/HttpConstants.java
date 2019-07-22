@@ -139,6 +139,11 @@ public class HttpConstants {
     public static String SAVE_IMG = "SaveImg";
 
     /**
+     * 删除图片
+     */
+    public static String DELETE_IMG = "DeleteImg";
+
+    /**
      * 获取传票信息
      */
     public static String GET_CP_INFO = "GETCPInfo";

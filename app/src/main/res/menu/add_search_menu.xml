@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_add_search"
-        android:icon="@drawable/ic_local_bar_black_24dp"
+        android:icon="@drawable/ic_search_black_24dp"
         android:orderInCategory="100"
         android:title="筛选"
         app:showAsAction="always" />

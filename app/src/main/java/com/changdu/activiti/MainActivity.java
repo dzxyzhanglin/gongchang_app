@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ public class MainActivity extends BaseActivity {
     private final int PRODUCT_MENU_ID = Menu.FIRST + 2;
     private final int MIME_MENU_ID = Menu.FIRST + 3;
 
+    private long mExitTime;
+
     private TextView mTvTitle;
 
     private FragmentManager fm;
@@ -42,6 +45,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
+        mContext = this;
 
         ActionBar.LayoutParams lp = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
         View mActionBarView = LayoutInflater.from(this).inflate(R.layout.actionbar_layout, null);
@@ -102,7 +106,7 @@ public class MainActivity extends BaseActivity {
                         fragmentTransaction.show(mHomeFragment);
                     }
                     fragmentTransaction.commit();
-                    mTvTitle.setText(getString(R.string.title_home));
+                    mTvTitle.setText("掌佳科技");
                     return true;
                 case STATISTICS_MENU_ID:
                     if (mStatisticsFragment == null) {
@@ -167,5 +171,22 @@ public class MainActivity extends BaseActivity {
                 .setUserCanRetry(false)         //失败后是否提示重新下载
                 .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
                 .register();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 判断两次点击的时间间隔（默认设置为2秒）
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                showToast("再按一次退出程序");
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+                super.onBackPressed();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

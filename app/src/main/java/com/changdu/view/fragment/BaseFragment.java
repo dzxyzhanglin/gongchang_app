@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.changdu.constant.Constant;
 
@@ -42,6 +43,7 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Log.e("CODE", "onRequestPermissionsResult ... " + requestCode);
         switch (requestCode) {
             case Constant.HARDWEAR_CAMERA_CODE:
                 if (grantResults.length > 0
@@ -59,7 +61,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void doOpenCamera(String captureType) {
-
+        Log.e("doOpenCamera", "父 doOpenCamera");
     }
 
     public void doWriteSDCard() {
