@@ -18,6 +18,7 @@ import com.changdu.network.RequestCenter;
 import com.changdu.util.ImageUtil;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
+import com.changdu.zxing.app.CaptureActivity;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -39,11 +40,14 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
     private ChuanTuAdapter adapter;
     private List<Map<String, Object>> dataList;
     private Button mSave;
+    private Button mBack;
 
     private String SPBH;
     private String SPID;
 
     private static int saveNum = 0;
+
+    private boolean LOAD_DATA_STATUS = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
         SPBH = intent.getStringExtra(Constant.CAPTURE_RESULT_CODE);
 
+        LOAD_DATA_STATUS = false;
+
         initView();
         getWpDetail();
     }
@@ -63,6 +69,8 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
         mGridView = findViewById(R.id.gd_chuantu);
         mSave = findViewById(R.id.btn_chuantu_save);
         mSave.setOnClickListener(this);
+        mBack = findViewById(R.id.btn_chuantu_back);
+        mBack.setOnClickListener(this);
     }
 
     private void getWpDetail() {
@@ -80,6 +88,8 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
                     cancleLoading();
                     return;
                 }
+
+                LOAD_DATA_STATUS = true;
 
                 // 修改标题
                 String SPK_SPMC = StringUtil.convertStr(map.get("SPK_SPMC"));
@@ -131,6 +141,10 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_add_image) {
+            if (!LOAD_DATA_STATUS) {
+                showToast("未查询到物品信息，不能进行此操作");
+                return true;
+            }
             PictureSelector.create(mContext)
                 .openGallery(PictureMimeType.ofImage())
                 .imageSpanCount(4)// 每行显示个数 int
@@ -178,6 +192,11 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
      * 保存图片
      */
     private void saveImgs() {
+        if (!LOAD_DATA_STATUS) {
+            showToast("未查询到物品信息，不能进行此操作");
+            return ;
+        }
+
         List<Map<String, Object>> lists = adapter.getmDataList();
         final int saveSize = lists.size();
         if (saveSize > 0) {
@@ -266,6 +285,12 @@ public class ChuanTuActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.btn_chuantu_save:
                 saveImgs();
+                break;
+            case R.id.btn_chuantu_back: // 返回到扫描界面
+                Intent intent = new Intent(mContext, CaptureActivity.class);
+                intent.putExtra("CAPTURE_TYPE", Constant.CAPTURE_CHUANTU);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

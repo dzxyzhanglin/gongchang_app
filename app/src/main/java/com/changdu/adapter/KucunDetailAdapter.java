@@ -48,6 +48,7 @@ public class KucunDetailAdapter extends CommonAdapter {
             holder.mZPD_PC = view.findViewById(R.id.kucun_detail_ZPD_PC);
             holder.mHWB_HWMC = view.findViewById(R.id.kucun_detail_HWB_HWMC);
             holder.mZPD_SL = view.findViewById(R.id.kucun_detail_ZPD_SL);
+            holder.mZPD_JLDW = view.findViewById(R.id.kucun_detail_ZPD_JLDW);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -59,6 +60,7 @@ public class KucunDetailAdapter extends CommonAdapter {
         holder.mZPD_PC.setText(StringUtil.convertStr(data.get("ZPD_PC")));
         holder.mHWB_HWMC.setText(StringUtil.convertStr(data.get("HWB_HWMC")));
         holder.mZPD_SL.setText(StringUtil.convertStr(data.get("ZPD_SL")));
+        holder.mZPD_JLDW.setText(StringUtil.convertStr(data.get("JLB_JLDW")));
 
         return view;
     }
@@ -69,5 +71,6 @@ public class KucunDetailAdapter extends CommonAdapter {
         private TextView mZPD_PC;
         private TextView mHWB_HWMC;
         private TextView mZPD_SL;
+        private TextView mZPD_JLDW;
     }
 }

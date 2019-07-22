@@ -52,6 +52,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
     private EditText mQTBF;
     private EditText mSBID;
     private EditText mKGRQ_TIME;
+    private EditText mNOTE;
     private RadioGroup mSJBZ;
     private RadioButton mSjYes;
     private RadioButton mSjNo;
@@ -78,6 +79,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         Intent intent = getIntent();
         CPNO = intent.getStringExtra(Constant.CAPTURE_RESULT_CODE);
         Log.e("CPNO->", CPNO);
+        LOAD_DATA_STATUS = false;
 
         initView();
         getCpData();
@@ -101,6 +103,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         mSBID.setOnClickListener(this);
         mKGRQ_TIME = findViewById(R.id.KGRQ_TIME);
         mKGRQ_TIME.setOnClickListener(this);
+        mNOTE = findViewById(R.id.NOTE);
         mSJBZ = findViewById(R.id.SJBZ);
         mSJBZ.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -154,6 +157,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                             SBID = StringUtil.convertStr(cpinfo.get("SBID"));
                             mSBID.setText(StringUtil.convertStr(cpinfo.get("SBMC")));
                             mKGRQ_TIME.setText(StringUtil.convertStr(cpinfo.get("WGRQ")));
+                            mNOTE.setText(StringUtil.convertStr(cpinfo.get("Note")));
 
                         } else if (Objects.equals(Code, "1")) {
                             showToast(StringUtil.convertStr(reslutMap.get("Msg")));
@@ -230,6 +234,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         properties.put("MDID", formatNum(mMDID.getText().toString()));
         properties.put("SBID", SBID);
         properties.put("KGRQ", fomatDate(mKGRQ_TIME.getText().toString()));
+        properties.put("Note", mNOTE.getText().toString());
         properties.put("SJBZ", SJBZ);
         properties.put("QTBF", formatBf());
 

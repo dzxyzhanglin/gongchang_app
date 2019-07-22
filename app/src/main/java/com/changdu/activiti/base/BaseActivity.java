@@ -222,13 +222,11 @@ public class BaseActivity extends AppCompatActivity {
      * @return
      */
     public long getDatePickDefaultDate(EditText mDate) {
-        Date selectedDate = DateUtil.parseDate(mDate.getText().toString());
-        Log.e("DATE1", mDate.getText().toString());
+        Date selectedDate = DateUtil.parseDate(mDate.getText().toString(), null);
         long date = System.currentTimeMillis() + 60000;
         if (selectedDate != null) {
             date = selectedDate.getTime();
         }
-        Log.e("DATE", String.valueOf(date));
         return date;
     }
 

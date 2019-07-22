@@ -75,6 +75,11 @@
             style="@style/Normal_ItemList_Body"
             android:gravity="center"
             android:text="数量" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="单位" />
     </LinearLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -106,6 +111,7 @@
     <Button
         android:id="@+id/btn_kucun_detal_wtadd"
         style="@style/Normal_Blue_Button"
+        android:background="@color/color_gray"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"

@@ -12,6 +12,7 @@ import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.CkActivity;
 import com.changdu.activiti.basicdata.HwActivity;
+import com.changdu.activiti.basicdata.JldwActivity;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
@@ -34,6 +35,7 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
     private EditText mZPD_PC;
     private EditText mZPD_HW;
     private EditText mZPD_SL;
+    private EditText mZPD_JLDW;
 
     private String SPID = ""; // 物品ID
     private String ZPD_JGID = ""; // 仓库ID
@@ -42,6 +44,8 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
     private String ZPD_HW = ""; // 货位ID
     private String HWB_HWMC = ""; // 货位名称
     private String ZPD_SL = ""; // 数量
+    private String ZPD_JLDW = ""; // 单位ID
+    private String JLB_JLDW = ""; // 单位名称
     private String OPERATE = "";
     private List<Map<String, Object>> dataList;
     private int index;
@@ -65,6 +69,8 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         mZPD_HW = findViewById(R.id.et_kucun_addupdate_ZPD_HW);
         mZPD_HW.setOnClickListener(this);
         mZPD_SL = findViewById(R.id.et_kucun_addupdate_ZPD_SL);
+        mZPD_JLDW = findViewById(R.id.et_kucun_addupdate_ZPD_JLDW);
+        mZPD_JLDW.setOnClickListener(this);
     }
 
     private void initData() {
@@ -76,6 +82,10 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
         ZPD_HW = intent.getStringExtra("ZPD_HW");
         HWB_HWMC = intent.getStringExtra("HWB_HWMC");
         ZPD_SL = intent.getStringExtra("ZPD_SL");
+
+        ZPD_JLDW = intent.getStringExtra("ZPD_JLDW");
+        JLB_JLDW = intent.getStringExtra("JLB_JLDW");
+
         OPERATE = intent.getStringExtra("OPERATE");
         index = intent.getIntExtra("DATA_INDEX", -1);
 
@@ -99,6 +109,7 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
             mZPD_PC.setText(ZPD_PC);
             mZPD_HW.setText(HWB_HWMC);
             mZPD_SL.setText(ZPD_SL);
+            mZPD_JLDW.setText(JLB_JLDW);
         }
     }
 
@@ -119,6 +130,11 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
                 Intent hwIntent = new Intent(mContext, HwActivity.class);
                 hwIntent.putExtra("CKID", ZPD_JGID);
                 startActivityForResult(hwIntent, Constant.ACTIVITI_FOR_RESULT_HW);
+                break;
+            case R.id.et_kucun_addupdate_ZPD_JLDW: // 选择单位
+                Intent dwIntent = new Intent(mContext, JldwActivity.class);
+                dwIntent.putExtra("SPID", SPID);
+                startActivityForResult(dwIntent, Constant.ACTIVITI_FOR_RESULT_JLDW);
                 break;
         }
     }
@@ -184,10 +200,10 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
             idx++;
         }
 
-        if (Constant.OPERATE_ADD.equals(OPERATE)) {
+        if (Constant.OPERATE_ADD.equals(OPERATE)) { // 新增
             StringBuilder sb = new StringBuilder();
             sb.append(SPID).append("|");
-            sb.append("{1D586C20-D3E8-4833-B9DF-5ECD266F9396}").append("|");
+            sb.append(ZPD_JLDW).append("|");
             sb.append(ZPD_PC).append("|");
             sb.append(ZPD_JGID).append("|");
             sb.append(ZPD_HW).append("|");
@@ -227,6 +243,12 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
                 HWB_HWMC = data.getStringExtra("NAME");
                 ZPD_HW = data.getStringExtra("ID");
                 mZPD_HW.setText(HWB_HWMC);
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_JLDW) {
+            if (data != null) {
+                ZPD_JLDW = data.getStringExtra("ID");
+                JLB_JLDW = data.getStringExtra("NAME");
+                mZPD_JLDW.setText(JLB_JLDW);
             }
         }
     }

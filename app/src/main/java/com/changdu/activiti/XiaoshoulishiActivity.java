@@ -84,6 +84,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
         });
 
         mBDate = findViewById(R.id.et_xsls_BDate);
+        mBDate.setText(DateUtil.getPreMonthDate()); // 默认显示一个月数据
         mBDate.setOnClickListener(this);
         mEDate = findViewById(R.id.et_xsls_EDate);
         mEDate.setOnClickListener(this);
@@ -251,7 +252,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.et_xsls_EDate: // 结束日期
                 long endDate = getDatePickDefaultDate(mEDate);
-                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", endDate, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "结束日期", endDate, DateSelectorWheelView.TYPE_YYYYMMDD, 1, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
                         Log.e("selectedDate", selectedDate);

@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:background="@drawable/bg_f7f8fa_circle"
         android:gravity="left|center"
-        android:hint="请手工输入扫描结果"
+        android:hint="请手工录入物品编码"
         android:paddingLeft="10dp"
         android:textColor="@color/color_333333"
         android:textSize="18sp" />

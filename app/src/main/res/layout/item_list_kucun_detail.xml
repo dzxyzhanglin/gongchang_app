@@ -37,6 +37,12 @@
             style="@style/Normal_ItemList_Body"
             android:gravity="center"
             android:text="28" />
+
+        <TextView
+            android:id="@+id/kucun_detail_ZPD_JLDW"
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="件" />
     </LinearLayout>
 
 </LinearLayout>

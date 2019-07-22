@@ -3,6 +3,7 @@ package com.changdu.activiti;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -45,6 +46,8 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
     private String SPK_SPMC = "";
     private String SPK_SPSX = "";
 
+    private boolean LOAD_DATA_STATUS = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,7 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
         mContext = this;
         // 设置标题
         setTitle(getString(R.string.title_kucun_detail), true);
+        LOAD_DATA_STATUS = false;
 
         Intent intent = getIntent();
         SPID = intent.getStringExtra("SPID");
@@ -95,6 +99,8 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra("ZPD_HW", StringUtil.convertStr(data.get("ZPD_HW")));
                 intent.putExtra("HWB_HWMC", StringUtil.convertStr(data.get("HWB_HWMC")));
                 intent.putExtra("ZPD_SL", StringUtil.convertStr(data.get("ZPD_SL")));
+                intent.putExtra("ZPD_JLDW", StringUtil.convertStr(data.get("ZPD_JLDW")));
+                intent.putExtra("JLB_JLDW", StringUtil.convertStr(data.get("JLB_JLDW")));
                 intent.putExtra("OPERATE", Constant.OPERATE_UPDATE);
                 intent.putExtra("DATA_LIST", mData);
                 intent.putExtra("DATA_INDEX", i);
@@ -119,6 +125,9 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
                     return;
                 }
 
+                LOAD_DATA_STATUS = true;
+                mAdd.setBackgroundResource(R.color.colorPrimary);
+
                 // 标题赋值
                 mSPK_SPBH.setText(StringUtil.convertStr(map.get("SPK_SPBH")));
                 mSPK_SPMC.setText(StringUtil.convertStr(map.get("SPK_SPMC")));
@@ -139,6 +148,10 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_kucun_detal_wtadd:
+                if (!LOAD_DATA_STATUS) {
+                    showToast("没有查询到物品详细信息，不能进行次操作");
+                    return;
+                }
                 Intent intent = new Intent(mContext, KucunAddUpdateActivity.class);
                 intent.putExtra("SPID", SPID);
                 intent.putExtra("ZPD_JGID", "");
@@ -153,5 +166,12 @@ public class KucunDetailActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        // 重新刷新数据
+        getDataList();
     }
 }
