@@ -23,9 +23,12 @@
     <string name="title_xiaoshou_kaidan">销售开单</string>
     <string name="title_xiaoshou_kaidan_addwp">开单物品选择</string>
     <string name="title_jindu_chaxun">生产进度查询</string>
+    <string name="title_shoujiachaxun">售价查询</string>
     <string name="title_ck">仓库选择</string>
     <string name="title_hw">货位选择</string>
+    <string name="title_pc">批次选择</string>
     <string name="title_jldw">计量单位选择</string>
+    <string name="title_gx">工序选择</string>
     <string name="title_fplx">发票类型选择</string>
     <string name="title_jsfs">结算方式选择</string>
     <string name="title_kh">客户选择</string>

@@ -127,10 +127,12 @@ public class XiaoshouKaidanActivity extends BaseActivity implements View.OnClick
                 properties.put("XDJID", "");
                 properties.put("List", buildWpList());
 
+                showLoading();
                 RequestCenter.SellSave(properties, new WebServiceUtils.WebServiceCallBack() {
 
                     @Override
                     public void callBack(String resultStr) {
+                        cancleLoading();
                         Map<String, Object> map = toMap(resultStr);
                         if (map == null) {
                             return;

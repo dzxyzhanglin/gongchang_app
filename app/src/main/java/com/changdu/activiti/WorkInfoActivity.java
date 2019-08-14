@@ -14,10 +14,10 @@ import android.widget.TextView;
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.DeviceActivity;
+import com.changdu.activiti.basicdata.GxActivity;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
-import com.changdu.util.DateUtil;
 import com.changdu.util.JsonHandler;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
@@ -27,7 +27,6 @@ import com.dou361.dialogui.widget.DateSelectorWheelView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +64,9 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
     private String CPNO; // 传票号码(二维码扫描值)
     private String SBID; // 设备
     private String SBID_NAME;
+    private String GXID; // 工序ID
     private String SJBZ = "1";
+    private String NOCANGX = "1";
     private List<Map<String, Object>> bfItemMap = new ArrayList<>();
     private boolean LOAD_DATA_STATUS = false; // 加载数据状态
 
@@ -89,6 +90,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         mCPNO = findViewById(R.id.CPNO);
         mCPMC = findViewById(R.id.CPMC);
         mGXMC = findViewById(R.id.GXMC);
+        mGXMC.setOnClickListener(this);
 
         mJSSL = findViewById(R.id.JSSL);
         mCurBFSL = findViewById(R.id.CurBFSL);
@@ -134,9 +136,9 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         RequestCenter.GetCPDInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
+                cancleLoading();
                 if (resultStr != null) {
                     try {
-                        cancleLoading();
                         Map<String, Object> reslutMap = JsonHandler.Dom2Map(resultStr);
                         if (reslutMap == null) {
                             return;
@@ -149,16 +151,19 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                             cpinfo = (Map<String, Object>) reslutMap.get("data");
                             CPID = StringUtil.convertStr(cpinfo.get("CPID"));
 
+                            // 如果 NOCANGX 为 0 允许修改工序 1 不允许修改工序
+                            NOCANGX = StringUtil.convertStr(cpinfo.get("NOCANGX"));
+                            GXID = StringUtil.convertStr(cpinfo.get("DQGX"));
+                            mGXMC.setText(StringUtil.convertStr(cpinfo.get("GXMC")));
+
                             mCPNO.setText(StringUtil.convertStr(cpinfo.get("CPNO")));
                             mCPMC.setText(StringUtil.convertStr(cpinfo.get("CPMC")));
-                            mGXMC.setText(StringUtil.convertStr(cpinfo.get("GXMC")));
 
                             mJSSL.setText(StringUtil.convertStr(cpinfo.get("DQSL")));
                             SBID = StringUtil.convertStr(cpinfo.get("SBID"));
                             mSBID.setText(StringUtil.convertStr(cpinfo.get("SBMC")));
                             mKGRQ_TIME.setText(StringUtil.convertStr(cpinfo.get("WGRQ")));
                             mNOTE.setText(StringUtil.convertStr(cpinfo.get("Note")));
-
                         } else if (Objects.equals(Code, "1")) {
                             showToast(StringUtil.convertStr(reslutMap.get("Msg")));
                         } else {
@@ -177,6 +182,13 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.GXMC: // 选择工序
+                if (!Objects.equals(NOCANGX, "1")) {
+                    Intent intent = new Intent(mContext, GxActivity.class);
+                    intent.putExtra("CPID", CPID);
+                    startActivityForResult(intent, Constant.ACTIVITI_FOR_RESULT_GX);
+                }
+                break;
             case R.id.QTBF: // 其他报废
                 Intent intent = new Intent(mContext, QtbfActivity.class);
                 Bundle localBundle = new Bundle();
@@ -224,7 +236,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
 
         HashMap<String, String> properties = new HashMap<>();
         properties.put("CPID", CPID);
-        properties.put("GXID", StringUtil.convertStr(cpinfo.get("DQGX")));
+        properties.put("GXID", GXID);
         properties.put("UID", UserManager.getInstance().getUID());
         properties.put("JSSL", StringUtil.convertStr(cpinfo.get("DQSL")));
         properties.put("PreBFSL", formatNum(mPreBFSL.getText().toString()));
@@ -302,9 +314,17 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                 mSBID.setText(SB_NAME);
             }
         } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_ADD_QTBF) {
-            bfItemMap = ((List)data.getExtras().getSerializable("bfItemMap"));
-            if (this.bfItemMap.size() > 0) {
-                mQTBF.setText("工序数量" + this.bfItemMap.size());
+            if (data != null) {
+                bfItemMap = ((List) data.getExtras().getSerializable("bfItemMap"));
+                if (this.bfItemMap.size() > 0) {
+                    mQTBF.setText("工序数量" + this.bfItemMap.size());
+                }
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_GX) {
+            if (data != null) {
+                GXID = data.getStringExtra("ID");
+                String GXMC = data.getStringExtra("NAME");
+                mGXMC.setText(GXMC);
             }
         }
     }

@@ -26,10 +26,14 @@
             android:layout_weight="1"
             android:background="@drawable/bg_f7f8fa_circle"
             android:gravity="left|center"
-            android:hint="请输入批次"
+            android:hint="请选择批次"
             android:paddingLeft="10dp"
             android:textColor="@color/color_333333"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:editable="false"
+            android:inputType="none"
+            android:focusableInTouchMode="false"/>
     </LinearLayout>
 
     <LinearLayout

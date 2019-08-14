@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shoujia_search_layout"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="@color/color_white"
+    android:clickable="true"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:layout_marginTop="10dp"
+        android:text="商品编码:" />
+
+    <EditText
+        android:id="@+id/et_sj_SPBH"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入商品编码" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="商品名称:" />
+
+    <EditText
+        android:id="@+id/et_sj_SPMC"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入商品名称" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="型号规格:" />
+
+    <EditText
+        android:id="@+id/et_sj_SPSX"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入型号规格" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="助记码:" />
+
+    <EditText
+        android:id="@+id/et_sj_ZJM"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入助记码" />
+
+    <TextView
+        style="@style/Normal_Search_Title"
+        android:text="客户名称:" />
+
+    <EditText
+        android:id="@+id/et_sj_KHMC"
+        style="@style/Normal_Search_Edittext"
+        android:hint="请输入客户名称" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_sj"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/button_blue_circle"
+        android:text="@string/btn_search"
+        android:textColor="@color/color_white"
+        android:textSize="18sp" />
+
+</LinearLayout>

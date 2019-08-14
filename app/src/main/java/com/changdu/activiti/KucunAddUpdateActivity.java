@@ -129,6 +129,7 @@ public class KucunAddUpdateActivity extends BaseActivity implements View.OnClick
                 }
                 Intent hwIntent = new Intent(mContext, HwActivity.class);
                 hwIntent.putExtra("CKID", ZPD_JGID);
+                hwIntent.putExtra("SPID", SPID);
                 startActivityForResult(hwIntent, Constant.ACTIVITI_FOR_RESULT_HW);
                 break;
             case R.id.et_kucun_addupdate_ZPD_JLDW: // 选择单位

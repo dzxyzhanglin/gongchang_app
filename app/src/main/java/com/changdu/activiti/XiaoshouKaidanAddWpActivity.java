@@ -21,6 +21,8 @@ import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.CkActivity;
 import com.changdu.activiti.basicdata.HwActivity;
 import com.changdu.activiti.basicdata.JldwActivity;
+import com.changdu.activiti.basicdata.PcActivity;
+import com.changdu.adapter.JldwAdapter;
 import com.changdu.adapter.XiaoshouKaidanAddWpAdapter;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
@@ -75,6 +77,7 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
     private String DialogHW_NAME = "";
     private String DialogDWID = "";
     private String DialogDW_NAME = "";
+    private String DialogPC; //批次
     private Map<String, Object> selectedData;
 
     @Override
@@ -90,7 +93,7 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         CK_NAME = intent.getStringExtra("CK_NAME");
 
         initView();
-        getDataCount();
+        //getDataCount();
     }
 
     private void initView() {
@@ -150,6 +153,9 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
+
+        // 默认打开搜索
+        openOrCloseDrawer();
     }
 
     @Override
@@ -306,6 +312,7 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
                 }
                 // 底部弹窗
                 mDialogPC = mButtonDialog.findViewById(R.id.et_kaidan_dialog_PC); // 批次
+                mDialogPC.setOnClickListener(this);
                 mDialogHWID = mButtonDialog.findViewById(R.id.et_kaidan_dialog_HWID); // 货位
                 mDialogHWID.setOnClickListener(this);
                 mDialogDW = mButtonDialog.findViewById(R.id.et_kaidan_dialog_DW); // 单位
@@ -314,10 +321,21 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
                 mDialogPRICE = mButtonDialog.findViewById(R.id.et_kaidan_dialog_PRICE); // 价格
                 mButtonDialogSave = mButtonDialog.findViewById(R.id.btn_kaidan_dialog_save);
                 mButtonDialogSave.setOnClickListener(this);
+
+                // 设置默认单位
+                setDefaultDW(StringUtil.convertStr(selectedData.get("ID")));
+
+                break;
+            case R.id.et_kaidan_dialog_PC: // 批次
+                Intent pcIntent = new Intent(mContext, PcActivity.class);
+                pcIntent.putExtra("CKID", CKID);
+                pcIntent.putExtra("SPID", StringUtil.convertStr(selectedData.get("ID")));
+                startActivityForResult(pcIntent, Constant.ACTIVITI_FOR_RESULT_PC);
                 break;
             case R.id.et_kaidan_dialog_HWID: // 货位
                 Intent hwIntent = new Intent(mContext, HwActivity.class);
                 hwIntent.putExtra("CKID", CKID);
+                hwIntent.putExtra("SPID", StringUtil.convertStr(selectedData.get("ID")));
                 startActivityForResult(hwIntent, Constant.ACTIVITI_FOR_RESULT_HW);
                 break;
             case R.id.et_kaidan_dialog_DW: // 单位
@@ -330,6 +348,9 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
                 Map<String, Object> m = new HashMap<>();
                 m.put("SPID", StringUtil.convertStr(selectedData.get("ID")));
                 m.put("SPK_SPBH", StringUtil.convertStr(selectedData.get("SPK_SPBH")));
+                m.put("SPK_SPMC", StringUtil.convertStr(selectedData.get("SPK_SPMC")));
+                m.put("SPK_SPSX", StringUtil.convertStr(selectedData.get("SPK_SPSX")));
+                m.put("JLB_DWMC", StringUtil.convertStr(selectedData.get("JLB_DWMC")));
                 m.put("DWID", DialogDWID);
                 m.put("DW_NAME", DialogDW_NAME);
                 m.put("PC", mDialogPC.getText().toString());
@@ -352,6 +373,27 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
         }
     }
 
+    /**
+     * 设置默认单位
+     * @param SPID
+     */
+    private void setDefaultDW(String SPID) {
+        HashMap<String, String> properties = new HashMap<>();
+        properties.put("SPID", SPID);
+        RequestCenter.GETJLDItem(properties, new WebServiceUtils.WebServiceCallBack() {
+            @Override
+            public void callBack(String resultStr) {
+                List<Map<String, Object>> dataList = (List<Map<String, Object>>) toListMap(resultStr);
+                if (dataList != null && !CollUtil.isEmpty(dataList)) {
+                    Map<String, Object> data = dataList.get(0);
+                    DialogDW_NAME = StringUtil.convertStr(data.get("JLB_JLDW"));
+                    DialogDWID = StringUtil.convertStr(data.get("ID"));
+                    mDialogDW.setText(DialogDW_NAME);
+                }
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -372,6 +414,11 @@ public class XiaoshouKaidanAddWpActivity extends BaseActivity implements View.On
                 DialogDW_NAME = data.getStringExtra("NAME");
                 DialogDWID = data.getStringExtra("ID");
                 mDialogDW.setText(DialogDW_NAME);
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_PC) {
+            if (data != null) {
+                DialogPC = data.getStringExtra("NAME");
+                mDialogPC.setText(DialogPC);
             }
         }
     }

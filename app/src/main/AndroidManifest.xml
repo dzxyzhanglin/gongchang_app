@@ -46,6 +46,7 @@
         <activity android:name=".activiti.XiaoshoulishiDetailActivity" />
         <activity android:name=".activiti.XiaoshouKaidanActivity" />
         <activity android:name=".activiti.XiaoshouKaidanAddWpActivity" />
+        <activity android:name=".activiti.ShoujiachaxunActivity" />
 
         <activity android:name=".activiti.JinduActivity" />
 
@@ -56,6 +57,8 @@
         <activity android:name=".activiti.basicdata.FplxActivity" />
         <activity android:name=".activiti.basicdata.KhActivity" />
         <activity android:name=".activiti.basicdata.DeviceActivity" />
+        <activity android:name=".activiti.basicdata.PcActivity" />
+        <activity android:name=".activiti.basicdata.GxActivity" />
 
         <activity android:name=".activiti.ChanliangtongjiActivity" />
 

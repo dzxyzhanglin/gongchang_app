@@ -16,6 +16,7 @@ import com.changdu.R;
 import com.changdu.activiti.ChanliangtongjiActivity;
 import com.changdu.activiti.JinduActivity;
 import com.changdu.activiti.KucunActivity;
+import com.changdu.activiti.ShoujiachaxunActivity;
 import com.changdu.activiti.XiaoshouKaidanActivity;
 import com.changdu.activiti.XiaoshoulishiActivity;
 import com.changdu.adapter.HomeAdapter;
@@ -97,56 +98,15 @@ public class HomeFragment extends BaseFragment {
                 } else if (Objects.equals(title, getString(R.string.title_jindu_chaxun))) {
                     model = new HomeModel(R.drawable.icon_jinduchaxun, title);
                     dataList.add(model);
+                } else if (Objects.equals(title, getString(R.string.title_shoujiachaxun))) {
+                    model = new HomeModel(R.drawable.icon_shoujiachaxun, title);
+                    dataList.add(model);
                 }
             }
 
-            /*String kucunTitle = getString(R.string.title_kucun_chaxun);
-            if (permissionData.indexOf(kucunTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_kucun_chaxun, kucunTitle);
-                dataList.add(model);
-            }*/
-
-            /*String shoujichuantuTitle = getString(R.string.title_kucun_shoujichuantu);
-            if (permissionData.indexOf(shoujichuantuTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_shoujichuantu, shoujichuantuTitle);
-                dataList.add(model);
-            }*/
-
-            /*String shoujipandianTitle = getString(R.string.title_kucun_shoujipandian);
-            if (permissionData.indexOf(shoujipandianTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_shoujipandian, shoujipandianTitle);
-                dataList.add(model);
-            }*/
-
-            /*String xiaoshoukaidanTitle = getString(R.string.title_xiaoshou_kaidan);
-            if (permissionData.indexOf(xiaoshoukaidanTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_xiaoshoukaidan, xiaoshoukaidanTitle);
-                dataList.add(model);
-            }*/
-
-           /* String xisoshoulishiTitle = getString(R.string.title_xiaoshoulishi_chaxun);
-            if (permissionData.indexOf(xisoshoulishiTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_xisoshoulishi, xisoshoulishiTitle);
-                dataList.add(model);
-            }*/
-
-            /*String chejiansaomaTitle = getString(R.string.title_kucun_chejiansaoma);
-            if (permissionData.indexOf(chejiansaomaTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_chejiansaoma, chejiansaomaTitle);
-                dataList.add(model);
-            }*/
-
-            /*String gongrenchanliangtongjiTitle = getString(R.string.title_chanliangtongji);
-            if (permissionData.indexOf(gongrenchanliangtongjiTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_gongrenchanliangtongji, gongrenchanliangtongjiTitle);
-                dataList.add(model);
-            }*/
-
-            /*String jinduchaxunTitle = getString(R.string.title_jindu_chaxun);
-            if (permissionData.indexOf(jinduchaxunTitle) != -1) {
-                model = new HomeModel(R.drawable.icon_jinduchaxun, jinduchaxunTitle);
-                dataList.add(model);
-            }*/
+            // TODO
+            model = new HomeModel(R.drawable.icon_shoujiachaxun, "售价查询");
+            dataList.add(model);
         }
 
         // 显示数据
@@ -200,6 +160,9 @@ public class HomeFragment extends BaseFragment {
                         } else {
                             requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
                         }
+                        break;
+                    case R.drawable.icon_shoujiachaxun: // 售价查询
+                        startActivity(new Intent(mContext, ShoujiachaxunActivity.class));
                         break;
                     default:
                         Toast.makeText(mContext, "暂无该功能", Toast.LENGTH_SHORT).show();

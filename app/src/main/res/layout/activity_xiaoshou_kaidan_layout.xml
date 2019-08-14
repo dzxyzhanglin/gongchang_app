@@ -136,7 +136,7 @@
     <!-- 添加物品 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="15dp"
         android:background="@color/color_f2f2f2"
         android:orientation="horizontal">
@@ -149,12 +149,28 @@
         <TextView
             style="@style/Normal_ItemList_Body"
             android:gravity="center"
+            android:text="名称" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="规格" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
             android:text="批次" />
 
         <TextView
             style="@style/Normal_ItemList_Body"
             android:gravity="center"
             android:text="货位" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/color_f2f2f2"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/Normal_ItemList_Body"
@@ -164,18 +180,29 @@
         <TextView
             style="@style/Normal_ItemList_Body"
             android:gravity="center"
+            android:text="单位" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
             android:text="价格" />
+
+        <TextView
+            style="@style/Normal_ItemList_Body"
+            android:gravity="center"
+            android:text="金额" />
 
         <ImageView
             android:id="@+id/btn_kaidan_addwp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:gravity="center"
             android:src="@drawable/ic_add_circle_black_24dp" />
 
     </LinearLayout>
+
     <ListView
         android:id="@+id/lv_kaidan_wp"
         android:layout_width="match_parent"

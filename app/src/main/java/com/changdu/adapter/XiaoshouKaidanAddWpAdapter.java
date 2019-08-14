@@ -66,7 +66,7 @@ public class XiaoshouKaidanAddWpAdapter extends CommonAdapter {
         holder.mSPK_SPBH.setText(StringUtil.convertStr(data.get("SPK_SPBH")));
         holder.mSPK_SPMC.setText(StringUtil.convertStr(data.get("SPK_SPMC")));
         holder.mSPK_SPSX.setText(StringUtil.convertStr(data.get("SPK_SPSX")));
-        holder.mJLB_JLDW.setText(StringUtil.convertStr(data.get("JLB_JLDW")));
+        holder.mJLB_JLDW.setText(StringUtil.convertStr(data.get("JLB_DWMC")));
         holder.mJGZ_JGMC.setText(StringUtil.convertStr(data.get("JGZ_JGMC")));
         holder.mZSL.setText(StringUtil.convertStr(data.get("ZSL")));
 

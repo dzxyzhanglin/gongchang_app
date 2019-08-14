@@ -69,7 +69,8 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
         setTitle(getString(R.string.title_kucun_chaxun), true);
 
         initView();
-        getDataCount();
+        // 2019-08-02 默认不查询数据
+        //getDataCount();
 
         refreshLayout = findViewById(R.id.kucun_refreshLayout);
         refreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能（非必须）
@@ -96,6 +97,9 @@ public class KucunActivity extends BaseActivity implements View.OnClickListener 
                 }, 500);
             }
         });
+
+        // 默认打开搜索界面
+        openOrCloseDrawer();
     }
 
     private void initView() {

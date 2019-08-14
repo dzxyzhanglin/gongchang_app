@@ -50,7 +50,9 @@ public class HwAdapter extends CommonAdapter {
         }
 
         Map<String, Object> data = mDataList.get(i);
-        holder.mCkName.setText(StringUtil.convertStr(data.get("HWB_HWMC")));
+        holder.mCkName.setText(
+                StringUtil.convertStr(data.get("HWB_HWMC")) + " [数量：" +
+                        StringUtil.convertStr(data.get("SL")) + "]");
 
         return view;
     }

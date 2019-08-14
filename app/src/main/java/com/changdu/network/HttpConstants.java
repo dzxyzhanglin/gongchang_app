@@ -23,6 +23,11 @@ public class HttpConstants {
     public static String GET_HW_ITEMS = "GETHWItems";
 
     /**
+     * 某个商品在仓库的批次列表
+     */
+    public static String GET_PC_ITEMS = "GETPCItem";
+
+    /**
      * 计量单位列表
      */
     public static String GET_JLDW_ITEM = "GETJLDItem";
@@ -117,6 +122,16 @@ public class HttpConstants {
      * 生产进度列表
      */
     public static String GET_CPD_INFO = "GETCPInfo";
+
+    /**
+     * 售价查询总量
+     */
+    public static String GET_PRICE_COUNT = "GETPriceCount";
+
+    /**
+     * 售价查询列表
+     */
+    public static String GET_PRICE_DETAIL = "GETPriceDetail";
 
     /**
      * 销售开单保存

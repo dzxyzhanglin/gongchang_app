@@ -29,6 +29,7 @@ public class HwActivity extends BaseActivity {
     private HwAdapter adapter;
 
     private String CKID = ""; // 仓库ID
+    private String SPID = ""; // 商品ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class HwActivity extends BaseActivity {
 
         Intent intent = getIntent();
         CKID = intent.getStringExtra("CKID");
+        SPID = intent.getStringExtra("SPID");
 
         initHwData();
     }
@@ -50,6 +52,7 @@ public class HwActivity extends BaseActivity {
     private void initHwData() {
         HashMap<String, String> properties = new HashMap<>();
         properties.put("CKID", CKID);
+        properties.put("SPID", SPID);
         RequestCenter.GETHWItems(properties, new WebServiceUtils.WebServiceCallBack() {
 
             @Override

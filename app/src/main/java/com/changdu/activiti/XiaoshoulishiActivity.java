@@ -230,7 +230,7 @@ public class XiaoshoulishiActivity extends BaseActivity implements View.OnClickL
         properties.put("UID", UID);
         properties.put("DJZT", ""); // 单据状态
         properties.put("DJBH", ""); // 单据单号
-        properties.put("USR_NAME", mUSR_NAME.getText().toString()); // 业务员
+        properties.put("YWY", mUSR_NAME.getText().toString()); // 业务员
         properties.put("KHMC", mDWZ_DWMC.getText().toString()); // 客户名称
         properties.put("BDate", mBDate.getText().toString()); // 开始日期
         properties.put("EDate", mEDate.getText().toString()); // 截至日期

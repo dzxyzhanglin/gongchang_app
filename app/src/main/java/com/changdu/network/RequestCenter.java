@@ -37,6 +37,15 @@ public class RequestCenter {
     }
 
     /**
+     * 批次列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETPCItem(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_PC_ITEMS, properties, webServiceCallBack);
+    }
+
+    /**
      * 计量单位列表
      * @param properties
      * @param webServiceCallBack
@@ -208,6 +217,24 @@ public class RequestCenter {
     }
 
     /**
+     * 售价查询总量
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETPriceCount(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_PRICE_COUNT, properties, webServiceCallBack);
+    }
+
+    /**
+     * 售价查询列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETPriceDetail(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_PRICE_DETAIL, properties, webServiceCallBack);
+    }
+
+    /**
      * 销售开单保存
      */
     public static void SellSave(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
@@ -312,6 +339,4 @@ public class RequestCenter {
     public static void MadeCheckProc(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
         WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.MADE_CHECK_PROC, properties, webServiceCallBack);
     }
-
-
 }

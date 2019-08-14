@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="客户名称："
+            />
+        <TextView
+            android:id="@+id/sj_DWZ_DWMC"
+            style="@style/Normal_ItemList_Body"
+            android:textSize="10sp"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="100dp"
+            android:text="最近销售日期："
+            />
+        <TextView
+            android:id="@+id/sj_XSRQ"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="物品名称："
+            />
+        <TextView
+            android:id="@+id/sj_SPK_SPMC"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="100dp"
+            android:text="物品编码："
+            />
+        <TextView
+            android:id="@+id/sj_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="单位："
+            />
+        <TextView
+            android:id="@+id/sj_JLB_JLDW"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="100dp"
+            android:text="型号规格："
+            />
+        <TextView
+            android:id="@+id/sj_SPK_SPSX"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="标准售价："
+            />
+        <TextView
+            android:id="@+id/sj_JLB_XSJG"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="100dp"
+            android:text="最近售价："
+            />
+        <TextView
+            android:id="@+id/sj_ZJJG"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="80dp"
+            android:text="最高售价："
+            />
+        <TextView
+            android:id="@+id/sj_ZGJG"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
+            android:layout_width="100dp"
+            android:text="最大售价："
+            />
+        <TextView
+            android:id="@+id/sj_ZDJG"
+            style="@style/Normal_ItemList_Body"
+            android:text=""
+            />
+    </LinearLayout>
+
+</LinearLayout>
