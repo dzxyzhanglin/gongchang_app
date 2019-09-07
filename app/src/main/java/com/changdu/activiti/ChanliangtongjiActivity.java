@@ -20,6 +20,7 @@ import com.changdu.adapter.ChanliangtongjiAdapter;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
 import com.changdu.util.CollUtil;
+import com.changdu.util.DateUtil;
 import com.changdu.util.JsonToMap;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
@@ -68,6 +69,7 @@ public class ChanliangtongjiActivity extends BaseActivity implements View.OnClic
     private void initView() {
         mListView = findViewById(R.id.lv_chanliangtongji);
         mBDate = findViewById(R.id.et_cltj_BDate);
+        mBDate.setText(DateUtil.getCurrentMonthFirstDate());
         mBDate.setOnClickListener(this);
         mEDate = findViewById(R.id.et_cltj_EDate);
         mEDate.setOnClickListener(this);
@@ -210,8 +212,8 @@ public class ChanliangtongjiActivity extends BaseActivity implements View.OnClic
         HashMap<String, String> properties = new HashMap<>();
         String UID = UserManager.getInstance().getUID();
         properties.put("RYID", UID);
-        properties.put("BDate", mBDate.getText().toString()); // 开始日期
-        properties.put("EDate", mEDate.getText().toString()); // 截至日期
+        properties.put("BDate", DateUtil.fmtDate(mBDate.getText().toString())); // 开始日期
+        properties.put("EDate", DateUtil.fmtDate(mEDate.getText().toString())); // 截至日期
         return properties;
     }
 

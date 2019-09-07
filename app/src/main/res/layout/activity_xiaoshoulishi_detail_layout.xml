@@ -80,6 +80,7 @@
                 android:text="结算方式：" />
 
             <TextView
+                android:id="@+id/tv_xsls_detail_GXF_MC"
                 style="@style/Normal_ItemList_Body"
                 android:text="" />
         </LinearLayout>
@@ -92,6 +93,7 @@
                 android:text="发票类型：" />
 
             <TextView
+                android:id="@+id/tv_xsls_detail_IV_MC"
                 style="@style/Normal_ItemList_Body"
                 android:text="" />
 

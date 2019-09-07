@@ -5,7 +5,7 @@ package com.changdu.network;
  */
 public class HttpConstants {
 
-    public static final String ROOT_URL = "http://183.230.28.135:8081/ERPWebService.asmx";
+    public static final String ROOT_URL = "";
 
     /**
      * 登录

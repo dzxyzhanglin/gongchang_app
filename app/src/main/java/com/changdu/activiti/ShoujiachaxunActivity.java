@@ -59,7 +59,10 @@ public class ShoujiachaxunActivity extends BaseActivity implements View.OnClickL
         setTitle(getString(R.string.title_shoujiachaxun), true);
 
         initView();
-        getDataCount();
+        //getDataCount();
+
+        // 默认打开搜索界面
+        openOrCloseDrawer();
     }
 
     private void initView() {
@@ -214,7 +217,7 @@ public class ShoujiachaxunActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_jd: // 搜索
+            case R.id.btn_sj: // 搜索
                 PNum = 1;
                 openOrCloseDrawer();
                 getDataCount();

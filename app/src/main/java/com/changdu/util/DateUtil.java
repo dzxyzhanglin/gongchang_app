@@ -51,4 +51,19 @@ public class DateUtil {
         Date m = c.getTime();
         return formatDate(m, null);
     }
+
+    public static String getCurrentMonthFirstDate() {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, 0);
+        c.set(Calendar.DAY_OF_MONTH, 1);//1:本月第一天
+        Date m = c.getTime();
+        return formatDate(m, null);
+    }
+
+    public static String fmtDate(String date) {
+        if (date != null) {
+            return date.replaceAll("-", "");
+        }
+        return "";
+    }
 }

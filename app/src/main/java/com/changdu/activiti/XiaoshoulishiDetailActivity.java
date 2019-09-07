@@ -28,6 +28,8 @@ public class XiaoshoulishiDetailActivity extends BaseActivity {
     private TextView mPFD_ZDJE;
     private TextView mPFD_DJZT;
     private TextView mPFD_DJRQ;
+    private TextView mGXF_MC;
+    private TextView mIV_MC;
     private ListView mListView;
     private XisoshoulishiDetailAdapter adapter;
 
@@ -56,6 +58,8 @@ public class XiaoshoulishiDetailActivity extends BaseActivity {
         mPFD_ZDJE = findViewById(R.id.tv_xsls_detail_PFD_ZDJE);
         mPFD_DJZT = findViewById(R.id.tv_xsls_detail_PFD_DJZT);
         mPFD_DJRQ = findViewById(R.id.tv_xsls_detail_PFD_DJRQ);
+        mGXF_MC = findViewById(R.id.tv_xsls_detail_GXF_MC);
+        mIV_MC = findViewById(R.id.tv_xsls_detail_IV_MC);
 
         mListView = findViewById(R.id.lv_xsls_detail);
     }
@@ -79,6 +83,8 @@ public class XiaoshoulishiDetailActivity extends BaseActivity {
                 mPFD_ZDJE.setText(StringUtil.convertStr(map.get("PFD_ZDJE")));
                 mPFD_DJZT.setText(StringUtil.convertStr(map.get("PFD_DJZT")));
                 mPFD_DJRQ.setText(StringUtil.convertStr(map.get("PFD_DJRQ")));
+                mGXF_MC.setText(StringUtil.convertStr(map.get("GXF_MC")));
+                mIV_MC.setText(StringUtil.convertStr(map.get("IV_MC")));
 
                 // 物品信息
                 List<Map<String, Object>> dataList = (List<Map<String, Object>>) map.get("DList");
