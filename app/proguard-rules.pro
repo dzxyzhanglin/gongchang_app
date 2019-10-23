@@ -34,7 +34,7 @@
 -dontskipnonpubliclibraryclasses
 
 # 指定不去忽略非公共库的类成员
--dontskipnonpubliclibraryclassmembers
+-dontskipnonpubliclibraryclassmembersh
 
 # #不优化输入的类文件/不要优化;会导致log依旧能输出   -dontoptimize
 
