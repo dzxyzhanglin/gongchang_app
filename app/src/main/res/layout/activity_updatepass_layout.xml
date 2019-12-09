@@ -5,15 +5,35 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="left|center"
+            android:text="用户名："
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/et_updatepass_USERNAME"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_weight="1"
+            android:text="张三"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:gravity="left|center"
         android:layout_marginLeft="20dp"
+        android:gravity="left|center"
         android:text="旧密码："
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
     <EditText
         android:id="@+id/et_updatepass_OLDPWD"
         android:layout_width="match_parent"

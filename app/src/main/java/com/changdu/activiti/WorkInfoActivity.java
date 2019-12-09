@@ -15,6 +15,7 @@ import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
 import com.changdu.activiti.basicdata.DeviceActivity;
 import com.changdu.activiti.basicdata.GxActivity;
+import com.changdu.activiti.basicdata.MdActivity;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
@@ -64,6 +65,8 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
     private String CPNO; // 传票号码(二维码扫描值)
     private String SBID; // 设备
     private String SBID_NAME;
+    private String MDID; // 模具
+    private String MD_NAME;
     private String GXID; // 工序ID
     private String SJBZ = "1";
     private String NOCANGX = "1";
@@ -99,6 +102,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         mCurKJSL = findViewById(R.id.CurKJSL);
         mPreKJSL = findViewById(R.id.PreKJSL);
         mMDID = findViewById(R.id.MDID);
+        mMDID.setOnClickListener(this);
         mQTBF = findViewById(R.id.QTBF);
         mQTBF.setOnClickListener(this);
         mSBID = findViewById(R.id.SBID);
@@ -201,6 +205,11 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                 startActivityForResult(
                         new Intent(mContext, DeviceActivity.class), Constant.ACTIVITI_FOR_RESULT_DEVICE);
                 break;
+            case R.id.MDID: // 模具
+                Intent mdIntent = new Intent(mContext, MdActivity.class);
+                mdIntent.putExtra("SBID", SBID);
+                startActivityForResult(mdIntent, Constant.ACTIVITI_FOR_RESULT_MD);
+                break;
             case R.id.KGRQ_TIME: // 完工时间
                 long date = getDatePickDefaultDate(mKGRQ_TIME);
                 DialogUIUtils.showDatePick(mContext, Gravity.BOTTOM, "选择开工时间", date, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
@@ -243,7 +252,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         properties.put("CurKJSL", formatNum(mCurKJSL.getText().toString()));
         properties.put("PreKJSL", formatNum(mPreKJSL.getText().toString()));
         properties.put("CYBFSL", formatNum(mCYBFSL.getText().toString()));
-        properties.put("MDID", formatNum(mMDID.getText().toString()));
+        properties.put("MDID", MDID);
         properties.put("SBID", SBID);
         properties.put("KGRQ", fomatDate(mKGRQ_TIME.getText().toString()));
         properties.put("Note", mNOTE.getText().toString());
@@ -312,6 +321,12 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                 SBID = data.getStringExtra("ID");
                 String SB_NAME = data.getStringExtra("NAME");
                 mSBID.setText(SB_NAME);
+            }
+        } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_MD) {
+            if (data != null) {
+                MDID = data.getStringExtra("ID");
+                String MD_NAME = data.getStringExtra("NAME");
+                mSBID.setText(MD_NAME);
             }
         } else if (requestCode == Constant.ACTIVITI_FOR_RESULT_ADD_QTBF) {
             if (data != null) {

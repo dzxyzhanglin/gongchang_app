@@ -10,15 +10,6 @@
     <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
-            android:text="编码："
-            />
-        <TextView
-            android:id="@+id/kucun_SPK_SPBH"
-            style="@style/Normal_ItemList_Body"
-            android:text="DQCP0552"
-            />
-        <TextView
-            style="@style/Normal_ItemList_Title"
             android:text="名称："
             />
         <TextView
@@ -31,6 +22,15 @@
     <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
+            android:text="编码："
+            />
+        <TextView
+            android:id="@+id/kucun_SPK_SPBH"
+            style="@style/Normal_ItemList_Body"
+            android:text="DQCP0552"
+            />
+        <TextView
+            style="@style/Normal_ItemList_Title"
             android:text="规格："
             />
         <TextView
@@ -38,6 +38,9 @@
             style="@style/Normal_ItemList_Body"
             android:text="CG150-C"
             />
+    </LinearLayout>
+
+    <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
             android:text="仓库："
@@ -47,9 +50,6 @@
             style="@style/Normal_ItemList_Body"
             android:text="02号仓库"
             />
-    </LinearLayout>
-
-    <LinearLayout style="@style/Normal_ItemList_Layout">
         <TextView
             style="@style/Normal_ItemList_Title"
             android:text="数量："

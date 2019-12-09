@@ -103,10 +103,6 @@ public class HomeFragment extends BaseFragment {
                     dataList.add(model);
                 }
             }
-
-            // TODO
-            model = new HomeModel(R.drawable.icon_shoujiachaxun, "售价查询");
-            dataList.add(model);
         }
 
         // 显示数据

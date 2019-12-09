@@ -5,7 +5,7 @@ package com.changdu.network;
  */
 public class HttpConstants {
 
-    public static final String ROOT_URL = "http://183.230.28.135:8081/ERPWebService.asmx";
+    public static final String ROOT_URL = "http://cqzb.vicp.cc/ERPWebService.asmx";
 
     /**
      * 登录
@@ -192,5 +192,10 @@ public class HttpConstants {
      * 检验登记
      */
     public static String MADE_CHECK_PROC = "MadeCheckProc";
+
+    /**
+     * 模具列表
+     */
+    public static String GET_MD_ITEMS = "GETMDItems";
 
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.changdu.R;
 import com.changdu.activiti.base.BaseActivity;
@@ -25,6 +26,7 @@ public class UpdatePassActivity extends BaseActivity implements View.OnClickList
     private EditText mOLDPWD;
     private EditText mNEWPWD;
     private EditText mCONFIRM_NEWPWD;
+    private TextView mUSERNAME;
     private Button mSave;
 
     @Override
@@ -42,6 +44,8 @@ public class UpdatePassActivity extends BaseActivity implements View.OnClickList
         mOLDPWD = findViewById(R.id.et_updatepass_OLDPWD);
         mNEWPWD = findViewById(R.id.et_updatepass_NEWPWD);
         mCONFIRM_NEWPWD = findViewById(R.id.et_updatepass_CONFIRM_NEWPWD);
+        mUSERNAME = findViewById(R.id.et_updatepass_USERNAME);
+        mUSERNAME.setText(UserManager.getInstance().getUName());
         mSave = findViewById(R.id.btn_updatepass);
         mSave.setOnClickListener(this);
     }

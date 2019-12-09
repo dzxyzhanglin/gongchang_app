@@ -339,4 +339,13 @@ public class RequestCenter {
     public static void MadeCheckProc(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
         WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.MADE_CHECK_PROC, properties, webServiceCallBack);
     }
+
+    /**
+     * 获取模具列表
+     * @param properties
+     * @param webServiceCallBack
+     */
+    public static void GETMDItems(HashMap<String, String> properties, final WebServiceUtils.WebServiceCallBack webServiceCallBack) {
+        WebServiceUtils.callWebService(HttpConstants.ROOT_URL, HttpConstants.GET_MD_ITEMS, properties, webServiceCallBack);
+    }
 }

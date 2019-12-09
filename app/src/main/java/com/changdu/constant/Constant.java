@@ -46,6 +46,8 @@ public class Constant {
 
     public static final int ACTIVITI_FOR_RESULT_GX = 1007;
 
+    public static final int ACTIVITI_FOR_RESULT_MD = 1008;
+
     public static final int ACTIVITI_FOR_RESULT_ADD_WP = 1100;
 
     public static final int ACTIVITI_FOR_RESULT_ADD_QTBF = 1101;
