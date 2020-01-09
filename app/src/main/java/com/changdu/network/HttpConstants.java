@@ -5,7 +5,9 @@ package com.changdu.network;
  */
 public class HttpConstants {
 
-    public static final String ROOT_URL = "http://cqzb.vicp.cc/ERPWebService.asmx";
+    //public static final String ROOT_URL = "http://cqzb.vicp.cc/ERPWebService.asmx";
+    // 大东气门
+    public static final String ROOT_URL = "http://183.230.28.135:8081/ERPWebService.asmx";
 
     /**
      * 登录

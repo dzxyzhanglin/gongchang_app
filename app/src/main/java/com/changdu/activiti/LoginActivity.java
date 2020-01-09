@@ -22,6 +22,7 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 登录
@@ -80,6 +81,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void callBack(String resultStr) {
                         cancleLoading();
                         if (resultStr != null) {
+                           /* try {
+                                Map<String, Object> reslutMap = JsonHandler.Dom2Map(resultStr);
+                                if (reslutMap == null) {
+                                    return;
+                                }
+                                String resultCode = StringUtil.convertStr(reslutMap.get("Code"));
+                                if (Objects.equals(resultCode, "0")) {
+                                    UserModel userModel = new UserModel();
+                                    userModel.setUTYPE(StringUtil.convertStr(reslutMap.get("UType")));
+                                    userModel.setUID(StringUtil.convertStr(reslutMap.get("UID")));
+                                    userModel.setUName(StringUtil.convertStr(reslutMap.get("UName")));
+                                    userModel.setCode(Code);
+                                    UserManager.getInstance().setUser(userModel);
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                } else {
+                                    showToast(StringUtil.convertStr(reslutMap.get("Msg")));
+                                }
+                            } catch (Exception ex) {
+                                showToast(getString(R.string.data_parse_error));
+                            }*/
+
                             // 去掉首尾的 [  ];
                             resultStr = StringUtil.formart(resultStr);
                             UserModel userModel = (UserModel) JsonHandler.jsonToObject(resultStr, UserModel.class);

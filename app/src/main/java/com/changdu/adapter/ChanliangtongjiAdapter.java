@@ -44,12 +44,18 @@ public class ChanliangtongjiAdapter extends CommonAdapter {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.item_list_chanliangtongji, null);
             holder.mCPNO = view.findViewById(R.id.cltj_CPNO);
+            holder.mSCRY = view.findViewById(R.id.cltj_SCRY);
             holder.mGYB_GYMC = view.findViewById(R.id.cltj_GYB_GYMC);
             holder.mSPK_SPBH = view.findViewById(R.id.cltj_SPK_SPBH);
             holder.mSPK_SPMC = view.findViewById(R.id.cltj_SPK_SPMC);
             holder.mJSSL = view.findViewById(R.id.cltj_JSSL);
             holder.mRKSL = view.findViewById(R.id.cltj_RKSL);
             holder.mBFSL = view.findViewById(R.id.cltj_BFSL);
+            holder.mBDATE = view.findViewById(R.id.cltj_BDATE);
+            holder.mEDATE = view.findViewById(R.id.cltj_EDATE);
+            holder.mBQSL = view.findViewById(R.id.cltj_BQSL);
+            holder.mBHGSL = view.findViewById(R.id.cltj_BHGSL);
+            holder.mCYBFSL = view.findViewById(R.id.cltj_CYBFSL);
 
             view.setTag(holder);
         } else {
@@ -58,24 +64,36 @@ public class ChanliangtongjiAdapter extends CommonAdapter {
 
         Map<String, Object> data = mDataList.get(i);
         holder.mCPNO.setText(StringUtil.convertStr(data.get("CPNO")));
+        holder.mSCRY.setText(StringUtil.convertStr(data.get("SCRY")));
         holder.mGYB_GYMC.setText(StringUtil.convertStr(data.get("GYB_GYMC")));
         holder.mSPK_SPBH.setText(StringUtil.convertStr(data.get("SPK_SPBH")));
         holder.mSPK_SPMC.setText(StringUtil.convertStr(data.get("SPK_SPMC")));
         holder.mJSSL.setText(StringUtil.convertStr(data.get("JSSL")));
         holder.mRKSL.setText(StringUtil.convertStr(data.get("RKSL")));
         holder.mBFSL.setText(StringUtil.convertStr(data.get("BFSL")));
+        holder.mBDATE.setText(StringUtil.convertStr(data.get("BDATE")));
+        holder.mEDATE.setText(StringUtil.convertStr(data.get("EDATE")));
+        holder.mBQSL.setText(StringUtil.convertStr(data.get("BQSL")));
+        holder.mBHGSL.setText(StringUtil.convertStr(data.get("BHGSL")));
+        holder.mCYBFSL.setText(StringUtil.convertStr(data.get("CYBFSL")));
 
         return view;
     }
 
     private class ViewHolder {
         private TextView mCPNO;
+        private TextView mSCRY;
         private TextView mGYB_GYMC;
         private TextView mSPK_SPBH;
         private TextView mSPK_SPMC;
         private TextView mJSSL;
         private TextView mRKSL;
         private TextView mBFSL;
+        private TextView mBDATE;
+        private TextView mEDATE;
+        private TextView mBQSL;
+        private TextView mBHGSL;
+        private TextView mCYBFSL;
 
     }
 }

@@ -75,13 +75,13 @@
 
     </LinearLayout>
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/iv_login_login"
         android:layout_below="@+id/tv_login_title"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="120dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"/>-->
 
 </RelativeLayout>

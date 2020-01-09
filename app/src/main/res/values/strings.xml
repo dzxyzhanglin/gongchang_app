@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">掌佳科技</string>
-    <string name="welcom_name">欢迎进入掌佳科技</string>
+    <string name="app_name">大东气门(新)</string>
+    <string name="welcom_name">欢迎进入大东气门</string>
     <string name="login_username">请输入用户名</string>
     <string name="login_password">请输入密码</string>
     <string name="login_btn">立即登录</string>

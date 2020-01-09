@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.commit();
 
         // 检查更新
-        checkVersion();
+        //checkVersion();
     }
 
     /**
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
                         fragmentTransaction.show(mHomeFragment);
                     }
                     fragmentTransaction.commit();
-                    mTvTitle.setText("掌佳科技");
+                    mTvTitle.setText(R.string.app_name);
                     return true;
                 case STATISTICS_MENU_ID:
                     if (mStatisticsFragment == null) {

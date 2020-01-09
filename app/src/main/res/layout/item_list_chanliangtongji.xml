@@ -13,6 +13,7 @@
             android:text="生产人员："
             />
         <TextView
+            android:id="@+id/cltj_SCRY"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
@@ -104,6 +105,7 @@
             android:text="不合格数："
             />
         <TextView
+            android:id="@+id/cltj_BHGSL"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
@@ -127,6 +129,7 @@
             android:text="抽样报废数："
             />
         <TextView
+            android:id="@+id/cltj_CYBFSL"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
@@ -136,6 +139,7 @@
             android:text="缺件数："
             />
         <TextView
+            android:id="@+id/cltj_BQSL"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
@@ -148,6 +152,7 @@
             android:text="开工日期："
             />
         <TextView
+            android:id="@+id/cltj_BDATE"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
@@ -157,6 +162,7 @@
             android:text="完工日期："
             />
         <TextView
+            android:id="@+id/cltj_EDATE"
             style="@style/Normal_ItemList_Body"
             android:text=""
             />
