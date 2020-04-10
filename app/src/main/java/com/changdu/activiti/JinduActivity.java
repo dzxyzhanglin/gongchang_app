@@ -236,8 +236,8 @@ public class JinduActivity extends BaseActivity implements View.OnClickListener 
         properties.put("UID", UID);
         properties.put("SCDH", mSCD_DJBH.getText().toString());
         properties.put("CPNO", mCPNO.getText().toString());
-        properties.put("BDate", mBDate.getText().toString());
-        properties.put("EDate", mEDate.getText().toString());
+        properties.put("BDate", handleDate(mBDate.getText().toString()));
+        properties.put("EDate", handleDate(mEDate.getText().toString()));
         properties.put("CPMC", mCPMC.getText().toString());
 
         return properties;

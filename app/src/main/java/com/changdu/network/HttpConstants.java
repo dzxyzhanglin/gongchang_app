@@ -123,7 +123,7 @@ public class HttpConstants {
     /**
      * 生产进度列表
      */
-    public static String GET_CPD_INFO = "GETCPInfo";
+    public static String GET_CPD_INFO = "GetCPDInfo";
 
     /**
      * 售价查询总量

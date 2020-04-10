@@ -14,8 +14,27 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // rename the apk with the version name
+            android.applicationVariants.all { variant ->
+                //判断是release还是debug版本
+                def buildType = variant.buildType.name
+                def fileName//获取当前时间的"YYYY-MM-dd"格式。
+                def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+                //println variant.getPackageApplicationProvider().outputFile
+                //def output = variant.outputFile()
+                variant.outputs.each {
+                    if (buildType == "release") {
+                        variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apks/${buildType}/${createTime}")
+                        fileName = "dadong_${defaultConfig.versionName}_${createTime}_${buildType}.apk"
+                        //it.outputFile = new File(it.outputFile.parent, fileName)
+                        it.outputFileName = fileName
+                    }
+                }
+            }
         }
     }
+
+
 }
 
 dependencies {

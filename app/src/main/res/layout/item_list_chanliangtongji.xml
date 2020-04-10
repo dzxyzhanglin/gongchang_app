@@ -26,7 +26,7 @@
             style="@style/Normal_ItemList_Body"
             android:id="@+id/cltj_CPNO"
             android:text=""
-            android:textSize="12sp"
+            android:textSize="10sp"
             />
     </LinearLayout>
 
@@ -154,6 +154,7 @@
         <TextView
             android:id="@+id/cltj_BDATE"
             style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
             android:text=""
             />
         <TextView
@@ -164,6 +165,7 @@
         <TextView
             android:id="@+id/cltj_EDATE"
             style="@style/Normal_ItemList_Body"
+            android:textSize="12sp"
             android:text=""
             />
     </LinearLayout>

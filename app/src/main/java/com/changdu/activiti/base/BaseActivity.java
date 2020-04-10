@@ -231,6 +231,15 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 处理日期
+     * @param date
+     * @return
+     */
+    public String handleDate(String date) {
+        return date != null ? date.replaceAll("-", "") : "";
+    }
+
+    /**
      * 结果解析为map对象，
      * 解析失败返回null
      * @param resultStr
