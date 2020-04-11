@@ -6,8 +6,8 @@ android {
         applicationId "com.changdu"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 23
-        versionName "V1.0.10"
+        versionCode 25
+        versionName "V1.0.25"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

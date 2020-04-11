@@ -137,7 +137,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         properties.put("UID", UserManager.getInstance().getUID());
 
         showLoading();
-        RequestCenter.GetCPDInfo(properties, new WebServiceUtils.WebServiceCallBack() {
+        RequestCenter.GETCPInfo(properties, new WebServiceUtils.WebServiceCallBack() {
             @Override
             public void callBack(String resultStr) {
                 cancleLoading();
