@@ -40,6 +40,20 @@ public class DateUtil {
         return sdf.format(date);
     }
 
+    public static String addHour(Date date, int offset) {
+        if (date == null) {
+            return "";
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, offset);
+        date = calendar.getTime();
+        return format.format(date);
+    }
+
     /**
      * 获取一个月前的日期
      * @return
@@ -65,5 +79,10 @@ public class DateUtil {
             return date.replaceAll("-", "");
         }
         return "";
+    }
+
+    public static void main(String[] args) {
+        String s = addHour(new Date(), -2);
+        System.out.println(s);
     }
 }

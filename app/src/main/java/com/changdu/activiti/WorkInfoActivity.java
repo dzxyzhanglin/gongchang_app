@@ -19,6 +19,7 @@ import com.changdu.activiti.basicdata.MdActivity;
 import com.changdu.constant.Constant;
 import com.changdu.manager.UserManager;
 import com.changdu.network.RequestCenter;
+import com.changdu.util.DateUtil;
 import com.changdu.util.JsonHandler;
 import com.changdu.util.StringUtil;
 import com.changdu.util.WebServiceUtils;
@@ -28,6 +29,7 @@ import com.dou361.dialogui.widget.DateSelectorWheelView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,7 +168,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
                             mJSSL.setText(StringUtil.convertStr(cpinfo.get("DQSL")));
                             SBID = StringUtil.convertStr(cpinfo.get("SBID"));
                             mSBID.setText(StringUtil.convertStr(cpinfo.get("SBMC")));
-                            mKGRQ_TIME.setText(StringUtil.convertStr(cpinfo.get("WGRQ")));
+                            mKGRQ_TIME.setText(DateUtil.addHour(new Date(), -2));
                             mNOTE.setText(StringUtil.convertStr(cpinfo.get("Note")));
                         } else if (Objects.equals(Code, "1")) {
                             showToast(StringUtil.convertStr(reslutMap.get("Msg")));
@@ -248,6 +250,7 @@ public class WorkInfoActivity extends BaseActivity implements View.OnClickListen
         properties.put("GXID", GXID);
         properties.put("UID", UserManager.getInstance().getUID());
         properties.put("JSSL", StringUtil.convertStr(cpinfo.get("DQSL")));
+        properties.put("CurBFSL", formatNum(mCurBFSL.getText().toString()));
         properties.put("PreBFSL", formatNum(mPreBFSL.getText().toString()));
         properties.put("CurKJSL", formatNum(mCurKJSL.getText().toString()));
         properties.put("PreKJSL", formatNum(mPreKJSL.getText().toString()));
